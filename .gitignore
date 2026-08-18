@@ -1,0 +1,28 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production build artifacts
+dist/
+dist-ssr/
+*.local
+
+# Environment & editor
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Testing & coverage
+coverage/
+*.lcov
+
+# Temporary files
+*.tmp
+*.temp
+.tempmediaStorage/

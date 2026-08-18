@@ -1,0 +1,202 @@
+[
+  {
+    "id": "phase-00",
+    "number": 0,
+    "slug": "setup-and-tooling",
+    "title": "Setup & Tooling",
+    "estTime": "~14 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 12,
+    "folderName": "00-setup-and-tooling"
+  },
+  {
+    "id": "phase-01",
+    "number": 1,
+    "slug": "math-foundations",
+    "title": "Math Foundations",
+    "estTime": "~23 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 22,
+    "folderName": "01-math-foundations"
+  },
+  {
+    "id": "phase-02",
+    "number": 2,
+    "slug": "ml-fundamentals",
+    "title": "ML Fundamentals",
+    "estTime": "~21 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 18,
+    "folderName": "02-ml-fundamentals"
+  },
+  {
+    "id": "phase-03",
+    "number": 3,
+    "slug": "deep-learning-core",
+    "title": "Deep Learning Core",
+    "estTime": "~15 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 13,
+    "folderName": "03-deep-learning-core"
+  },
+  {
+    "id": "phase-04",
+    "number": 4,
+    "slug": "computer-vision",
+    "title": "Computer Vision",
+    "estTime": "~27 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 28,
+    "folderName": "04-computer-vision"
+  },
+  {
+    "id": "phase-05",
+    "number": 5,
+    "slug": "nlp-foundations-to-advanced",
+    "title": "NLP — Foundations to Advanced",
+    "estTime": "~30 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 29,
+    "folderName": "05-nlp-foundations-to-advanced"
+  },
+  {
+    "id": "phase-06",
+    "number": 6,
+    "slug": "speech-and-audio",
+    "title": "Speech & Audio",
+    "estTime": "~18 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 17,
+    "folderName": "06-speech-and-audio"
+  },
+  {
+    "id": "phase-07",
+    "number": 7,
+    "slug": "transformers-deep-dive",
+    "title": "Transformers Deep Dive",
+    "estTime": "~14 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 16,
+    "folderName": "07-transformers-deep-dive"
+  },
+  {
+    "id": "phase-08",
+    "number": 8,
+    "slug": "generative-ai",
+    "title": "Generative AI",
+    "estTime": "~14 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 15,
+    "folderName": "08-generative-ai"
+  },
+  {
+    "id": "phase-09",
+    "number": 9,
+    "slug": "reinforcement-learning",
+    "title": "Reinforcement Learning",
+    "estTime": "~13 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 12,
+    "folderName": "09-reinforcement-learning"
+  },
+  {
+    "id": "phase-10",
+    "number": 10,
+    "slug": "llms-from-scratch",
+    "title": "LLMs from Scratch",
+    "estTime": "~26 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 24,
+    "folderName": "10-llms-from-scratch"
+  },
+  {
+    "id": "phase-11",
+    "number": 11,
+    "slug": "llm-engineering",
+    "title": "LLM Engineering",
+    "estTime": "~17 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 17,
+    "folderName": "11-llm-engineering"
+  },
+  {
+    "id": "phase-12",
+    "number": 12,
+    "slug": "multimodal-ai",
+    "title": "Multimodal AI",
+    "estTime": "~65 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 25,
+    "folderName": "12-multimodal-ai"
+  },
+  {
+    "id": "phase-13",
+    "number": 13,
+    "slug": "tools-and-protocols",
+    "title": "Tools & Protocols",
+    "estTime": "~24.5 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 23,
+    "folderName": "13-tools-and-protocols"
+  },
+  {
+    "id": "phase-14",
+    "number": 14,
+    "slug": "agent-engineering",
+    "title": "Agent Engineering",
+    "estTime": "~42 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 42,
+    "folderName": "14-agent-engineering"
+  },
+  {
+    "id": "phase-15",
+    "number": 15,
+    "slug": "autonomous-systems",
+    "title": "Autonomous Systems",
+    "estTime": "~20 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 22,
+    "folderName": "15-autonomous-systems"
+  },
+  {
+    "id": "phase-16",
+    "number": 16,
+    "slug": "multi-agent-and-swarms",
+    "title": "Multi-Agent & Swarms",
+    "estTime": "~28 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 25,
+    "folderName": "16-multi-agent-and-swarms"
+  },
+  {
+    "id": "phase-17",
+    "number": 17,
+    "slug": "infrastructure-and-production",
+    "title": "Infrastructure & Production",
+    "estTime": "~32 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 28,
+    "folderName": "17-infrastructure-and-production"
+  },
+  {
+    "id": "phase-18",
+    "number": 18,
+    "slug": "ethics-safety-alignment",
+    "title": "Ethics, Safety & Alignment",
+    "estTime": "~31 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 30,
+    "folderName": "18-ethics-safety-alignment"
+  },
+  {
+    "id": "phase-19",
+    "number": 19,
+    "slug": "capstone-projects",
+    "title": "Capstone Projects",
+    "estTime": "~620 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 85,
+    "folderName": "19-capstone-projects"
+  }
+]
