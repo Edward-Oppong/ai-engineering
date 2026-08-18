@@ -146,11 +146,37 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
         <div><strong className="text-stone-900 dark:text-stone-100 font-medium">{allItems.length}</strong> total in deck</div>
       </div>
 
+      {/* Cognitive Retention Mathematical Model Banner */}
+      <div className="rounded-xl overflow-hidden border border-stone-200/90 dark:border-stone-800 bg-white dark:bg-[#242321] shadow-sm p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+        <div className="md:col-span-7 space-y-2">
+          <div className="text-[11px] font-mono font-medium text-purple-700 dark:text-purple-400 uppercase tracking-wider">
+            Quantitative Memory Model
+          </div>
+          <h3 className="font-serif text-lg sm:text-xl font-medium text-stone-900 dark:text-stone-100">
+            SuperMemo-2 Spaced Consolidation
+          </h3>
+          <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed">
+            Based on Ebbinghaus forgetting curves. Flashcard intervals expand geometrically upon successful recall, reinforcing neural memory traces just as forgetting begins.
+          </p>
+        </div>
+
+        <div className="md:col-span-5 rounded-lg overflow-hidden border border-stone-200 dark:border-stone-800 shadow-xs">
+          <img 
+            src="./illustrations/retention.jpg" 
+            alt="Cognitive Spaced Repetition Quantitative Models"
+            className="w-full h-auto object-cover"
+            onError={(e) => {
+              (e.target as HTMLElement).style.display = 'none';
+            }}
+          />
+        </div>
+      </div>
+
       {/* Main Flashcard Session */}
       {activeTab === 'study' && (
         <div>
           {dueItems.length === 0 ? (
-            <div className="p-12 rounded-xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 text-center space-y-2 max-w-lg mx-auto shadow-sm">
+            <div className="p-10 rounded-xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 text-center space-y-2 max-w-lg mx-auto shadow-sm">
               <CheckCircle2 className="w-8 h-8 text-emerald-700 dark:text-emerald-400 mx-auto" />
               <h2 className="font-serif text-xl font-medium text-stone-900 dark:text-stone-100">All Reviews Completed</h2>
               <p className="text-xs text-stone-500 dark:text-stone-400 max-w-sm mx-auto leading-relaxed">

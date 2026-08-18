@@ -49,6 +49,7 @@ const MILESTONES: CurriculumMilestone[] = [
     badgeText: 'text-indigo-800 dark:text-indigo-300',
     borderColor: 'border-indigo-200/80 dark:border-indigo-800/60',
     accentBar: 'bg-indigo-600 dark:bg-indigo-400',
+    illustrationPath: './illustrations/foundations.jpg',
     phaseIds: ['phase-00', 'phase-01', 'phase-02', 'phase-03']
   },
   {
@@ -61,6 +62,7 @@ const MILESTONES: CurriculumMilestone[] = [
     badgeText: 'text-emerald-800 dark:text-emerald-300',
     borderColor: 'border-emerald-200/80 dark:border-emerald-800/60',
     accentBar: 'bg-emerald-600 dark:bg-emerald-400',
+    illustrationPath: './illustrations/perception.jpg',
     phaseIds: ['phase-04', 'phase-05', 'phase-06']
   },
   {
@@ -99,7 +101,7 @@ const MILESTONES: CurriculumMilestone[] = [
     badgeText: 'text-teal-800 dark:text-teal-300',
     borderColor: 'border-teal-200/80 dark:border-teal-800/60',
     accentBar: 'bg-teal-600 dark:bg-teal-400',
-    illustrationPath: './illustrations/monograph-cover.jpg',
+    illustrationPath: './illustrations/production.jpg',
     phaseIds: ['phase-17', 'phase-18', 'phase-19']
   }
 ];
