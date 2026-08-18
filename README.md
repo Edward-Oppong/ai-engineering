@@ -122,17 +122,30 @@ The app will start at `http://localhost:5173`.
 
 ---
 
-## 🏗️ Production Build & Preview
+## 🏗️ Production Build & Desktop App (.exe)
 
-To build the optimized static production bundle:
-
+### 1. Web Production Build
 ```bash
-# Build data index, check TypeScript, and generate dist/
+# Compile curriculum index, TypeScript, and Vite static assets
 npm run build
 
-# Preview the production build locally
+# Preview static build locally
 npm run preview
 ```
+
+### 2. Standalone Desktop App (Electron)
+You can package the entire application into a standalone desktop `.exe` installer or portable binary:
+
+```bash
+# Run the desktop app locally
+npm run electron:start
+
+# Package into a native Windows .exe (installer + portable executable)
+npm run electron:build
+```
+The packaged installers will be generated inside the `release/` directory:
+* **Installer**: `release/AI Engineering Study Companion Setup 1.0.0.exe`
+* **Portable**: `release/AI Engineering Study Companion 1.0.0.exe`
 
 ---
 

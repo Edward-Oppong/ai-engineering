@@ -638,14 +638,24 @@ npm run build:data
 npm run dev
 ```
 
-### Production Build
+### Production Build (Web / Static)
 ```powershell
 npm run build
 # Output: dist/
 
-# Preview the production bundle
+# Preview the production bundle locally
 npm run preview
 # App at http://localhost:4173
+```
+
+### Desktop Application (Electron)
+```powershell
+# Run the desktop app locally from the production build
+npm run electron:start
+
+# Package into a standalone Windows .exe (installer + portable)
+npm run electron:build
+# Output: release/AI Engineering Study Companion Setup 1.0.0.exe
 ```
 
 ### TypeScript Errors
