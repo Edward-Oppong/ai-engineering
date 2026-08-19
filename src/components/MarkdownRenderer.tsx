@@ -29,7 +29,17 @@ const MermaidBlock: React.FC<{ chart: string }> = ({ chart }) => {
       const isDark = document.documentElement.classList.contains('dark');
       mermaid.initialize({
         startOnLoad: false,
+        securityLevel: 'strict',
+        fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+        fontSize: 13,
         theme: isDark ? 'dark' : 'neutral',
+        flowchart: {
+          htmlLabels: true,
+          padding: 20,
+          nodeSpacing: 45,
+          rankSpacing: 45,
+          useMaxWidth: true,
+        },
         themeVariables: isDark ? {
           darkMode: true,
           background: '#171513',
@@ -38,6 +48,8 @@ const MermaidBlock: React.FC<{ chart: string }> = ({ chart }) => {
           primaryBorderColor: '#44403c',
           lineColor: '#78716c',
           secondaryColor: '#211e1b',
+          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+          fontSize: '13px',
         } : {
           darkMode: false,
           background: '#ffffff',
@@ -46,6 +58,8 @@ const MermaidBlock: React.FC<{ chart: string }> = ({ chart }) => {
           primaryBorderColor: '#d6d3d1',
           lineColor: '#78716c',
           secondaryColor: '#faf9f6',
+          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+          fontSize: '13px',
         }
       });
 
