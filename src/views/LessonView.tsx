@@ -178,15 +178,15 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
   const { prev, next } = getAdjacentLessons(lessonId);
 
-  // Milestone color accent based on phase number
+  // Milestone color accent & illustration based on phase number
   const domainTheme = useMemo(() => {
-    if (!phase) return { badgeBg: 'bg-stone-100 dark:bg-stone-800', badgeText: 'text-stone-700 dark:text-stone-300', name: 'Curriculum' };
+    if (!phase) return { badgeBg: 'bg-stone-100 dark:bg-stone-800', badgeText: 'text-stone-700 dark:text-stone-300', name: 'Curriculum', illustrationPath: './illustrations/monograph-cover.jpg' };
     const num = phase.number;
-    if (num <= 3) return { badgeBg: 'bg-indigo-50 dark:bg-indigo-950/40', badgeText: 'text-indigo-800 dark:text-indigo-300', name: '1. Foundations & Core ML' };
-    if (num <= 6) return { badgeBg: 'bg-emerald-50 dark:bg-emerald-950/40', badgeText: 'text-emerald-800 dark:text-emerald-300', name: '2. Perceptual Modalities' };
-    if (num <= 10) return { badgeBg: 'bg-amber-50 dark:bg-amber-950/40', badgeText: 'text-amber-800 dark:text-amber-300', name: '3. Generative & Transformers' };
-    if (num <= 16) return { badgeBg: 'bg-purple-50 dark:bg-purple-950/40', badgeText: 'text-purple-800 dark:text-purple-300', name: '4. Agentic Systems' };
-    return { badgeBg: 'bg-teal-50 dark:bg-teal-950/40', badgeText: 'text-teal-800 dark:text-teal-300', name: '5. Production & Capstones' };
+    if (num <= 3) return { badgeBg: 'bg-indigo-50 dark:bg-indigo-950/40', badgeText: 'text-indigo-800 dark:text-indigo-300', name: '1. Foundations & Core ML', illustrationPath: './illustrations/foundations.jpg' };
+    if (num <= 6) return { badgeBg: 'bg-emerald-50 dark:bg-emerald-950/40', badgeText: 'text-emerald-800 dark:text-emerald-300', name: '2. Perceptual Modalities', illustrationPath: './illustrations/perception.jpg' };
+    if (num <= 10) return { badgeBg: 'bg-amber-50 dark:bg-amber-950/40', badgeText: 'text-amber-800 dark:text-amber-300', name: '3. Generative & Transformers', illustrationPath: './illustrations/transformers.jpg' };
+    if (num <= 16) return { badgeBg: 'bg-purple-50 dark:bg-purple-950/40', badgeText: 'text-purple-800 dark:text-purple-300', name: '4. Agentic Systems', illustrationPath: './illustrations/agents.jpg' };
+    return { badgeBg: 'bg-teal-50 dark:bg-teal-950/40', badgeText: 'text-teal-800 dark:text-teal-300', name: '5. Production & Capstones', illustrationPath: './illustrations/production.jpg' };
   }, [phase]);
 
   // Reading column width CSS class
@@ -334,8 +334,32 @@ export const LessonView: React.FC<LessonViewProps> = ({
       )}
 
       {/* Main Chapter Column */}
-      <div className={`${columnWidthClass} mx-auto px-4 sm:px-6 pt-10`}>
+      <div className={`${columnWidthClass} mx-auto px-4 sm:px-6 pt-8`}>
         
+        {/* Editorial Domain Artwork Hero Banner */}
+        {domainTheme.illustrationPath && (
+          <div className="mb-8 rounded-xl overflow-hidden border border-stone-200/90 dark:border-stone-800 bg-stone-50 dark:bg-[#1f1e1c] shadow-xs relative group">
+            <img 
+              src={domainTheme.illustrationPath}
+              alt={domainTheme.name}
+              className="w-full h-32 sm:h-44 object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+              onError={(e) => {
+                (e.target as HTMLElement).parentElement!.style.display = 'none';
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-4 sm:p-5">
+              <div className="text-white">
+                <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-stone-300 font-medium">
+                  {domainTheme.name}
+                </span>
+                <div className="font-serif text-sm sm:text-base text-stone-100 font-medium line-clamp-1">
+                  Track {String(phase.number).padStart(2, '0')}: {phase.title}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Chapter Header */}
         <div className="mb-10 space-y-3 font-sans">
           <div className="flex items-center gap-2.5 text-xs text-stone-500 dark:text-stone-400 flex-wrap">

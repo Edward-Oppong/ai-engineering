@@ -176,12 +176,35 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
       {activeTab === 'study' && (
         <div>
           {dueItems.length === 0 ? (
-            <div className="p-10 rounded-xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 text-center space-y-2 max-w-lg mx-auto shadow-sm">
-              <CheckCircle2 className="w-8 h-8 text-emerald-700 dark:text-emerald-400 mx-auto" />
-              <h2 className="font-serif text-xl font-medium text-stone-900 dark:text-stone-100">All Reviews Completed</h2>
-              <p className="text-xs text-stone-500 dark:text-stone-400 max-w-sm mx-auto leading-relaxed">
-                You are caught up on all scheduled review items for today. As you read chapters and complete quizzes, missed concepts will be scheduled here.
-              </p>
+            <div className="p-8 sm:p-10 rounded-xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 text-center space-y-4 max-w-lg mx-auto shadow-sm">
+              <div className="w-full h-36 rounded-lg overflow-hidden border border-stone-200 dark:border-stone-800 mb-2">
+                <img 
+                  src="./illustrations/retention.jpg" 
+                  alt="Retention Memory Schedule" 
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLElement).parentElement!.style.display = 'none';
+                  }}
+                />
+              </div>
+              <div className="w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-6 h-6" />
+              </div>
+              <div className="space-y-1">
+                <h2 className="font-serif text-xl font-medium text-stone-900 dark:text-stone-100">All Reviews Completed</h2>
+                <p className="text-xs text-stone-500 dark:text-stone-400 max-w-sm mx-auto leading-relaxed">
+                  You are fully caught up on all scheduled review items for today. As you read chapters and test yourself with quizzes, missed concepts are automatically scheduled here.
+                </p>
+              </div>
+              <div className="pt-2">
+                <a
+                  href="#phases"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-stone-900 hover:bg-stone-800 dark:bg-stone-100 dark:hover:bg-white text-white dark:text-stone-900 text-xs font-medium transition-colors shadow-xs"
+                >
+                  <span>Explore Syllabus Chapters</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
           ) : currentCard ? (
             <div className="max-w-2xl mx-auto space-y-4">

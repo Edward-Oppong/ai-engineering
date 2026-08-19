@@ -26,6 +26,7 @@ interface MilestoneGroup {
   badgeBg: string;
   badgeText: string;
   borderColor: string;
+  illustrationPath: string;
   phaseIds: string[];
 }
 
@@ -36,6 +37,7 @@ const MILESTONE_GROUPS: MilestoneGroup[] = [
     badgeBg: 'bg-indigo-50 dark:bg-indigo-950/40',
     badgeText: 'text-indigo-800 dark:text-indigo-300',
     borderColor: 'border-indigo-200 dark:border-indigo-800',
+    illustrationPath: './illustrations/foundations.jpg',
     phaseIds: ['phase-00', 'phase-01', 'phase-02', 'phase-03']
   },
   {
@@ -44,6 +46,7 @@ const MILESTONE_GROUPS: MilestoneGroup[] = [
     badgeBg: 'bg-emerald-50 dark:bg-emerald-950/40',
     badgeText: 'text-emerald-800 dark:text-emerald-300',
     borderColor: 'border-emerald-200 dark:border-emerald-800',
+    illustrationPath: './illustrations/perception.jpg',
     phaseIds: ['phase-04', 'phase-05', 'phase-06']
   },
   {
@@ -52,6 +55,7 @@ const MILESTONE_GROUPS: MilestoneGroup[] = [
     badgeBg: 'bg-amber-50 dark:bg-amber-950/40',
     badgeText: 'text-amber-800 dark:text-amber-300',
     borderColor: 'border-amber-200 dark:border-amber-800',
+    illustrationPath: './illustrations/transformers.jpg',
     phaseIds: ['phase-07', 'phase-08', 'phase-09', 'phase-10']
   },
   {
@@ -60,6 +64,7 @@ const MILESTONE_GROUPS: MilestoneGroup[] = [
     badgeBg: 'bg-purple-50 dark:bg-purple-950/40',
     badgeText: 'text-purple-800 dark:text-purple-300',
     borderColor: 'border-purple-200 dark:border-purple-800',
+    illustrationPath: './illustrations/agents.jpg',
     phaseIds: ['phase-11', 'phase-12', 'phase-13', 'phase-14', 'phase-15', 'phase-16']
   },
   {
@@ -68,6 +73,7 @@ const MILESTONE_GROUPS: MilestoneGroup[] = [
     badgeBg: 'bg-teal-50 dark:bg-teal-950/40',
     badgeText: 'text-teal-800 dark:text-teal-300',
     borderColor: 'border-teal-200 dark:border-teal-800',
+    illustrationPath: './illustrations/production.jpg',
     phaseIds: ['phase-17', 'phase-18', 'phase-19']
   }
 ];
@@ -213,13 +219,27 @@ export const PhasesView: React.FC<PhasesViewProps> = ({
                 <span className="font-mono">{selectedPhase.estTime}</span>
               </div>
 
-              <div>
-                <h2 className="font-serif text-2xl sm:text-3xl font-medium text-stone-900 dark:text-stone-100 tracking-tight">
-                  {selectedPhase.title}
-                </h2>
-                <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">
-                  Track {String(selectedPhase.number).padStart(2, '0')} · {currentPhaseLessons.length} chapters
-                </p>
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                <div className="sm:col-span-8 space-y-1.5">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-medium text-stone-900 dark:text-stone-100 tracking-tight">
+                    {selectedPhase.title}
+                  </h2>
+                  <p className="text-xs text-stone-500 dark:text-stone-400">
+                    Track {String(selectedPhase.number).padStart(2, '0')} · {currentPhaseLessons.length} chapters
+                  </p>
+                </div>
+                {currentPhaseMilestone.illustrationPath && (
+                  <div className="sm:col-span-4 rounded-lg overflow-hidden border border-stone-200 dark:border-stone-800 shadow-2xs">
+                    <img 
+                      src={currentPhaseMilestone.illustrationPath}
+                      alt={currentPhaseMilestone.name}
+                      className="w-full h-24 sm:h-20 object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLElement).style.display = 'none';
+                      }}
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Filters */}

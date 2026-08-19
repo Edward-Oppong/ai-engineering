@@ -11,6 +11,14 @@ interface SearchModalProps {
   completedLessonIds: Set<string>;
 }
 
+function getDomainThumbnail(phaseNum: number): string {
+  if (phaseNum <= 3) return './illustrations/foundations.jpg';
+  if (phaseNum <= 6) return './illustrations/perception.jpg';
+  if (phaseNum <= 10) return './illustrations/transformers.jpg';
+  if (phaseNum <= 16) return './illustrations/agents.jpg';
+  return './illustrations/production.jpg';
+}
+
 export const SearchModal: React.FC<SearchModalProps> = ({
   isOpen,
   onClose,
@@ -139,30 +147,43 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       : 'text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-[#2a2926]'
                   }`}
                 >
-                  <div className="flex items-start gap-2.5 min-w-0">
-                    <div className="mt-0.5 shrink-0">
-                      {isDone ? (
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400" />
-                      ) : (
-                        <Circle className="w-3.5 h-3.5 text-stone-300 dark:text-stone-600" />
-                      )}
-                    </div>
-
-                    <div className="min-w-0">
-                      <div className="flex items-baseline gap-2 flex-wrap">
-                        <span className="text-[11px] font-mono text-stone-400">
-                          T{lesson.phaseNum}·C{lesson.lessonNum}
-                        </span>
-                        <span className="font-serif text-sm text-stone-900 dark:text-stone-100 truncate">
-                          {lesson.title}
-                        </span>
+                  <div className="flex items-center justify-between gap-3 w-full min-w-0">
+                    <div className="flex items-start gap-2.5 min-w-0">
+                      <div className="mt-0.5 shrink-0">
+                        {isDone ? (
+                          <CheckCircle className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400" />
+                        ) : (
+                          <Circle className="w-3.5 h-3.5 text-stone-300 dark:text-stone-600" />
+                        )}
                       </div>
 
-                      {lesson.motto && (
-                        <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5 line-clamp-1 italic font-serif">
-                          "{lesson.motto}"
-                        </p>
-                      )}
+                      <div className="min-w-0">
+                        <div className="flex items-baseline gap-2 flex-wrap">
+                          <span className="text-[11px] font-mono text-stone-400">
+                            T{lesson.phaseNum}·C{lesson.lessonNum}
+                          </span>
+                          <span className="font-serif text-sm text-stone-900 dark:text-stone-100 truncate">
+                            {lesson.title}
+                          </span>
+                        </div>
+
+                        {lesson.motto && (
+                          <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5 line-clamp-1 italic font-serif">
+                            "{lesson.motto}"
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="w-10 h-7 rounded overflow-hidden shrink-0 border border-stone-200 dark:border-stone-800 opacity-70 group-hover:opacity-100">
+                      <img 
+                        src={getDomainThumbnail(lesson.phaseNum)} 
+                        alt="" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLElement).parentElement!.style.display = 'none';
+                        }}
+                      />
                     </div>
                   </div>
                 </div>

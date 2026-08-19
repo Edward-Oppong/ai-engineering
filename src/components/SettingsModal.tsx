@@ -123,10 +123,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         onClick={e => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200 dark:border-stone-800 bg-stone-50/60 dark:bg-[#1e1d1c]">
+        <div className="flex items-center justify-between px-6 py-3.5 border-b border-stone-200 dark:border-stone-800 bg-stone-50/60 dark:bg-[#1e1d1c]">
           <div className="flex items-center gap-2.5">
             <Database className="w-4 h-4 text-stone-700 dark:text-stone-300" />
-            <h2 className="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">
+            <h2 className="font-serif text-base font-medium text-stone-900 dark:text-stone-100">
               Study Data & Portability
             </h2>
           </div>
@@ -137,6 +137,24 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           >
             <X className="w-4 h-4" />
           </button>
+        </div>
+
+        {/* Monograph Art Banner */}
+        <div className="w-full h-24 sm:h-28 overflow-hidden relative border-b border-stone-200 dark:border-stone-800 shrink-0">
+          <img 
+            src="./illustrations/monograph-cover.jpg" 
+            alt="AI Engineering Study Companion" 
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              (e.target as HTMLElement).parentElement!.style.display = 'none';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-4">
+            <div className="text-white">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-stone-300">Local-First Storage</span>
+              <div className="font-serif text-sm font-medium text-white">IndexedDB Study State & Offline Data</div>
+            </div>
+          </div>
         </div>
 
         {/* Modal Content */}

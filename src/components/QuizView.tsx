@@ -214,6 +214,32 @@ export const QuizView: React.FC<QuizViewProps> = ({
         })}
       </div>
 
+      {/* Retention Card Banner on Completion */}
+      {submitted && (
+        <div className="p-4 bg-purple-50/50 dark:bg-purple-950/20 border-t border-purple-100 dark:border-purple-900/40 flex items-center gap-4 text-xs">
+          <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 border border-purple-200 dark:border-purple-800">
+            <img 
+              src="./illustrations/retention.jpg" 
+              alt="Memory Retention"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLElement).parentElement!.style.display = 'none';
+              }}
+            />
+          </div>
+          <div className="space-y-0.5">
+            <div className="font-semibold text-purple-950 dark:text-purple-200 font-serif text-sm">
+              Cognitive Retention Updated
+            </div>
+            <p className="text-purple-800/80 dark:text-purple-300/80 text-[11px] leading-relaxed">
+              {questions.length - correctCount > 0 
+                ? `${questions.length - correctCount} missed concept${questions.length - correctCount > 1 ? 's were' : ' was'} scheduled into your SM-2 Spaced Repetition deck.` 
+                : 'Perfect recall! All concepts are consolidated.'}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Action Footer */}
       <div className="p-4 bg-stone-50 dark:bg-[#1e1d1c] border-t border-stone-200 dark:border-stone-800 flex items-center justify-between flex-wrap gap-4 text-xs">
         <div className="text-stone-500 dark:text-stone-400">
