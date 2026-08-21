@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { db } from '../lib/db';
-import { UserDataBackup } from '../types';
+import { UserDataBackup, UserProfile } from '../types';
+import { AVATAR_COLORS } from '../lib/auth';
 import { 
   X, 
   Download, 
@@ -9,19 +10,25 @@ import {
   Check, 
   AlertTriangle, 
   Database,
-  FileJson
+  FileJson,
+  User,
+  Users
 } from 'lucide-react';
 
 interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
   onDataChanged: () => void;
+  currentUser?: UserProfile;
+  onOpenAuth?: () => void;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
   isOpen,
   onClose,
-  onDataChanged
+  onDataChanged,
+  currentUser,
+  onOpenAuth,
 }) => {
   const [stats, setStats] = useState<{ lessonCount: number; quizCount: number; reviewCount: number; activityDays: number; bookmarkCount: number } | null>(null);
   const [exporting, setExporting] = useState(false);
@@ -172,6 +179,47 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/30 border border-rose-300 dark:border-rose-800 text-rose-900 dark:text-rose-200 flex items-start gap-2">
               <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
               <span>{errorMessage}</span>
+            </div>
+          )}
+
+          {/* Active Learner Profile Card */}
+          {currentUser && (
+            <div className="p-3.5 rounded-xl bg-stone-100/70 dark:bg-[#1e1d1c] border border-stone-200 dark:border-stone-800 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div 
+                  className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-white text-xs shadow-xs shrink-0 ${
+                    (AVATAR_COLORS.find(c => c.id === currentUser.avatarColor) || AVATAR_COLORS[0]).bg
+                  }`}
+                >
+                  {currentUser.name.slice(0, 2).toUpperCase()}
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-serif font-medium text-sm text-stone-900 dark:text-stone-100">
+                      {currentUser.name}
+                    </span>
+                    <span className="text-[10px] font-mono text-stone-400">
+                      (@{currentUser.username})
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-stone-500 dark:text-stone-400">
+                    Isolated local database & progress state
+                  </div>
+                </div>
+              </div>
+
+              {onOpenAuth && (
+                <button
+                  onClick={() => {
+                    onClose();
+                    onOpenAuth();
+                  }}
+                  className="px-3 py-1.5 rounded-lg bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 text-xs font-medium transition-colors flex items-center gap-1.5 cursor-pointer shrink-0"
+                >
+                  <Users className="w-3.5 h-3.5" />
+                  <span>Switch Profile</span>
+                </button>
+              )}
             </div>
           )}
 

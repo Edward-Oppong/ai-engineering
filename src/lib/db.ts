@@ -8,11 +8,67 @@ import {
   UserReadingPreferences
 } from '../types';
 
-const DB_NAME = 'ai_engineering_study_db';
 const DB_VERSION = 2;
 
 export class StudyDB {
   private dbPromise: Promise<IDBDatabase> | null = null;
+  private currentUserId: string = 'default';
+
+  constructor(userId?: string) {
+    if (userId) {
+      this.currentUserId = userId;
+    } else {
+      try {
+        const active = localStorage.getItem('ai_eng_active_user_id');
+        if (active) this.currentUserId = active;
+      } catch {
+        this.currentUserId = 'default';
+      }
+    }
+  }
+
+  /**
+   * Switch the active user database context.
+   * Closes any existing connection so that subsequent queries hit the newly selected user's database.
+   */
+  public async switchUser(userId: string): Promise<void> {
+    if (this.currentUserId === userId && this.dbPromise) {
+      return;
+    }
+
+    if (this.dbPromise) {
+      try {
+        const conn = await this.dbPromise;
+        conn.close();
+      } catch {
+        // Connection already closed or unavailable
+      }
+    }
+    this.dbPromise = null;
+    this.currentUserId = userId;
+  }
+
+  public getUserId(): string {
+    return this.currentUserId;
+  }
+
+  private getDBName(): string {
+    return this.currentUserId === 'default'
+      ? 'ai_engineering_study_db'
+      : `ai_engineering_study_db_${this.currentUserId}`;
+  }
+
+  private getBookmarksKey(): string {
+    return this.currentUserId === 'default'
+      ? 'ai_eng_bookmarks'
+      : `ai_eng_bookmarks_${this.currentUserId}`;
+  }
+
+  private getReadingPrefsKey(): string {
+    return this.currentUserId === 'default'
+      ? 'ai_eng_reading_prefs'
+      : `ai_eng_reading_prefs_${this.currentUserId}`;
+  }
 
   /**
    * Test whether IndexedDB is available in this browser context.
@@ -42,7 +98,8 @@ export class StudyDB {
     if (this.dbPromise) return this.dbPromise;
 
     this.dbPromise = new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      const dbName = this.getDBName();
+      const request = indexedDB.open(dbName, DB_VERSION);
 
       request.onupgradeneeded = (event) => {
         const db = request.result;
@@ -148,49 +205,14 @@ export class StudyDB {
     return new Promise((resolve, reject) => {
       const tx = db.transaction(['lessons', 'activityLog'], 'readwrite');
       const store = tx.objectStore('lessons');
-      store.put(updated);
+      const putReq = store.put(updated);
 
-      if (status === 'completed') {
+      if (status === 'completed' && existing.status !== 'completed') {
         this.recordActivitySync(tx);
       }
 
-      tx.oncomplete = () => resolve(updated);
-      tx.onerror = () => reject(tx.error);
-    });
-  }
-
-  async updateLessonNotes(
-    lesson: { id: string; phaseId: string; title: string; slug: string },
-    notes: string
-  ): Promise<UserLessonRecord> {
-    const db = await this.getDB();
-    const existing = (await this.getLesson(lesson.id)) || {
-      id: lesson.id,
-      phaseId: lesson.phaseId,
-      title: lesson.title,
-      slug: lesson.slug,
-      status: 'in_progress' as LessonStatus,
-      notes: '',
-    };
-
-    // Enforce 50,000 character limit to prevent unbounded storage growth
-    const MAX_NOTES_LENGTH = 50_000;
-    const truncatedNotes = notes.length > MAX_NOTES_LENGTH
-      ? notes.slice(0, MAX_NOTES_LENGTH)
-      : notes;
-
-    const updated: UserLessonRecord = {
-      ...existing,
-      notes: truncatedNotes,
-      lastViewedAt: new Date().toISOString(),
-    };
-
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction('lessons', 'readwrite');
-      const store = tx.objectStore('lessons');
-      store.put(updated);
-      tx.oncomplete = () => resolve(updated);
-      tx.onerror = () => reject(tx.error);
+      putReq.onsuccess = () => resolve(updated);
+      putReq.onerror = () => reject(putReq.error);
     });
   }
 
@@ -216,23 +238,93 @@ export class StudyDB {
     return new Promise((resolve, reject) => {
       const tx = db.transaction('lessons', 'readwrite');
       const store = tx.objectStore('lessons');
-      store.put(updated);
-      tx.oncomplete = () => resolve(updated);
-      tx.onerror = () => reject(tx.error);
+      const putReq = store.put(updated);
+      putReq.onsuccess = () => resolve(updated);
+      putReq.onerror = () => reject(putReq.error);
+    });
+  }
+
+  async updateLessonNotes(
+    lesson: { id: string; phaseId: string; title: string; slug: string },
+    notes: string
+  ): Promise<UserLessonRecord> {
+    const db = await this.getDB();
+    const existing = (await this.getLesson(lesson.id)) || {
+      id: lesson.id,
+      phaseId: lesson.phaseId,
+      title: lesson.title,
+      slug: lesson.slug,
+      status: 'in_progress',
+      notes: '',
+    };
+
+    const updated: UserLessonRecord = {
+      ...existing,
+      notes,
+      lastViewedAt: new Date().toISOString(),
+    };
+
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('lessons', 'readwrite');
+      const store = tx.objectStore('lessons');
+      const putReq = store.put(updated);
+      putReq.onsuccess = () => resolve(updated);
+      putReq.onerror = () => reject(putReq.error);
+    });
+  }
+
+  async saveNotes(lessonId: string, notes: string): Promise<void> {
+    const db = await this.getDB();
+    const existing = await this.getLesson(lessonId);
+    if (!existing) return;
+
+    existing.notes = notes;
+    existing.lastViewedAt = new Date().toISOString();
+
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('lessons', 'readwrite');
+      const store = tx.objectStore('lessons');
+      const req = store.put(existing);
+      req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async updateTimeSpent(lessonId: string, secondsDelta: number): Promise<void> {
+    const db = await this.getDB();
+    const existing = await this.getLesson(lessonId);
+    if (!existing) return;
+
+    existing.timeSpentSeconds = (existing.timeSpentSeconds || 0) + secondsDelta;
+    existing.lastViewedAt = new Date().toISOString();
+
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('lessons', 'readwrite');
+      const store = tx.objectStore('lessons');
+      const req = store.put(existing);
+      req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
     });
   }
 
   // --- Quiz Store Operations ---
 
-  async saveQuizAttempt(attempt: UserQuizAttempt): Promise<void> {
+  async saveQuizAttempt(attempt: Omit<UserQuizAttempt, 'id'>): Promise<UserQuizAttempt> {
     const db = await this.getDB();
+    const fullAttempt: UserQuizAttempt = {
+      ...attempt,
+      id: `${attempt.lessonId}-${Date.now()}`,
+    };
+
     return new Promise((resolve, reject) => {
       const tx = db.transaction(['quizAttempts', 'activityLog'], 'readwrite');
       const store = tx.objectStore('quizAttempts');
-      store.put(attempt);
+      const req = store.put(fullAttempt);
+
       this.recordActivitySync(tx);
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
+
+      req.onsuccess = () => resolve(fullAttempt);
+      req.onerror = () => reject(req.error);
     });
   }
 
@@ -241,41 +333,55 @@ export class StudyDB {
     return new Promise((resolve, reject) => {
       const tx = db.transaction('quizAttempts', 'readonly');
       const store = tx.objectStore('quizAttempts');
-      let req: IDBRequest<UserQuizAttempt[]>;
+
       if (lessonId) {
         const index = store.index('lessonId');
-        req = index.getAll(lessonId);
+        const req = index.getAll(lessonId);
+        req.onsuccess = () => {
+          const results = (req.result || []) as UserQuizAttempt[];
+          resolve(results.sort((a, b) => new Date(b.answeredAt).getTime() - new Date(a.answeredAt).getTime()));
+        };
+        req.onerror = () => reject(req.error);
       } else {
-        req = store.getAll();
+        const req = store.getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => reject(req.error);
       }
-      req.onsuccess = () => resolve(req.result || []);
+    });
+  }
+
+  // --- Spaced Repetition (SM-2) Queue Operations ---
+
+  async getReviewItem(id: string): Promise<SM2ReviewItem | null> {
+    const db = await this.getDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('reviewQueue', 'readonly');
+      const store = tx.objectStore('reviewQueue');
+      const req = store.get(id);
+      req.onsuccess = () => resolve(req.result || null);
       req.onerror = () => reject(req.error);
     });
   }
 
-  // --- Review Queue (Spaced Repetition) Operations ---
-
   async saveReviewItem(item: SM2ReviewItem): Promise<void> {
     const db = await this.getDB();
     return new Promise((resolve, reject) => {
-      const tx = db.transaction(['reviewQueue', 'activityLog'], 'readwrite');
+      const tx = db.transaction('reviewQueue', 'readwrite');
       const store = tx.objectStore('reviewQueue');
-      store.put(item);
-      this.recordActivitySync(tx);
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
+      const req = store.put(item);
+      req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
     });
   }
 
   async saveReviewItems(items: SM2ReviewItem[]): Promise<void> {
     const db = await this.getDB();
     return new Promise((resolve, reject) => {
-      const tx = db.transaction(['reviewQueue', 'activityLog'], 'readwrite');
+      const tx = db.transaction('reviewQueue', 'readwrite');
       const store = tx.objectStore('reviewQueue');
       for (const item of items) {
         store.put(item);
       }
-      this.recordActivitySync(tx);
       tx.oncomplete = () => resolve();
       tx.onerror = () => reject(tx.error);
     });
@@ -292,9 +398,10 @@ export class StudyDB {
     });
   }
 
-  async getDueReviewItems(cutoffDateStr?: string): Promise<SM2ReviewItem[]> {
-    const today = cutoffDateStr || new Date().toISOString().slice(0, 10);
+  async getDueReviewItems(): Promise<SM2ReviewItem[]> {
     const db = await this.getDB();
+    const today = new Date().toISOString().slice(0, 10);
+
     return new Promise((resolve, reject) => {
       const tx = db.transaction('reviewQueue', 'readonly');
       const store = tx.objectStore('reviewQueue');
@@ -322,12 +429,12 @@ export class StudyDB {
   // --- Bookmark Operations ---
 
   async getBookmarks(): Promise<string[]> {
+    const localKey = this.getBookmarksKey();
     try {
       const db = await this.getDB();
       return new Promise((resolve) => {
         if (!db.objectStoreNames.contains('bookmarks')) {
-          // Fallback to localStorage
-          const local = localStorage.getItem('ai_eng_bookmarks');
+          const local = localStorage.getItem(localKey);
           resolve(local ? JSON.parse(local) : []);
           return;
         }
@@ -341,7 +448,7 @@ export class StudyDB {
         req.onerror = () => resolve([]);
       });
     } catch {
-      const local = localStorage.getItem('ai_eng_bookmarks');
+      const local = localStorage.getItem(localKey);
       return local ? JSON.parse(local) : [];
     }
   }
@@ -368,7 +475,7 @@ export class StudyDB {
       // Fallback
     }
 
-    localStorage.setItem('ai_eng_bookmarks', JSON.stringify(updated));
+    localStorage.setItem(this.getBookmarksKey(), JSON.stringify(updated));
     return !isCurrentlyBookmarked;
   }
 
@@ -450,7 +557,7 @@ export class StudyDB {
 
     let readingPreferences: UserReadingPreferences | undefined = undefined;
     try {
-      const storedPref = localStorage.getItem('ai_eng_reading_prefs');
+      const storedPref = localStorage.getItem(this.getReadingPrefsKey());
       if (storedPref) readingPreferences = JSON.parse(storedPref);
     } catch {
       // Ignore
@@ -509,10 +616,10 @@ export class StudyDB {
       }
 
       if (backup.data.bookmarks) {
-        localStorage.setItem('ai_eng_bookmarks', JSON.stringify(backup.data.bookmarks));
+        localStorage.setItem(this.getBookmarksKey(), JSON.stringify(backup.data.bookmarks));
       }
       if (backup.data.readingPreferences) {
-        localStorage.setItem('ai_eng_reading_prefs', JSON.stringify(backup.data.readingPreferences));
+        localStorage.setItem(this.getReadingPrefsKey(), JSON.stringify(backup.data.readingPreferences));
       }
 
       tx.oncomplete = () => {
@@ -552,11 +659,33 @@ export class StudyDB {
       tx.objectStore('reviewQueue').clear();
       tx.objectStore('activityLog').clear();
 
-      localStorage.removeItem('ai_eng_bookmarks');
-      localStorage.removeItem('ai_eng_reading_prefs');
+      localStorage.removeItem(this.getBookmarksKey());
+      localStorage.removeItem(this.getReadingPrefsKey());
 
       tx.oncomplete = () => resolve();
       tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async deleteUserData(userId: string): Promise<void> {
+    if (this.currentUserId === userId && this.dbPromise) {
+      const conn = await this.dbPromise;
+      conn.close();
+      this.dbPromise = null;
+    }
+
+    const dbName = userId === 'default' ? 'ai_engineering_study_db' : `ai_engineering_study_db_${userId}`;
+    const bookmarksKey = userId === 'default' ? 'ai_eng_bookmarks' : `ai_eng_bookmarks_${userId}`;
+    const readingPrefsKey = userId === 'default' ? 'ai_eng_reading_prefs' : `ai_eng_reading_prefs_${userId}`;
+
+    localStorage.removeItem(bookmarksKey);
+    localStorage.removeItem(readingPrefsKey);
+
+    return new Promise((resolve) => {
+      const req = indexedDB.deleteDatabase(dbName);
+      req.onsuccess = () => resolve();
+      req.onerror = () => resolve();
+      req.onblocked = () => resolve();
     });
   }
 }

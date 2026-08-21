@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { SearchModal } from './components/SearchModal';
 import { SettingsModal } from './components/SettingsModal';
+import { AuthModal } from './components/AuthModal';
+import { DesktopInstallModal } from './components/DesktopInstallModal';
 import { DashboardView } from './views/DashboardView';
 import { PhasesView } from './views/PhasesView';
 import { LessonView } from './views/LessonView';
@@ -10,7 +12,8 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { StorageWarningBanner } from './components/StorageWarningBanner';
 import { roadmap, lessonsSummary } from './lib/curriculum-loader';
 import { db, StudyDB } from './lib/db';
-import { UserLessonRecord, SM2ReviewItem } from './types';
+import { auth } from './lib/auth';
+import { UserLessonRecord, SM2ReviewItem, UserProfile } from './types';
 
 export function App() {
   const [currentTab, setCurrentTab] = useState<'dashboard' | 'phases' | 'lesson' | 'review'>('dashboard');
@@ -18,6 +21,15 @@ export function App() {
   const [selectedPhaseId, setSelectedPhaseId] = useState<string>('phase-00');
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
+  const [isDesktopInstallOpen, setIsDesktopInstallOpen] = useState<boolean>(false);
+
+  // Detect if running inside Electron desktop app — hide install guide banner when true
+  const isElectron = navigator.userAgent.toLowerCase().includes('electron');
+
+  // Multi-learner profile state
+  const [currentUser, setCurrentUser] = useState<UserProfile>(() => auth.getCurrentUser());
+
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     return localStorage.getItem('theme') !== 'light';
   });
@@ -63,8 +75,17 @@ export function App() {
     }
   }, [storageAvailable]);
 
+  // Initial user sync
   useEffect(() => {
-    refreshUserData();
+    db.switchUser(currentUser.id).then(() => {
+      refreshUserData();
+    });
+  }, [currentUser.id, refreshUserData]);
+
+  const handleUserChanged = useCallback(async (newUser: UserProfile) => {
+    setCurrentUser(newUser);
+    await db.switchUser(newUser.id);
+    await refreshUserData();
   }, [refreshUserData]);
 
   // Hash-based routing
@@ -102,6 +123,7 @@ export function App() {
       if (e.key === 'Escape') {
         setIsSearchOpen(false);
         setIsSettingsOpen(false);
+        setIsAuthOpen(false);
       }
     };
 
@@ -143,6 +165,8 @@ export function App() {
         onSelectTab={handleSelectTab}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
+        currentUser={currentUser}
+        onOpenAuth={() => setIsAuthOpen(true)}
         streakCount={streakCount}
         dueReviewCount={dueReviews.length}
         darkMode={darkMode}
@@ -150,7 +174,7 @@ export function App() {
       />
 
       <main className="flex-1" id="main-content">
-        <ErrorBoundary context="Study Overview" key={`dashboard-${currentTab}`}>
+        <ErrorBoundary context="Study Overview" key={`dashboard-${currentTab}-${currentUser.id}`}>
           {currentTab === 'dashboard' && (
             <DashboardView
               roadmap={roadmap}
@@ -161,11 +185,12 @@ export function App() {
               onSelectLesson={handleSelectLesson}
               onSelectPhase={handleSelectPhase}
               onOpenReview={() => handleSelectTab('review')}
+              onOpenDesktopInstall={isElectron ? undefined : () => setIsDesktopInstallOpen(true)}
             />
           )}
         </ErrorBoundary>
 
-        <ErrorBoundary context="Syllabus">
+        <ErrorBoundary context="Syllabus" key={`phases-${currentUser.id}`}>
           {currentTab === 'phases' && (
             <PhasesView
               roadmap={roadmap}
@@ -177,7 +202,7 @@ export function App() {
           )}
         </ErrorBoundary>
 
-        <ErrorBoundary context="Lesson Reader">
+        <ErrorBoundary context="Lesson Reader" key={`lesson-${selectedLessonId}-${currentUser.id}`}>
           {currentTab === 'lesson' && selectedLessonId && (
             <LessonView
               lessonId={selectedLessonId}
@@ -188,7 +213,7 @@ export function App() {
           )}
         </ErrorBoundary>
 
-        <ErrorBoundary context="Spaced Review Deck">
+        <ErrorBoundary context="Spaced Review Deck" key={`review-${currentUser.id}`}>
           {currentTab === 'review' && (
             <ReviewQueueView
               onSelectLesson={handleSelectLesson}
@@ -209,6 +234,20 @@ export function App() {
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
         onDataChanged={refreshUserData}
+        currentUser={currentUser}
+        onOpenAuth={() => setIsAuthOpen(true)}
+      />
+
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        currentUser={currentUser}
+        onUserChanged={handleUserChanged}
+      />
+
+      <DesktopInstallModal
+        isOpen={isDesktopInstallOpen}
+        onClose={() => setIsDesktopInstallOpen(false)}
       />
     </div>
   );

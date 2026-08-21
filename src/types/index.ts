@@ -152,3 +152,23 @@ export interface PythonExecutionResult {
   executionTimeMs: number;
   error: string | null;
 }
+
+// User Profiles & Authentication (for online/multi-user progress isolation)
+export interface UserProfile {
+  id: string;              // unique user id, e.g. "usr_12345" or "default"
+  name: string;            // display name, e.g. "Edward"
+  username: string;        // unique handle, e.g. "edward"
+  email?: string;          // optional email for identification
+  avatarColor: string;     // color identifier for avatar badge
+  avatarIcon?: string;     // optional icon identifier
+  pinHash?: string;        // optional hashed PIN / password for profile security
+  createdAt: string;       // ISO timestamp
+  lastLoginAt: string;     // ISO timestamp
+  isDefault?: boolean;     // true for initial default profile
+}
+
+export interface AuthSession {
+  currentUser: UserProfile;
+  availableUsers: UserProfile[];
+}
+

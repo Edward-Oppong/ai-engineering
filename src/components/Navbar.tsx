@@ -1,11 +1,15 @@
 import React from 'react';
-import { Search, Moon, Sun, Settings } from 'lucide-react';
+import { Search, Moon, Sun, Settings, User } from 'lucide-react';
+import { UserProfile } from '../types';
+import { AVATAR_COLORS } from '../lib/auth';
 
 interface NavbarProps {
   currentTab: 'dashboard' | 'phases' | 'lesson' | 'review';
   onSelectTab: (tab: 'dashboard' | 'phases' | 'review') => void;
   onOpenSearch: () => void;
   onOpenSettings: () => void;
+  currentUser: UserProfile;
+  onOpenAuth: () => void;
   streakCount: number;
   dueReviewCount: number;
   darkMode: boolean;
@@ -17,11 +21,15 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectTab,
   onOpenSearch,
   onOpenSettings,
+  currentUser,
+  onOpenAuth,
   streakCount,
   dueReviewCount,
   darkMode,
   onToggleDarkMode
 }) => {
+  const avatarMeta = AVATAR_COLORS.find(c => c.id === currentUser.avatarColor) || AVATAR_COLORS[0];
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-stone-300/70 dark:border-stone-800 bg-[#f5f2eb]/90 dark:bg-[#1c1b1a]/90 backdrop-blur-md transition-colors font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-6">
@@ -100,10 +108,24 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           )}
 
+          {/* Learner Profile & Switcher Trigger */}
+          <button
+            onClick={onOpenAuth}
+            className="flex items-center gap-1.5 px-2 py-1 rounded-md text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors text-xs font-sans group cursor-pointer"
+            title={`Learner Profile: ${currentUser.name} (@${currentUser.username}) — Click to switch or manage profiles`}
+          >
+            <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white shadow-2xs shrink-0 ${avatarMeta.bg}`}>
+              {currentUser.name.slice(0, 1).toUpperCase()}
+            </div>
+            <span className="hidden sm:inline font-medium max-w-[90px] truncate text-stone-800 dark:text-stone-200">
+              {currentUser.name}
+            </span>
+          </button>
+
           {/* Settings & Backup Modal Trigger */}
           <button
             onClick={onOpenSettings}
-            className="p-1.5 rounded-md text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors"
+            className="p-1.5 rounded-md text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors cursor-pointer"
             title="Study Data & Backup Settings"
           >
             <Settings className="w-4 h-4" />
@@ -112,7 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Dark / Light Mode Toggle */}
           <button
             onClick={onToggleDarkMode}
-            className="p-1.5 rounded-md text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors"
+            className="p-1.5 rounded-md text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors cursor-pointer"
             title={darkMode ? 'Switch to Light mode' : 'Switch to Dark mode'}
           >
             {darkMode ? (

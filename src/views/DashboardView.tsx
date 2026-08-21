@@ -9,7 +9,8 @@ import {
   Layers, 
   Compass, 
   ChevronRight,
-  Flame
+  Flame,
+  Monitor
 } from 'lucide-react';
 
 interface DashboardViewProps {
@@ -21,6 +22,7 @@ interface DashboardViewProps {
   onSelectLesson: (lessonId: string) => void;
   onSelectPhase: (phaseId: string) => void;
   onOpenReview: () => void;
+  onOpenDesktopInstall?: () => void;
 }
 
 // 5 Connected Curriculum Milestones
@@ -114,7 +116,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   streakCount,
   onSelectLesson,
   onSelectPhase,
-  onOpenReview
+  onOpenReview,
+  onOpenDesktopInstall
 }) => {
   const userLessonMap = useMemo(() => {
     const map = new Map<string, UserLessonRecord>();
@@ -405,12 +408,38 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         <button
           onClick={onOpenReview}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-50 dark:bg-stone-800 hover:bg-amber-100 dark:hover:bg-stone-700 text-amber-900 dark:text-stone-200 text-xs font-medium transition-colors shrink-0 border border-amber-200 dark:border-stone-700"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-50 dark:bg-stone-800 hover:bg-amber-100 dark:hover:bg-stone-700 text-amber-900 dark:text-stone-200 text-xs font-medium transition-colors shrink-0 border border-amber-200 dark:border-stone-700 cursor-pointer"
         >
           <span>Open Review Deck</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </section>
+
+      {/* Standalone Desktop Executable (.exe) Installation Banner */}
+      {onOpenDesktopInstall && (
+        <section className="p-6 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-300/60 dark:border-amber-900/60 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 text-xs font-semibold text-amber-800 dark:text-amber-300 uppercase tracking-wider">
+              <Monitor className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+              <span>Standalone Desktop App</span>
+            </div>
+            <h3 className="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">
+              Run 100% Offline with Native Windows Desktop App (.exe)
+            </h3>
+            <p className="text-xs text-stone-600 dark:text-stone-400 max-w-2xl">
+              Clone from GitHub, run <code className="px-1 py-0.5 rounded bg-stone-200 dark:bg-stone-800 font-mono text-[11px]">npm run electron:build</code>, and install the standalone Windows desktop installer from the <code className="px-1 py-0.5 rounded bg-stone-200 dark:bg-stone-800 font-mono text-[11px]">release/</code> folder.
+            </p>
+          </div>
+
+          <button
+            onClick={onOpenDesktopInstall}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-stone-900 hover:bg-stone-800 dark:bg-stone-100 dark:hover:bg-white text-white dark:text-stone-900 text-xs font-medium transition-colors shrink-0 shadow-xs cursor-pointer"
+          >
+            <span>View Setup Guide</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </section>
+      )}
     </div>
   );
 };
