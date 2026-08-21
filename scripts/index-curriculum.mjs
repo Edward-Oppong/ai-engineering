@@ -22,7 +22,14 @@ if (!fs.existsSync(outPhasesDir)) {
 
 console.log(`[Indexer] Reading curriculum from: ${curriculumDir}`);
 
+const existingRoadmapPath = path.join(outDataDir, 'roadmap.json');
+const hasExistingData = fs.existsSync(existingRoadmapPath) && fs.statSync(existingRoadmapPath).size > 100;
+
 if (!fs.existsSync(curriculumDir)) {
+  if (hasExistingData) {
+    console.warn(`[Indexer] Warning: Curriculum directory not found at ${curriculumDir}. Preserving existing src/data/ bundle.`);
+    process.exit(0);
+  }
   console.error(`[Indexer Error] Curriculum directory not found at ${curriculumDir}`);
   process.exit(1);
 }
@@ -90,6 +97,15 @@ const phaseFolders = fs.existsSync(phasesDir)
   : [];
 
 console.log(`[Indexer] Found ${phaseFolders.length} phase directories.`);
+
+if (phaseFolders.length === 0) {
+  if (hasExistingData) {
+    console.warn(`[Indexer] Warning: 0 phase directories found in ${curriculumDir} (e.g. uninitialized git submodule in CI/Vercel). Preserving pre-compiled src/data/ bundle.`);
+    process.exit(0);
+  }
+  console.error(`[Indexer Error] No phase directories found in ${phasesDir}`);
+  process.exit(1);
+}
 
 const allLessonsSummary = [];
 const phasesMetadata = [];

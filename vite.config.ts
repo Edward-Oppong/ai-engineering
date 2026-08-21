@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Vercel-compatible absolute base; Electron loads dist/index.html directly
+  base: './', // Relative base for Electron file:// and Vercel compatibility
   server: {
     port: 3000,
     open: false,
