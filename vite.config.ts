@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Supports opening static files locally or serving from any sub-path
+  base: '/', // Vercel-compatible absolute base; Electron loads dist/index.html directly
   server: {
     port: 3000,
     open: false,
@@ -12,5 +12,7 @@ export default defineConfig({
   build: {
     target: 'esnext',
     chunkSizeWarningLimit: 3000,
+    outDir: 'dist',
+    assetsDir: 'assets',
   },
 });

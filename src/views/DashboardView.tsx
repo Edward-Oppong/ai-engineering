@@ -153,16 +153,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   }, [userLessons, lessonsSummary]);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-14 animate-in fade-in duration-200 font-sans">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-14 animate-in fade-in duration-200 font-sans">
       
       {/* Editorial Hero Feature Card with Technical Lithograph Artwork */}
-      <section className="rounded-2xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+      <section className="rounded-2xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-300/70 dark:border-stone-800 shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12">
         
         {/* Left Column: Title, Overview & Continue CTA */}
         <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between space-y-6">
           <div className="space-y-3">
             <div className="flex items-center gap-2.5 text-xs text-stone-500 dark:text-stone-400">
-              <span className="font-mono uppercase tracking-wider text-[11px] px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-medium">
+              <span className="font-mono uppercase tracking-wider text-[11px] px-2 py-0.5 rounded bg-amber-100/80 dark:bg-stone-800 text-amber-900 dark:text-stone-300 border border-amber-200 dark:border-stone-700 font-medium">
                 Offline Study Companion
               </span>
               <span>·</span>
@@ -180,7 +180,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           {/* Current Reading Section */}
           {continueLesson && (
-            <div className="p-4 rounded-xl bg-stone-50 dark:bg-[#1e1d1c] border border-stone-200/80 dark:border-stone-800/80 space-y-2.5">
+            <div className="p-4 rounded-xl bg-[#ece8df] dark:bg-[#1e1d1c] border border-stone-300/60 dark:border-stone-800/80 space-y-2.5">
               <div className="flex items-center justify-between text-xs text-stone-500 dark:text-stone-400">
                 <span className="text-[11px] font-medium uppercase tracking-wider text-stone-500">
                   Current Chapter
@@ -212,7 +212,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           )}
 
           {/* Quick Metrics Bar */}
-          <div className="flex items-center gap-6 pt-2 border-t border-stone-100 dark:border-stone-800 text-xs text-stone-600 dark:text-stone-400">
+          <div className="flex items-center gap-6 pt-2 border-t border-stone-300/50 dark:border-stone-800 text-xs text-stone-600 dark:text-stone-400">
             <div>
               <span className="text-stone-900 dark:text-stone-100 font-semibold">{completedCount}</span>
               <span>/{totalLessons} chapters</span>
@@ -240,7 +240,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* Right Column: Editorial Monograph Artwork Illustration */}
-        <div className="lg:col-span-5 bg-stone-100/60 dark:bg-[#1a1918] border-t lg:border-t-0 lg:border-l border-stone-200/80 dark:border-stone-800 p-4 sm:p-6 flex items-center justify-center">
+        <div className="lg:col-span-5 bg-[#ece8df] dark:bg-[#1a1918] border-t lg:border-t-0 lg:border-l border-stone-300/60 dark:border-stone-800 p-4 sm:p-6 flex items-center justify-center">
           <div className="w-full max-w-sm rounded-xl overflow-hidden shadow-md border border-stone-300/60 dark:border-stone-700/60 group relative">
             <img 
               src="./illustrations/monograph-cover.jpg" 
@@ -257,7 +257,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       {/* Connected Curriculum Roadmap: 5 Sequential Learning Milestones */}
       <section className="space-y-8">
-        <div className="border-b border-stone-200 dark:border-stone-800 pb-4 flex items-baseline justify-between flex-wrap gap-4">
+        <div className="border-b border-stone-300/60 dark:border-stone-800 pb-4 flex items-baseline justify-between flex-wrap gap-4">
           <div>
             <div className="text-[11px] font-medium uppercase tracking-wider text-stone-500 dark:text-stone-400">
               Curriculum Architecture
@@ -283,10 +283,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             return (
               <div 
                 key={milestone.id}
-                className={`rounded-2xl bg-white dark:bg-[#242321] border ${milestone.borderColor} shadow-sm overflow-hidden transition-all`}
+                className={`rounded-2xl bg-[#faf8f4] dark:bg-[#242321] border ${milestone.borderColor} shadow-sm overflow-hidden transition-all`}
               >
                 {/* Milestone Header Banner */}
-                <div className="p-6 border-b border-stone-200/80 dark:border-stone-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="p-6 border-b border-stone-300/50 dark:border-stone-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="space-y-1 max-w-2xl">
                     <div className="flex items-center gap-2.5 flex-wrap">
                       <span className={`text-xs font-mono font-semibold px-2.5 py-0.5 rounded-md ${milestone.badgeBg} ${milestone.badgeText} border border-current/20`}>
@@ -330,7 +330,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   
                   {/* Optional Milestone Technical Illustration */}
                   {milestone.illustrationPath && (
-                    <div className="lg:col-span-4 rounded-xl overflow-hidden border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-[#1a1918] shadow-xs">
+                    <div className="lg:col-span-4 rounded-xl overflow-hidden border border-stone-300/60 dark:border-stone-800 bg-[#ece8df] dark:bg-[#1a1918] shadow-xs">
                       <img 
                         src={milestone.illustrationPath} 
                         alt={milestone.title}
@@ -355,7 +355,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           <div
                             key={phase.id}
                             onClick={() => onSelectPhase(phase.id)}
-                            className="p-3.5 rounded-xl bg-stone-50/70 dark:bg-[#1e1d1c] hover:bg-stone-100 dark:hover:bg-[#282624] border border-stone-200/80 dark:border-stone-800/80 hover:border-stone-300 dark:hover:border-stone-700 cursor-pointer transition-all shadow-2xs group flex flex-col justify-between"
+                            className="p-3.5 rounded-xl bg-[#eee9de] dark:bg-[#1e1d1c] hover:bg-[#e5dfd3] dark:hover:bg-[#282624] border border-stone-300/60 dark:border-stone-800/80 hover:border-stone-400/60 dark:hover:border-stone-700 cursor-pointer transition-all shadow-2xs group flex flex-col justify-between"
                           >
                             <div>
                               <div className="flex items-center justify-between text-xs text-stone-500 dark:text-stone-400 mb-1 font-mono">
@@ -368,7 +368,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                               </h4>
                             </div>
 
-                            <div className="mt-3 pt-2 border-t border-stone-200/50 dark:border-stone-800/50 flex items-center justify-between text-xs text-stone-500 dark:text-stone-400">
+                            <div className="mt-3 pt-2 border-t border-stone-300/40 dark:border-stone-800/50 flex items-center justify-between text-xs text-stone-500 dark:text-stone-400">
                               <span>
                                 {phaseCompleted}/{phaseLessons.length} read
                               </span>
@@ -389,7 +389,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       </section>
 
       {/* Review Deck Banner */}
-      <section className="p-6 rounded-2xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <section className="p-6 rounded-2xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-300/70 dark:border-stone-800 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-xs font-semibold text-stone-500 uppercase tracking-wider">
             <GraduationCap className="w-4 h-4 text-purple-700 dark:text-purple-400" />
@@ -405,7 +405,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         <button
           onClick={onOpenReview}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 text-xs font-medium transition-colors shrink-0 border border-stone-300 dark:border-stone-700"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-50 dark:bg-stone-800 hover:bg-amber-100 dark:hover:bg-stone-700 text-amber-900 dark:text-stone-200 text-xs font-medium transition-colors shrink-0 border border-amber-200 dark:border-stone-700"
         >
           <span>Open Review Deck</span>
           <ArrowRight className="w-3.5 h-3.5" />

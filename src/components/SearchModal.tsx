@@ -94,7 +94,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/40 dark:bg-black/60 backdrop-blur-xs animate-in fade-in duration-150 font-sans">
       <div 
-        className="w-full max-w-xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 rounded-xl shadow-xl overflow-hidden flex flex-col max-h-[75vh]"
+        className="w-full max-w-xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 rounded-xl shadow-xl overflow-hidden flex flex-col max-h-[75vh]"
         onClick={e => e.stopPropagation()}
         onKeyDown={handleKeyDown}
       >

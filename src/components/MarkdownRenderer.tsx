@@ -95,7 +95,7 @@ const MermaidBlock: React.FC<{ chart: string }> = ({ chart }) => {
   return (
     <div 
       ref={containerRef} 
-      className="mermaid-container select-none my-6 p-6 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm"
+      className="mermaid-container select-none my-6 p-6 rounded-2xl bg-[#faf8f4] dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm"
       dangerouslySetInnerHTML={{ __html: svg }} 
     />
   );

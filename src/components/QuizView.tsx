@@ -111,7 +111,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
   const scorePercent = Math.round((correctCount / questions.length) * 100);
 
   return (
-    <div className="my-10 rounded-xl border border-stone-200/90 dark:border-stone-800 bg-white dark:bg-[#242321] shadow-sm overflow-hidden font-sans">
+    <div className="my-10 rounded-xl border border-stone-200/90 dark:border-stone-800 bg-[#faf8f4] dark:bg-[#242321] shadow-sm overflow-hidden font-sans">
       
       {/* Header */}
       <div className="p-6 bg-stone-50 dark:bg-[#1e1d1c] border-b border-stone-200 dark:border-stone-800 flex items-center justify-between flex-wrap gap-4">
@@ -256,7 +256,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
           {submitted ? (
             <button
               onClick={handleReset}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-stone-800 hover:bg-stone-100 text-stone-800 dark:text-stone-200 font-medium transition-colors border border-stone-300 dark:border-stone-700"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#eee9de] dark:bg-stone-800 hover:bg-[#e5dfd3] text-stone-800 dark:text-stone-200 font-medium transition-colors border border-stone-300 dark:border-stone-700"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Retry</span>

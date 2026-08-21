@@ -101,7 +101,7 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-8 animate-in fade-in duration-200 font-sans">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 animate-in fade-in duration-200 font-sans">
       
       {/* Header */}
       <div className="flex items-baseline justify-between flex-wrap gap-4 border-b border-stone-200 dark:border-stone-800 pb-4">
@@ -147,7 +147,7 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
       </div>
 
       {/* Cognitive Retention Mathematical Model Banner */}
-      <div className="rounded-xl overflow-hidden border border-stone-200/90 dark:border-stone-800 bg-white dark:bg-[#242321] shadow-sm p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div className="rounded-xl overflow-hidden border border-stone-200/90 dark:border-stone-800 bg-[#faf8f4] dark:bg-[#242321] shadow-sm p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
         <div className="md:col-span-7 space-y-2">
           <div className="text-[11px] font-mono font-medium text-purple-700 dark:text-purple-400 uppercase tracking-wider">
             Quantitative Memory Model
@@ -176,7 +176,7 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
       {activeTab === 'study' && (
         <div>
           {dueItems.length === 0 ? (
-            <div className="p-8 sm:p-10 rounded-xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 text-center space-y-4 max-w-lg mx-auto shadow-sm">
+            <div className="p-8 sm:p-10 rounded-xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 text-center space-y-4 max-w-lg mx-auto shadow-sm">
               <div className="w-full h-36 rounded-lg overflow-hidden border border-stone-200 dark:border-stone-800 mb-2">
                 <img 
                   src="./illustrations/retention.jpg" 
@@ -215,7 +215,7 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
               </div>
 
               {/* Flashcard Box */}
-              <div className="p-6 sm:p-8 rounded-xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 shadow-sm space-y-6">
+              <div className="p-6 sm:p-8 rounded-xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 shadow-sm space-y-6">
                 
                 {/* Lesson Context */}
                 <div className="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-stone-800 text-xs text-stone-500 dark:text-stone-400">
@@ -350,7 +350,7 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
             Total {allItems.length} review cards saved in local database
           </div>
 
-          <div className="rounded-lg border border-stone-200 dark:border-stone-800 bg-white dark:bg-[#242321] overflow-hidden shadow-sm">
+          <div className="rounded-lg border border-stone-200 dark:border-stone-800 bg-[#faf8f4] dark:bg-[#242321] overflow-hidden shadow-sm">
             {allItems.length === 0 ? (
               <div className="p-8 text-center text-stone-500 text-xs">
                 No cards created yet. Missed quiz questions will appear here.

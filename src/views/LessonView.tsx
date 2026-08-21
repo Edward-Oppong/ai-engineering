@@ -247,7 +247,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
       
       {/* Top Banner Navigation — Hidden in Focus Mode */}
       {!preferences.focusMode && (
-        <div className="border-b border-stone-200/80 dark:border-stone-800 bg-[#fbfbfa]/90 dark:bg-[#1c1b1a]/90 backdrop-blur-md sticky top-14 z-30 font-sans">
+        <div className="border-b border-stone-300/60 dark:border-stone-800 bg-[#f5f2eb]/90 dark:bg-[#1c1b1a]/90 backdrop-blur-md sticky top-14 z-30 font-sans">
           <div className={`${columnWidthClass} mx-auto px-4 sm:px-6 py-2 flex items-center justify-between gap-4 flex-wrap text-xs`}>
             <div className="flex items-center gap-2 text-stone-500 dark:text-stone-400">
               <button
@@ -431,7 +431,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
             {/* Next Chapter Connection Card */}
             {next && (
-              <div className="p-6 rounded-xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 shadow-sm space-y-3 font-sans">
+              <div className="p-6 rounded-xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-300/60 dark:border-stone-800 shadow-sm space-y-3 font-sans">
                 <div className="text-[11px] font-medium uppercase tracking-wider text-stone-500 dark:text-stone-400 flex items-center justify-between">
                   <span>Next Chapter in Sequence</span>
                   <span className="font-mono">#{next.lessonNum} · {next.estTime}</span>
@@ -482,7 +482,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
         )}
 
         {/* Study Notebook */}
-        <div className="mt-14 p-6 rounded-xl bg-white dark:bg-[#242321] border border-stone-200/90 dark:border-stone-800 shadow-sm space-y-3 font-sans">
+        <div className="mt-14 p-6 rounded-xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-300/60 dark:border-stone-800 shadow-sm space-y-3 font-sans">
           <div className="flex items-center justify-between">
             <h3 className="font-medium text-xs text-stone-900 dark:text-stone-100 uppercase tracking-wider">Chapter Notes</h3>
             <div className="text-xs text-stone-500 dark:text-stone-400 flex items-center gap-3">
@@ -506,14 +506,14 @@ export const LessonView: React.FC<LessonViewProps> = ({
             placeholder="Record personal notes, synthesis, or key takeaways..."
             maxLength={50000}
             aria-label="Chapter study notes"
-            className="w-full h-32 p-3 rounded-lg bg-stone-50 dark:bg-[#1e1d1c] border border-stone-200 dark:border-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 text-xs focus:outline-none focus:border-stone-500 resize-y leading-relaxed font-sans"
+            className="w-full h-32 p-3 rounded-lg bg-[#ece8df] dark:bg-[#1e1d1c] border border-stone-300/50 dark:border-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 text-xs focus:outline-none focus:border-stone-500 resize-y leading-relaxed font-sans"
           />
         </div>
       </div>
 
       {/* Persistent Bottom Bar — Hidden in Focus Mode */}
       {!preferences.focusMode && (
-        <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#fbfbfa]/95 dark:bg-[#1c1b1a]/95 border-t border-stone-200/80 dark:border-stone-800 backdrop-blur-md py-2.5 px-4 sm:px-8 font-sans">
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#f5f2eb]/95 dark:bg-[#1c1b1a]/95 border-t border-stone-300/60 dark:border-stone-800 backdrop-blur-md py-2.5 px-4 sm:px-8 font-sans">
           <div className={`${columnWidthClass} mx-auto flex items-center justify-between gap-4`}>
             
             {/* Previous Chapter */}

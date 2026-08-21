@@ -69,7 +69,7 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ files }) => {
   };
 
   return (
-    <div className="my-8 rounded-xl border border-stone-200/90 dark:border-stone-800 bg-white dark:bg-[#242321] shadow-sm overflow-hidden font-sans">
+    <div className="my-8 rounded-xl border border-stone-200/90 dark:border-stone-800 bg-[#faf8f4] dark:bg-[#242321] shadow-sm overflow-hidden font-sans">
       
       {/* Header Bar */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-stone-50/80 dark:bg-[#1e1d1c] border-b border-stone-200 dark:border-stone-800 flex-wrap gap-2">
@@ -102,7 +102,7 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ files }) => {
           {/* Copy File Button */}
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white dark:bg-stone-800 hover:bg-stone-100 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 transition-colors text-xs font-medium border border-stone-300/80 dark:border-stone-700 shadow-2xs"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#faf8f4] dark:bg-stone-800 hover:bg-[#ece8df] dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 transition-colors text-xs font-medium border border-stone-300/80 dark:border-stone-700 shadow-2xs"
           >
             {copied ? (
               <>

@@ -4,44 +4,44 @@
 
 @layer base {
   :root {
-    /* Human Editorial Light Mode — Natural Warm Paper */
-    --bg-page: #fbfbfa;
-    --bg-surface: #ffffff;
-    --bg-surface-elevated: #f4f3ef;
-    --bg-surface-hover: #eae9e3;
-    --border-color: #e5e3dc;
-    --border-subtle: #eeece5;
+    /* Human Editorial Light Mode — Soothing Warm Paper & Rich Color Accents */
+    --bg-page: #f5f2eb;
+    --bg-surface: #faf8f4;
+    --bg-surface-elevated: #eee9de;
+    --bg-surface-hover: #e5decfa;
+    --border-color: #ded7c8;
+    --border-subtle: #eae4d8;
     
-    /* Text Hierarchy */
-    --text-primary: #282624;
-    --text-secondary: #5e5a55;
-    --text-muted: #8c8881;
+    /* Text Hierarchy — High Contrast Warm Charcoal */
+    --text-primary: #1f1e1c;
+    --text-secondary: #524e48;
+    --text-muted: #7d776e;
     
     /* Code styling */
-    --code-bg: #f3f1eb;
-    --code-border: #e2ded5;
+    --code-bg: #ece8df;
+    --code-border: #dbd4c4;
     
-    /* Quiet Learning Semantic Tokens — Understated & Bookish */
-    --learning-brand: #8a5836;
-    --learning-brand-hover: #73482b;
-    --learning-brand-subtle: #f8f4ee;
-    --learning-brand-text: #6b4429;
+    /* Semantic Milestone & Action Tokens — Rich & Distinct */
+    --learning-brand: #9e5b2d;
+    --learning-brand-hover: #834921;
+    --learning-brand-subtle: #fbeee4;
+    --learning-brand-text: #783e18;
 
-    --learning-mastered: #3b6b4c;
-    --learning-mastered-subtle: #f1f7f3;
-    --learning-mastered-border: #d2e4d8;
+    --learning-mastered: #2d6e46;
+    --learning-mastered-subtle: #eaf5ee;
+    --learning-mastered-border: #bde0c9;
 
-    --learning-inprogress: #3d637c;
-    --learning-inprogress-subtle: #f0f5f9;
-    --learning-inprogress-border: #d2e1ec;
+    --learning-inprogress: #2d6288;
+    --learning-inprogress-subtle: #e9f2f8;
+    --learning-inprogress-border: #bdd6e8;
 
-    --learning-practice: #5f4e78;
-    --learning-practice-subtle: #f6f3f9;
-    --learning-practice-border: #ded8e8;
+    --learning-practice: #68488e;
+    --learning-practice-subtle: #f2edf8;
+    --learning-practice-border: #d4c5e6;
 
-    --learning-unread: #8c8881;
-    --learning-unread-subtle: #f7f6f3;
-    --learning-unread-border: #e8e6df;
+    --learning-unread: #7d776e;
+    --learning-unread-subtle: #f0ece3;
+    --learning-unread-border: #ddd7cb;
   }
 
   .dark {

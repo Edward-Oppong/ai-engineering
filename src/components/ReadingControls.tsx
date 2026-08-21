@@ -93,7 +93,7 @@ export const ReadingControls: React.FC<ReadingControlsProps> = ({
 
       {/* Popover Settings Menu */}
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-64 p-4 rounded-xl bg-white dark:bg-[#242321] border border-stone-200 dark:border-stone-800 shadow-xl z-50 space-y-4 animate-in fade-in zoom-in-95 duration-100 text-xs">
+        <div className="absolute right-0 top-full mt-2 w-64 p-4 rounded-xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-200 dark:border-stone-800 shadow-xl z-50 space-y-4 animate-in fade-in zoom-in-95 duration-100 text-xs">
           
           {/* Font Size */}
           <div className="space-y-1.5">
@@ -111,7 +111,7 @@ export const ReadingControls: React.FC<ReadingControlsProps> = ({
                     onClick={() => onUpdatePreferences({ fontSize: size })}
                     className={`py-1 rounded text-center transition-all font-mono ${
                       isSelected
-                        ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-white font-semibold shadow-xs'
+                        ? 'bg-[#faf8f4] dark:bg-stone-800 text-stone-900 dark:text-white font-semibold shadow-xs'
                         : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                     }`}
                   >
@@ -132,7 +132,7 @@ export const ReadingControls: React.FC<ReadingControlsProps> = ({
                 onClick={() => onUpdatePreferences({ fontFamily: 'serif' })}
                 className={`py-1 px-2 rounded text-center transition-all font-serif ${
                   preferences.fontFamily === 'serif'
-                    ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-white font-semibold shadow-xs'
+                    ? 'bg-[#faf8f4] dark:bg-stone-800 text-stone-900 dark:text-white font-semibold shadow-xs'
                     : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                 }`}
               >
@@ -143,7 +143,7 @@ export const ReadingControls: React.FC<ReadingControlsProps> = ({
                 onClick={() => onUpdatePreferences({ fontFamily: 'sans' })}
                 className={`py-1 px-2 rounded text-center transition-all font-sans ${
                   preferences.fontFamily === 'sans'
-                    ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-white font-semibold shadow-xs'
+                    ? 'bg-[#faf8f4] dark:bg-stone-800 text-stone-900 dark:text-white font-semibold shadow-xs'
                     : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                 }`}
               >
@@ -168,7 +168,7 @@ export const ReadingControls: React.FC<ReadingControlsProps> = ({
                     onClick={() => onUpdatePreferences({ columnWidth: width })}
                     className={`py-1 rounded text-center transition-all ${
                       isSelected
-                        ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-white font-semibold shadow-xs'
+                        ? 'bg-[#faf8f4] dark:bg-stone-800 text-stone-900 dark:text-white font-semibold shadow-xs'
                         : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                     }`}
                   >

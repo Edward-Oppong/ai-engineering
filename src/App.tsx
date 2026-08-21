@@ -131,7 +131,7 @@ export function App() {
   );
 
   return (
-    <div className="min-h-screen bg-[#fbfbfa] dark:bg-[#1c1b1a] text-stone-900 dark:text-stone-100 font-sans flex flex-col transition-colors duration-200 selection:bg-amber-500/20 selection:text-amber-900 dark:selection:text-amber-100">
+    <div className="min-h-screen bg-[#f5f2eb] dark:bg-[#1c1b1a] text-stone-900 dark:text-stone-100 font-sans flex flex-col transition-colors duration-200 selection:bg-amber-500/20 selection:text-amber-900 dark:selection:text-amber-100">
       
       {/* Storage unavailability warning */}
       {!storageAvailable && !storageWarningDismissed && (

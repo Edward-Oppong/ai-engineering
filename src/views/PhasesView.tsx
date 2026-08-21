@@ -138,7 +138,7 @@ export const PhasesView: React.FC<PhasesViewProps> = ({
   }, [currentPhaseLessons, userLessonMap, statusFilter, searchQuery]);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 animate-in fade-in duration-200 font-sans">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-in fade-in duration-200 font-sans">
       
       {/* Header */}
       <div className="mb-8 border-b border-stone-200 dark:border-stone-800 pb-4">
@@ -177,7 +177,7 @@ export const PhasesView: React.FC<PhasesViewProps> = ({
                         className={`w-full text-left p-2.5 rounded-lg transition-colors flex items-center justify-between border ${
                           isSelected
                             ? 'bg-stone-100 dark:bg-[#2d2b29] border-stone-300 dark:border-stone-700 text-stone-900 dark:text-white font-medium shadow-xs'
-                            : 'bg-white dark:bg-[#242321] hover:bg-stone-50 dark:hover:bg-[#2a2926] border-stone-200/80 dark:border-stone-800 text-stone-700 dark:text-stone-300'
+                            : 'bg-[#eee9de] dark:bg-[#242321] hover:bg-[#e5dfd3] dark:hover:bg-[#2a2926] border-stone-300/60 dark:border-stone-800 text-stone-700 dark:text-stone-300'
                         }`}
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
@@ -209,7 +209,7 @@ export const PhasesView: React.FC<PhasesViewProps> = ({
         {/* Right Track Content */}
         <div className="lg:col-span-8 space-y-6">
           {selectedPhase && (
-            <div className={`p-6 rounded-xl bg-white dark:bg-[#242321] border ${currentPhaseMilestone.borderColor} shadow-sm space-y-4`}>
+            <div className={`p-6 rounded-xl bg-[#faf8f4] dark:bg-[#242321] border ${currentPhaseMilestone.borderColor} shadow-sm space-y-4`}>
               
               {/* Milestone Context Badge */}
               <div className="flex items-center justify-between text-xs text-stone-500 dark:text-stone-400 flex-wrap gap-2">
@@ -277,7 +277,7 @@ export const PhasesView: React.FC<PhasesViewProps> = ({
           {/* Chapters Directory */}
           <div className="space-y-2">
             {filteredLessons.length === 0 ? (
-              <div className="py-12 text-center text-stone-500 dark:text-stone-400 text-xs bg-white dark:bg-[#242321] rounded-xl border border-stone-200 dark:border-stone-800 font-sans">
+              <div className="py-12 text-center text-stone-500 dark:text-stone-400 text-xs bg-[#faf8f4] dark:bg-[#242321] rounded-xl border border-stone-300/60 dark:border-stone-800 font-sans">
                 No chapters match the selected filter.
               </div>
             ) : (
@@ -289,7 +289,7 @@ export const PhasesView: React.FC<PhasesViewProps> = ({
                   <div
                     key={lesson.id}
                     onClick={() => onSelectLesson(lesson.id)}
-                    className="p-3.5 rounded-lg bg-white dark:bg-[#242321] hover:bg-stone-50 dark:hover:bg-[#2a2926] border border-stone-200/80 dark:border-stone-800 hover:border-stone-300 dark:hover:border-stone-700 cursor-pointer transition-colors shadow-2xs flex items-center justify-between gap-4 group"
+                    className="p-3.5 rounded-lg bg-[#eee9de] dark:bg-[#242321] hover:bg-[#e5dfd3] dark:hover:bg-[#2a2926] border border-stone-300/60 dark:border-stone-800 hover:border-stone-400/60 dark:hover:border-stone-700 cursor-pointer transition-colors shadow-2xs flex items-center justify-between gap-4 group"
                   >
                     <div className="flex items-start gap-3 min-w-0">
                       <div className="mt-0.5">
