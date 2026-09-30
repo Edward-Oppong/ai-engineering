@@ -10,7 +10,11 @@ import {
   Compass, 
   ChevronRight,
   Flame,
-  Monitor
+  Monitor,
+  Folder,
+  Award,
+  ShieldCheck,
+  Sparkles
 } from 'lucide-react';
 
 interface DashboardViewProps {
@@ -23,6 +27,9 @@ interface DashboardViewProps {
   onSelectPhase: (phaseId: string) => void;
   onOpenReview: () => void;
   onOpenDesktopInstall?: () => void;
+  onOpenProjects?: () => void;
+  onOpenCertifications?: () => void;
+  onOpenLearningPaths?: () => void;
 }
 
 // 5 Connected Curriculum Milestones
@@ -117,7 +124,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onSelectLesson,
   onSelectPhase,
   onOpenReview,
-  onOpenDesktopInstall
+  onOpenDesktopInstall,
+  onOpenProjects,
+  onOpenCertifications,
+  onOpenLearningPaths
 }) => {
   const userLessonMap = useMemo(() => {
     const map = new Map<string, UserLessonRecord>();
@@ -256,6 +266,104 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             />
           </div>
         </div>
+      </section>
+
+      {/* Upstream Features Highlight Grid: Projects, Certifications & Career Paths */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-4 font-sans">
+        
+        {/* Card 1: 48 Hands-On Projects */}
+        <div 
+          onClick={onOpenProjects}
+          className="group p-5 rounded-2xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-300/70 dark:border-stone-800 hover:border-emerald-600/60 dark:hover:border-emerald-500/60 transition-all cursor-pointer shadow-xs hover:shadow-md flex flex-col justify-between"
+        >
+          <div>
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <span className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 flex items-center justify-center">
+                <Folder className="w-4 h-4" />
+              </span>
+              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                48 Builds · 5 Tiers
+              </span>
+            </div>
+
+            <h3 className="font-serif text-base font-bold text-stone-900 dark:text-stone-100 group-hover:text-emerald-800 dark:group-hover:text-emerald-300 transition-colors">
+              Hands-On Projects
+            </h3>
+            <p className="mt-1 text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+              Step-by-step builds with automated local test suites, starter code templates, and verified solutions.
+            </p>
+          </div>
+
+          <div className="mt-4 pt-3 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between text-xs">
+            <span className="text-stone-500 font-mono text-[11px]">Python · TS · Rust</span>
+            <span className="text-emerald-700 dark:text-emerald-400 font-medium flex items-center gap-1 group-hover:translate-x-0.5 transition-transform text-[11px]">
+              Explore Builds <ChevronRight className="w-3.5 h-3.5" />
+            </span>
+          </div>
+        </div>
+
+        {/* Card 2: MCPA & Claude Certifications */}
+        <div 
+          onClick={onOpenCertifications}
+          className="group p-5 rounded-2xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-300/70 dark:border-stone-800 hover:border-blue-600/60 dark:hover:border-blue-500/60 transition-all cursor-pointer shadow-xs hover:shadow-md flex flex-col justify-between"
+        >
+          <div>
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <span className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 flex items-center justify-center">
+                <ShieldCheck className="w-4 h-4" />
+              </span>
+              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                MCPA & Claude
+              </span>
+            </div>
+
+            <h3 className="font-serif text-base font-bold text-stone-900 dark:text-stone-100 group-hover:text-blue-800 dark:group-hover:text-blue-300 transition-colors">
+              Exam Blueprints & Certs
+            </h3>
+            <p className="mt-1 text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+              Official 2026 specifications, 67 exam prep lessons, domain weighting, and practice quizzes for MCPA & Claude.
+            </p>
+          </div>
+
+          <div className="mt-4 pt-3 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between text-xs">
+            <span className="text-stone-500 font-mono text-[11px]">67 Exam Lessons</span>
+            <span className="text-blue-700 dark:text-blue-400 font-medium flex items-center gap-1 group-hover:translate-x-0.5 transition-transform text-[11px]">
+              View Blueprints <ChevronRight className="w-3.5 h-3.5" />
+            </span>
+          </div>
+        </div>
+
+        {/* Card 3: Learning Paths & Career Routes */}
+        <div 
+          onClick={onOpenLearningPaths}
+          className="group p-5 rounded-2xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-300/70 dark:border-stone-800 hover:border-amber-600/60 dark:hover:border-amber-500/60 transition-all cursor-pointer shadow-xs hover:shadow-md flex flex-col justify-between"
+        >
+          <div>
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <span className="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 flex items-center justify-center">
+                <Compass className="w-4 h-4" />
+              </span>
+              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800">
+                6 Career Routes
+              </span>
+            </div>
+
+            <h3 className="font-serif text-base font-bold text-stone-900 dark:text-stone-100 group-hover:text-amber-800 dark:group-hover:text-amber-300 transition-colors">
+              Learning Paths & Career
+            </h3>
+            <p className="mt-1 text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+              Curated sequences targeting specific engineering roles: Forward-Deployed AI, Agent Systems, LLM Platform, and Evals.
+            </p>
+          </div>
+
+          <div className="mt-4 pt-3 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between text-xs">
+            <span className="text-stone-500 font-mono text-[11px]">12 Guided Tracks</span>
+            <span className="text-amber-700 dark:text-amber-400 font-medium flex items-center gap-1 group-hover:translate-x-0.5 transition-transform text-[11px]">
+              Explore Routes <ChevronRight className="w-3.5 h-3.5" />
+            </span>
+          </div>
+        </div>
+
       </section>
 
       {/* Connected Curriculum Roadmap: 5 Sequential Learning Milestones */}

@@ -5,10 +5,11 @@ import {
   UserActivityLog, 
   LessonStatus,
   UserDataBackup,
-  UserReadingPreferences
+  UserReadingPreferences,
+  UserProjectRecord
 } from '../types';
 
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
 export class StudyDB {
   private dbPromise: Promise<IDBDatabase> | null = null;
@@ -135,6 +136,12 @@ export class StudyDB {
         // 5. Bookmarks store (added in v2)
         if (!db.objectStoreNames.contains('bookmarks')) {
           db.createObjectStore('bookmarks', { keyPath: 'lessonId' });
+        }
+
+        // 6. User Projects store (added in v3)
+        if (!db.objectStoreNames.contains('projects')) {
+          const projectStore = db.createObjectStore('projects', { keyPath: 'id' });
+          projectStore.createIndex('status', 'status', { unique: false });
         }
       };
 
@@ -665,6 +672,107 @@ export class StudyDB {
       tx.oncomplete = () => resolve();
       tx.onerror = () => reject(tx.error);
     });
+  }
+
+  // --- Project Tracker Store Operations ---
+
+  async getProjectRecord(id: string): Promise<UserProjectRecord | null> {
+    const db = await this.getDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('projects', 'readonly');
+      const store = tx.objectStore('projects');
+      const req = store.get(id);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async getAllProjectRecords(): Promise<UserProjectRecord[]> {
+    const db = await this.getDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('projects', 'readonly');
+      const store = tx.objectStore('projects');
+      const req = store.getAll();
+      req.onsuccess = () => resolve(req.result || []);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async saveProjectRecord(record: UserProjectRecord): Promise<UserProjectRecord> {
+    const db = await this.getDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('projects', 'readwrite');
+      const store = tx.objectStore('projects');
+      const req = store.put(record);
+      req.onsuccess = () => resolve(record);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async setProjectStatus(
+    projectId: string, 
+    status: 'not_started' | 'in_progress' | 'completed'
+  ): Promise<UserProjectRecord> {
+    const existing = await this.getProjectRecord(projectId);
+    const now = new Date().toISOString();
+    const updated: UserProjectRecord = existing ? {
+      ...existing,
+      status,
+      lastWorkedAt: now,
+      completedAt: status === 'completed' ? (existing.completedAt || now) : undefined
+    } : {
+      id: projectId,
+      status,
+      completedStages: [],
+      notes: '',
+      lastWorkedAt: now,
+      completedAt: status === 'completed' ? now : undefined
+    };
+
+    return this.saveProjectRecord(updated);
+  }
+
+  async toggleProjectStageCompleted(projectId: string, stageId: string): Promise<UserProjectRecord> {
+    const existing = await this.getProjectRecord(projectId);
+    const now = new Date().toISOString();
+    const completedStages = new Set(existing?.completedStages || []);
+    
+    if (completedStages.has(stageId)) {
+      completedStages.delete(stageId);
+    } else {
+      completedStages.add(stageId);
+    }
+
+    const updatedStages = Array.from(completedStages);
+    const status = updatedStages.length > 0 ? (existing?.status === 'completed' ? 'completed' : 'in_progress') : (existing?.status || 'not_started');
+
+    const updated: UserProjectRecord = {
+      id: projectId,
+      status: status as any,
+      completedStages: updatedStages,
+      notes: existing?.notes || '',
+      repoUrl: existing?.repoUrl,
+      lastWorkedAt: now,
+      completedAt: existing?.completedAt
+    };
+
+    return this.saveProjectRecord(updated);
+  }
+
+  async updateProjectNotes(projectId: string, notes: string, repoUrl?: string): Promise<UserProjectRecord> {
+    const existing = await this.getProjectRecord(projectId);
+    const now = new Date().toISOString();
+    const updated: UserProjectRecord = {
+      id: projectId,
+      status: existing?.status || 'in_progress',
+      completedStages: existing?.completedStages || [],
+      notes,
+      repoUrl: repoUrl !== undefined ? repoUrl : existing?.repoUrl,
+      lastWorkedAt: now,
+      completedAt: existing?.completedAt
+    };
+
+    return this.saveProjectRecord(updated);
   }
 
   async deleteUserData(userId: string): Promise<void> {

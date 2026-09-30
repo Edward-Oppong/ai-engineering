@@ -172,3 +172,204 @@ export interface AuthSession {
   availableUsers: UserProfile[];
 }
 
+// Hands-on Real World Projects
+export interface ProjectStage {
+  id: string;
+  title: string;
+  summary: string;
+  hours: number;
+  difficulty: 'starter' | 'builder' | 'engineer' | 'systems' | 'frontier' | string;
+  language: string;
+  concepts: string[];
+  markdown: string;
+  starterFiles: CodeFile[];
+  testFiles: CodeFile[];
+}
+
+export interface ProjectItem {
+  id: string;
+  title: string;
+  level: number;
+  levelName: string;
+  tagline: string;
+  summary: string;
+  youWillBuild: string;
+  usefulFor: string[];
+  hours: number;
+  languages: string[];
+  languageWhy?: Record<string, string>;
+  status: 'ready' | 'draft' | 'planned';
+  skills: string[];
+  prerequisites: { title: string; path: string }[];
+  demo?: { command: string[]; cwd: string; [key: string]: any } | null;
+  stages: ProjectStage[];
+  stagesCount: number;
+  readme: string;
+  solutionFilesSummary?: { filename: string; language: string; sizeBytes: number }[];
+}
+
+export interface PlannedProject {
+  id: string;
+  title: string;
+  level: number;
+  status: string;
+  track: string;
+  languages: string[];
+  tagline: string;
+  summary: string;
+  output: string;
+  milestones?: string[];
+}
+
+export interface ProjectsBundle {
+  generatedAt: string;
+  totalProjects: number;
+  levels: { level: number; name: string; summary: string }[];
+  projects: ProjectItem[];
+  planned: PlannedProject[];
+}
+
+export interface UserProjectRecord {
+  id: string;             // matches ProjectItem.id
+  status: 'not_started' | 'in_progress' | 'completed';
+  completedStages: string[]; // stage IDs completed
+  notes: string;
+  repoUrl?: string;
+  completedAt?: string;
+  lastWorkedAt?: string;
+}
+
+// Certification Programs & Tracks
+export interface CertificationDomain {
+  id: string;
+  name: string;
+  weight: number;
+  objectives: string[];
+}
+
+export interface CertificationTrack {
+  id: string;
+  slug: string;
+  examCode: string;
+  credential: string;
+  shortName: string;
+  level: string;
+  accent?: string;
+  badge?: { imageUrl: string; width: number; height: number; shape: string };
+  summary: string;
+  audience?: string;
+  recommendedExperience?: string[];
+  exam?: {
+    items: number;
+    timeLimitMinutes: number;
+    feeUsd?: number;
+    format: string;
+    delivery: string;
+    officialGuideUrl?: string;
+    [key: string]: any;
+  };
+  domains: CertificationDomain[];
+  lessons?: { path: string; domains: string[] }[];
+}
+
+export interface CertificationProgram {
+  id: string;
+  name: string;
+  shortName: string;
+  slug: string;
+  phaseId: string;
+  provider: string;
+  summary: string;
+  promise: string;
+  accessNotice?: string;
+  disclaimer?: string;
+  scoringNotice?: string;
+  specVersion?: string;
+  officialLinks: { label: string; url: string }[];
+  tracks: CertificationTrack[];
+  lessonsCount: number;
+  lessons: {
+    id: string;
+    lessonNum: number;
+    title: string;
+    slug: string;
+    estTime: string;
+    domains: string[];
+    hasQuiz: boolean;
+    questionCount: number;
+  }[];
+}
+
+export interface CertificationsBundle {
+  generatedAt: string;
+  programs: CertificationProgram[];
+  totalCertificationLessons: number;
+}
+
+// Learning Paths & Career Routes
+export interface LearningPathStage {
+  id: string;
+  title: string;
+  outcome: string;
+  artifact: string;
+  lessons: { id?: string; title: string; estTime?: string; slug?: string; phaseId?: string; path?: string }[];
+}
+
+export interface LearningPath {
+  id: string;
+  kind: 'domain' | 'career-route' | string;
+  title: string;
+  workFamily?: string;
+  commonTitles?: string[];
+  summary: string;
+  decisionPrompt?: string;
+  mission?: string;
+  responsibilities?: string[];
+  goodFitIf?: string[];
+  baseline?: string[];
+  boundary?: string;
+  portfolioProof?: { title: string; description: string; evidence: string[] } | null;
+  readinessCriteria?: string[];
+  coverage?: { strong?: string[]; partial?: string[]; outsideCourse?: string[] };
+  estimatedMinutes?: number;
+  stages: LearningPathStage[];
+}
+
+// Research Papers, Trends & Daily Briefing Types
+export interface ResearchPaper {
+  id: string;
+  title: string;
+  authors: string[];
+  publishedDate: string;
+  category: 'Foundations' | 'Transformers & LLMs' | 'Agents & MCP' | 'Inference & Systems' | 'Frontier Evals';
+  phaseIds: string[];
+  phaseTitles: string[];
+  abstract: string;
+  keyTakeaways: string[];
+  arxivUrl?: string;
+  pdfUrl?: string;
+  codeUrl?: string;
+  readingMinutes: number;
+  isSeminal: boolean;
+  aiAnalysis?: string;
+}
+
+export interface DailyReadingProgress {
+  date: string;              // YYYY-MM-DD
+  readPaperIds: string[];     // IDs of papers read today
+  dailyGoal: number;          // Target papers to read (default 4)
+  isCompleted: boolean;       // true if readPaperIds.length >= dailyGoal
+  completedAt?: string;       // ISO timestamp
+}
+
+export interface AITrendItem {
+  id: string;
+  title: string;
+  summary: string;
+  category: string;
+  relatedPhase: string;
+  source: string;
+  date: string;
+  engineeringTakeaway: string;
+}
+

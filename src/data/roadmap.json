@@ -114,7 +114,7 @@
     "number": 11,
     "slug": "llm-engineering",
     "title": "LLM Engineering",
-    "estTime": "~17 hours",
+    "estTime": "~19 hours",
     "statusGlyph": "✅",
     "lessonsCount": 17,
     "folderName": "11-llm-engineering"
@@ -134,9 +134,9 @@
     "number": 13,
     "slug": "tools-and-protocols",
     "title": "Tools & Protocols",
-    "estTime": "~24.5 hours",
+    "estTime": "~43 hours",
     "statusGlyph": "✅",
-    "lessonsCount": 23,
+    "lessonsCount": 31,
     "folderName": "13-tools-and-protocols"
   },
   {
@@ -144,9 +144,9 @@
     "number": 14,
     "slug": "agent-engineering",
     "title": "Agent Engineering",
-    "estTime": "~42 hours",
+    "estTime": "~55 hours",
     "statusGlyph": "✅",
-    "lessonsCount": 42,
+    "lessonsCount": 54,
     "folderName": "14-agent-engineering"
   },
   {
@@ -198,5 +198,27 @@
     "statusGlyph": "✅",
     "lessonsCount": 85,
     "folderName": "19-capstone-projects"
+  },
+  {
+    "id": "phase-cert-mcpa",
+    "number": 101,
+    "slug": "cert-mcpa",
+    "title": "MCPA Exam Prep (2026-07-28 Spec)",
+    "estTime": "~30 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 34,
+    "folderName": "certifications/mcpa",
+    "isCertification": true
+  },
+  {
+    "id": "phase-cert-claude",
+    "number": 102,
+    "slug": "cert-claude",
+    "title": "Anthropic Claude Certifications",
+    "estTime": "~28 hours",
+    "statusGlyph": "✅",
+    "lessonsCount": 33,
+    "folderName": "certifications/claude",
+    "isCertification": true
   }
 ]

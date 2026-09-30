@@ -429,6 +429,45 @@ export const LessonView: React.FC<LessonViewProps> = ({
               </div>
             )}
 
+            {/* End of Lesson Completion Action Card */}
+            <div className="p-6 rounded-xl bg-gradient-to-br from-amber-500/10 via-[#faf8f4] to-emerald-500/10 dark:from-amber-950/20 dark:via-[#242321] dark:to-emerald-950/20 border border-stone-300/80 dark:border-stone-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-sans">
+              <div className="space-y-1">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  Chapter Completed?
+                </span>
+                <p className="text-xs text-stone-600 dark:text-stone-300">
+                  {isCompleted 
+                    ? 'Great work! You have marked this chapter finished. Your study progress and streak are saved.' 
+                    : 'Mark this chapter as completed to record your study progress and update your streak.'}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={handleToggleComplete}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold transition-all shadow-sm ${
+                    isCompleted
+                      ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-800'
+                      : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20'
+                  }`}
+                >
+                  <Check className="w-4 h-4" />
+                  <span>{isCompleted ? 'Finished (Mark Incomplete)' : 'Complete Chapter'}</span>
+                </button>
+
+                {lessonDetail.quiz && (
+                  <button
+                    onClick={() => setActiveTab('quiz')}
+                    className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg bg-amber-100 hover:bg-amber-200 dark:bg-amber-950/60 dark:hover:bg-amber-900/60 text-amber-900 dark:text-amber-200 text-xs font-medium border border-amber-300/60 dark:border-amber-800 transition-colors"
+                  >
+                    <span>Take Quiz</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            </div>
+
             {/* Next Chapter Connection Card */}
             {next && (
               <div className="p-6 rounded-xl bg-[#faf8f4] dark:bg-[#242321] border border-stone-300/60 dark:border-stone-800 shadow-sm space-y-3 font-sans">

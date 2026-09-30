@@ -15,7 +15,7 @@ function getDomainThumbnail(phaseNum: number): string {
   if (phaseNum <= 3) return './illustrations/foundations.jpg';
   if (phaseNum <= 6) return './illustrations/perception.jpg';
   if (phaseNum <= 10) return './illustrations/transformers.jpg';
-  if (phaseNum <= 16) return './illustrations/agents.jpg';
+  if (phaseNum <= 16 || phaseNum === 101) return './illustrations/agents.jpg';
   return './illustrations/production.jpg';
 }
 

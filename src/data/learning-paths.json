@@ -1,0 +1,1232 @@
+[
+  {
+    "id": "agent-skills",
+    "kind": "domain",
+    "title": "Agent Skills Engineering",
+    "workFamily": "",
+    "commonTitles": [],
+    "summary": "Build, route, secure, evaluate, package, and verify Agent Skills in real hosts.",
+    "decisionPrompt": "",
+    "mission": "",
+    "responsibilities": [],
+    "goodFitIf": [],
+    "baseline": [],
+    "boundary": "",
+    "portfolioProof": null,
+    "readinessCriteria": [],
+    "coverage": {},
+    "estimatedMinutes": 570,
+    "stages": []
+  },
+  {
+    "id": "agentic-ai-engineer",
+    "kind": "career-route",
+    "title": "Agent Systems Engineering",
+    "workFamily": "Agent Systems Engineering",
+    "commonTitles": [
+      "Agent Systems Engineer",
+      "Agentic AI Engineer",
+      "AI Agent Engineer"
+    ],
+    "summary": "Engineer tool-using agent loops with explicit context, memory, orchestration, safety, evaluation, and production control.",
+    "decisionPrompt": "Do you want to engineer tool-using systems whose state, decisions, failures, and controls remain observable?",
+    "mission": "Build on shared foundations to create agent systems with explicit tool contracts, state, safety boundaries, evaluation, and runtime evidence.",
+    "responsibilities": [
+      "Design tool contracts and close the thought, action, observation loop.",
+      "Control context, memory, state transitions, and orchestration.",
+      "Model failures and defend tool and instruction boundaries.",
+      "Evaluate behavior and operate the runtime from traces and controls."
+    ],
+    "goodFitIf": [
+      "You enjoy reasoning about stateful systems, control flow, and failure recovery.",
+      "You want autonomy to be bounded by explicit contracts and evidence.",
+      "You prefer testable orchestration over opaque agent demos."
+    ],
+    "baseline": [
+      "Complete the shared software engineering and AI foundations, or demonstrate equivalent working knowledge.",
+      "Be able to build an API-backed LLM application and read structured traces.",
+      "Understand basic testing, state management, and security boundaries."
+    ],
+    "boundary": "This is a specialist overlay after shared foundations. MCP is one integration surface, not the definition of agent systems engineering, and the route does not replace distributed systems or live operations experience.",
+    "portfolioProof": {
+      "title": "Observable Agent System",
+      "description": "Build a bounded agent workflow whose tools, state, memory, failure behavior, and release evidence can be inspected.",
+      "evidence": [
+        "A typed tool registry and agent loop",
+        "Explicit state and memory behavior",
+        "Failure and prompt injection tests",
+        "An agent evaluation suite",
+        "Runtime traces with stop, retry, and escalation evidence"
+      ]
+    },
+    "readinessCriteria": [
+      "Can separate tool capability from agent decision policy.",
+      "Can explain what enters context, what persists, and what expires.",
+      "Can model state transitions and orchestration failure paths.",
+      "Can test prompt injection, tool misuse, loops, and false completion claims.",
+      "Can evaluate behavior from trajectories and operate it from traces."
+    ],
+    "coverage": {
+      "strong": [
+        "Tool contracts and agent loops",
+        "Context, memory, and state",
+        "Orchestration and failure modes",
+        "Agent safety, evaluation, and observability"
+      ],
+      "partial": [
+        "Distributed agent systems",
+        "Human approval experience",
+        "Long-running workflow durability"
+      ],
+      "outsideCourse": [
+        "Production fleet ownership",
+        "Provider-internal model control",
+        "Years of live on-call experience"
+      ]
+    },
+    "estimatedMinutes": 865,
+    "stages": [
+      {
+        "id": "common-core",
+        "title": "Common Core",
+        "outcome": "Build a typed tool surface and a bounded agent loop.",
+        "artifact": "A deterministic agent loop with typed tools, validation, stop conditions, and a transcript.",
+        "lessons": [
+          {
+            "id": "phase-13-lesson-01",
+            "title": "The Tool Interface — Why Agents Need Structured I/O",
+            "estTime": "~45 minutes",
+            "slug": "the-tool-interface",
+            "phaseId": "phase-13"
+          },
+          {
+            "id": "phase-13-lesson-05",
+            "title": "Tool Schema Design — Naming, Descriptions, Parameter Constraints",
+            "estTime": "~45 minutes",
+            "slug": "tool-schema-design",
+            "phaseId": "phase-13"
+          },
+          {
+            "id": "phase-13-lesson-06",
+            "title": "MCP Fundamentals: Stateless Requests and JSON-RPC",
+            "estTime": "~55 minutes",
+            "slug": "mcp-fundamentals",
+            "phaseId": "phase-13"
+          },
+          {
+            "id": "phase-14-lesson-01",
+            "title": "The Agent Loop: Observe, Think, Act",
+            "estTime": "~60 minutes",
+            "slug": "the-agent-loop",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-06",
+            "title": "Tool Use and Function Calling",
+            "estTime": "~60 minutes",
+            "slug": "tool-use-and-function-calling",
+            "phaseId": "phase-14"
+          }
+        ]
+      },
+      {
+        "id": "role-practice",
+        "title": "Role Practice",
+        "outcome": "Make context, memory, state, and orchestration explicit and testable.",
+        "artifact": "A stateful workflow with a context budget, memory policy, checkpoints, and recovery paths.",
+        "lessons": [
+          {
+            "id": "phase-11-lesson-05",
+            "title": "Context Engineering: Windows, Budgets, Memory, and Retrieval",
+            "estTime": "~90 minutes",
+            "slug": "context-engineering",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-14-lesson-07",
+            "title": "Agent Memory — Virtual Context and Memory Paging",
+            "estTime": "~75 minutes",
+            "slug": "memory-virtual-context-memgpt",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-13",
+            "title": "Stateful Graph Orchestration — Durable Execution and Checkpoints",
+            "estTime": "~75 minutes",
+            "slug": "langgraph-stateful-graphs",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-28",
+            "title": "Orchestration Patterns: Supervisor, Swarm, Hierarchical",
+            "estTime": "~60 minutes",
+            "slug": "orchestration-patterns",
+            "phaseId": "phase-14"
+          }
+        ]
+      },
+      {
+        "id": "proof-project",
+        "title": "Proof Project",
+        "outcome": "Stress the system against realistic failures and unsafe inputs before release.",
+        "artifact": "An observable agent system with adversarial tests, trajectory evaluations, and explicit release gates.",
+        "lessons": [
+          {
+            "id": "phase-14-lesson-26",
+            "title": "Failure Modes: Why Agents Break",
+            "estTime": "~60 minutes",
+            "slug": "failure-modes-agentic",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-27",
+            "title": "Prompt Injection and the PVE Defense",
+            "estTime": "~75 minutes",
+            "slug": "prompt-injection-defense",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-30",
+            "title": "Eval-Driven Agent Development",
+            "estTime": "~60 minutes",
+            "slug": "eval-driven-agent-development",
+            "phaseId": "phase-14"
+          }
+        ]
+      },
+      {
+        "id": "interview-readiness-evidence",
+        "title": "Interview and Readiness Evidence",
+        "outcome": "Show that the runtime can be operated from controls and trace evidence.",
+        "artifact": "A case study with architecture, failure evidence, runtime controls, traces, and justified tradeoffs.",
+        "lessons": [
+          {
+            "id": "phase-14-lesson-29",
+            "title": "Production Runtimes: Queue, Event, Cron",
+            "estTime": "~60 minutes",
+            "slug": "production-runtimes",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-24",
+            "title": "Agent Observability: Langfuse, Phoenix, Opik",
+            "estTime": "~45 minutes",
+            "slug": "agent-observability-platforms",
+            "phaseId": "phase-14"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ai-data-engineer",
+    "kind": "career-route",
+    "title": "AI Data Systems",
+    "workFamily": "AI Data Systems",
+    "commonTitles": [
+      "AI Data Engineer",
+      "Machine Learning Data Engineer",
+      "Retrieval Engineer"
+    ],
+    "summary": "Build reliable data, feature, embedding, retrieval, evaluation, and observability pipelines for AI systems.",
+    "decisionPrompt": "Do you want to make the data behind training, retrieval, evaluation, and production behavior trustworthy?",
+    "mission": "Build on shared foundations to create traceable AI data systems that transform source data into measurable model and retrieval inputs.",
+    "responsibilities": [
+      "Design reproducible ingestion, transformation, and feature pipelines.",
+      "Build embedding and retrieval paths with explicit quality measures.",
+      "Detect leakage, drift, missing data, and retrieval regressions.",
+      "Instrument data-dependent behavior from source through production."
+    ],
+    "goodFitIf": [
+      "You care about lineage, repeatability, and data quality more than demos.",
+      "You enjoy tracing model behavior back to data and retrieval decisions.",
+      "You want to connect data systems with measurable AI outcomes."
+    ],
+    "baseline": [
+      "Complete the shared software engineering and AI foundations, or demonstrate equivalent working knowledge.",
+      "Be comfortable with tabular data, features, train and test splits, and basic evaluation.",
+      "Be able to inspect files, schemas, and pipeline output from code."
+    ],
+    "boundary": "This is a specialist overlay after shared foundations. It samples training, feature, and retrieval data work, but does not claim mastery of every warehouse, lake, streaming, or governance platform.",
+    "portfolioProof": {
+      "title": "Traceable AI Data Pipeline",
+      "description": "Build a reproducible data and retrieval path whose inputs, transformations, quality checks, and downstream effects can be inspected.",
+      "evidence": [
+        "A reproducible ingestion and transformation pipeline",
+        "Leakage, schema, and data quality checks",
+        "Embedding and retrieval evaluation results",
+        "Observability for data-dependent failures",
+        "A provenance and rollback note"
+      ]
+    },
+    "readinessCriteria": [
+      "Can explain lineage from raw data to model or retrieval input.",
+      "Can prevent leakage and verify feature transformations.",
+      "Can measure retrieval quality separately from generation quality.",
+      "Can identify a data, embedding, retrieval, or model cause from evidence.",
+      "Can reproduce a pipeline result and document how to roll it back."
+    ],
+    "coverage": {
+      "strong": [
+        "Data and feature pipelines",
+        "Embeddings and retrieval",
+        "RAG evaluation",
+        "AI observability"
+      ],
+      "partial": [
+        "Lineage and schema evolution",
+        "Pipeline orchestration and backfills",
+        "Data governance"
+      ],
+      "outsideCourse": [
+        "Enterprise warehouse or lake ownership",
+        "Compliance authority",
+        "Live data platform on-call experience"
+      ]
+    },
+    "estimatedMinutes": 915,
+    "stages": [
+      {
+        "id": "common-core",
+        "title": "Common Core",
+        "outcome": "Build reproducible data, feature, and language-model preparation pipelines.",
+        "artifact": "A versioned pipeline with deterministic transforms, split checks, and a reproducible run record.",
+        "lessons": [
+          {
+            "id": "phase-00-lesson-09",
+            "title": "Data Management",
+            "estTime": "~45 minutes",
+            "slug": "data-management",
+            "phaseId": "phase-00"
+          },
+          {
+            "id": "phase-02-lesson-08",
+            "title": "Feature Engineering & Selection",
+            "estTime": "~90 minutes",
+            "slug": "feature-engineering",
+            "phaseId": "phase-02"
+          },
+          {
+            "id": "phase-02-lesson-13",
+            "title": "ML Pipelines",
+            "estTime": "~120 minutes",
+            "slug": "ml-pipelines",
+            "phaseId": "phase-02"
+          },
+          {
+            "id": "phase-10-lesson-03",
+            "title": "Data Pipelines for Pre-Training",
+            "estTime": "~90 minutes",
+            "slug": "data-pipelines",
+            "phaseId": "phase-10"
+          }
+        ]
+      },
+      {
+        "id": "role-practice",
+        "title": "Role Practice",
+        "outcome": "Build context and retrieval paths whose quality can be measured independently.",
+        "artifact": "A retrieval system with a documented corpus, index configuration, and retrieval metrics.",
+        "lessons": [
+          {
+            "id": "phase-11-lesson-04",
+            "title": "Embeddings & Vector Representations",
+            "estTime": "~75 minutes",
+            "slug": "embeddings",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-05",
+            "title": "Context Engineering: Windows, Budgets, Memory, and Retrieval",
+            "estTime": "~90 minutes",
+            "slug": "context-engineering",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-06",
+            "title": "RAG (Retrieval-Augmented Generation)",
+            "estTime": "~90 minutes",
+            "slug": "rag",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-07",
+            "title": "Advanced RAG (Chunking, Reranking, Hybrid Search)",
+            "estTime": "~90 minutes",
+            "slug": "advanced-rag",
+            "phaseId": "phase-11"
+          }
+        ]
+      },
+      {
+        "id": "proof-project",
+        "title": "Proof Project",
+        "outcome": "Connect the data path to an evaluated production-style application.",
+        "artifact": "A traceable AI data pipeline with end-to-end quality checks and application-level evaluation.",
+        "lessons": [
+          {
+            "id": "phase-11-lesson-10",
+            "title": "Evaluation & Testing LLM Applications",
+            "estTime": "~45 minutes",
+            "slug": "evaluation",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-13",
+            "title": "Building a Production LLM Application",
+            "estTime": "~120 minutes",
+            "slug": "production-app",
+            "phaseId": "phase-11"
+          }
+        ]
+      },
+      {
+        "id": "interview-readiness-evidence",
+        "title": "Interview and Readiness Evidence",
+        "outcome": "Show how telemetry separates data, retrieval, and generation failures.",
+        "artifact": "A failure analysis that links a production symptom to the responsible data or retrieval stage.",
+        "lessons": [
+          {
+            "id": "phase-17-lesson-13",
+            "title": "LLM Observability Stack Selection",
+            "estTime": "~60 minutes",
+            "slug": "llm-observability",
+            "phaseId": "phase-17"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ai-developer-relations-engineer",
+    "kind": "career-route",
+    "title": "Developer Experience and Education",
+    "workFamily": "Developer Experience and Education",
+    "commonTitles": [
+      "AI Developer Relations Engineer",
+      "AI Developer Advocate",
+      "Developer Experience Engineer"
+    ],
+    "summary": "Build credible integrations, examples, and reusable agent packages, then turn developer friction into clearer tools and teaching.",
+    "decisionPrompt": "Do you want to make AI capabilities easier for developers to understand, adopt, and use correctly?",
+    "mission": "Build on shared foundations to turn technical capabilities into trustworthy interfaces, runnable examples, and reusable learning assets.",
+    "responsibilities": [
+      "Design clear API, tool, and protocol contracts for developer use.",
+      "Build runnable examples and reusable agent packages.",
+      "Teach runtime behavior, tradeoffs, and failure modes accurately.",
+      "Turn developer friction and feedback into product and documentation improvements."
+    ],
+    "goodFitIf": [
+      "You enjoy building software and explaining why it works.",
+      "You care about first-run success, examples, documentation, and developer trust.",
+      "You want developer feedback to shape the product."
+    ],
+    "baseline": [
+      "Complete the shared software engineering and AI foundations, or demonstrate equivalent working knowledge.",
+      "Be able to read API contracts and run local examples from source.",
+      "Be comfortable testing instructions from a new developer's point of view."
+    ],
+    "boundary": "This is a specialist overlay after shared foundations. The route is strongest on technical integration and reusable teaching assets, while community programs, events, and distribution need additional practice.",
+    "portfolioProof": {
+      "title": "Developer Adoption Kit",
+      "description": "Package one AI capability as a discoverable integration that another developer can run, inspect, and verify.",
+      "evidence": [
+        "A runnable API or tool integration",
+        "A concise quickstart and working example",
+        "A validated skill or reusable agent package",
+        "An evaluation and portability report",
+        "A documented improvement based on developer feedback"
+      ]
+    },
+    "readinessCriteria": [
+      "Can explain the difference between an instruction package and an executable tool.",
+      "Can design a small, unambiguous interface with useful failure messages.",
+      "Can create a runnable example that works from a clean setup.",
+      "Can validate discovery, invocation, packaging, and portability.",
+      "Can turn observed developer friction into a concrete product or teaching change."
+    ],
+    "coverage": {
+      "strong": [
+        "API and tool contracts",
+        "MCP implementation",
+        "Skill discovery and packaging",
+        "Runnable technical examples"
+      ],
+      "partial": [
+        "Technical writing and quickstarts",
+        "Developer feedback research",
+        "Community education"
+      ],
+      "outsideCourse": [
+        "Event and community program ownership",
+        "Content distribution strategy",
+        "Years of public developer-facing experience"
+      ]
+    },
+    "estimatedMinutes": 905,
+    "stages": [
+      {
+        "id": "common-core",
+        "title": "Common Core",
+        "outcome": "Build a sound capability interface from credentials through tool and protocol contracts.",
+        "artifact": "A runnable integration with a clear contract, setup path, and observable error behavior.",
+        "lessons": [
+          {
+            "id": "phase-00-lesson-04",
+            "title": "APIs & Keys",
+            "estTime": "~30 minutes",
+            "slug": "apis-and-keys",
+            "phaseId": "phase-00"
+          },
+          {
+            "id": "phase-13-lesson-01",
+            "title": "The Tool Interface — Why Agents Need Structured I/O",
+            "estTime": "~45 minutes",
+            "slug": "the-tool-interface",
+            "phaseId": "phase-13"
+          },
+          {
+            "id": "phase-13-lesson-05",
+            "title": "Tool Schema Design — Naming, Descriptions, Parameter Constraints",
+            "estTime": "~45 minutes",
+            "slug": "tool-schema-design",
+            "phaseId": "phase-13"
+          },
+          {
+            "id": "phase-13-lesson-06",
+            "title": "MCP Fundamentals: Stateless Requests and JSON-RPC",
+            "estTime": "~55 minutes",
+            "slug": "mcp-fundamentals",
+            "phaseId": "phase-13"
+          },
+          {
+            "id": "phase-13-lesson-07",
+            "title": "Building an MCP Server: Stateless Python and TypeScript",
+            "estTime": "~85 minutes",
+            "slug": "building-an-mcp-server",
+            "phaseId": "phase-13"
+          }
+        ]
+      },
+      {
+        "id": "role-practice",
+        "title": "Role Practice",
+        "outcome": "Make reusable agent knowledge discoverable, invocable, and progressively disclosed.",
+        "artifact": "A skill package with concise metadata, staged references, and explicit invocation examples.",
+        "lessons": [
+          {
+            "id": "phase-13-lesson-22",
+            "title": "Agent Skills: Portable Contract and Runtime Boundary",
+            "estTime": "~90 minutes",
+            "slug": "skills-and-agent-sdks",
+            "phaseId": "phase-13"
+          },
+          {
+            "id": "phase-13-lesson-24",
+            "title": "Skill Discovery and Progressive Disclosure",
+            "estTime": "~105 minutes",
+            "slug": "skill-discovery-and-progressive-disclosure",
+            "phaseId": "phase-13"
+          },
+          {
+            "id": "phase-13-lesson-25",
+            "title": "Skill Invocation and Routing",
+            "estTime": "~105 minutes",
+            "slug": "skill-invocation-and-routing",
+            "phaseId": "phase-13"
+          }
+        ]
+      },
+      {
+        "id": "proof-project",
+        "title": "Proof Project",
+        "outcome": "Prove that the package and its surrounding tool ecosystem work across supported contexts.",
+        "artifact": "A developer adoption kit with validation results, portability notes, and a working end-to-end example.",
+        "lessons": [
+          {
+            "id": "phase-13-lesson-27",
+            "title": "Skill Evals, Packaging, and Portability",
+            "estTime": "~150 minutes",
+            "slug": "skill-evals-packaging-and-portability",
+            "phaseId": "phase-13"
+          },
+          {
+            "id": "phase-13-lesson-23",
+            "title": "Capstone: Stateless Tool Ecosystem",
+            "estTime": "~120 minutes",
+            "slug": "capstone-tool-ecosystem",
+            "phaseId": "phase-13"
+          }
+        ]
+      },
+      {
+        "id": "interview-readiness-evidence",
+        "title": "Interview and Readiness Evidence",
+        "outcome": "Show how developer feedback changed the integration or its teaching path.",
+        "artifact": "A short adoption case study with friction evidence, the change made, and the measured result.",
+        "lessons": [
+          {
+            "id": "phase-14-lesson-54",
+            "title": "Build a Feedback Ratchet with Ownership and Retirement",
+            "estTime": "~75 minutes",
+            "slug": "build-the-feedback-ratchet",
+            "phaseId": "phase-14"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ai-evaluation-reliability-engineer",
+    "kind": "career-route",
+    "title": "AI Evaluation and Reliability",
+    "workFamily": "AI Evaluation and Reliability",
+    "commonTitles": [
+      "AI Evaluation Engineer",
+      "AI Reliability Engineer",
+      "Machine Learning Site Reliability Engineer"
+    ],
+    "summary": "Measure model and agent behavior, expose failure modes, instrument the runtime, and build release and incident controls around evidence.",
+    "decisionPrompt": "Do you want to turn model and system uncertainty into evaluation, observability, release, and recovery evidence?",
+    "mission": "Build on shared foundations to define trustworthy behavior, expose failures, and operate AI releases through measurable reliability controls.",
+    "responsibilities": [
+      "Design model, LLM, and agent evaluations around real failure risks.",
+      "Instrument inference behavior and system health with useful telemetry.",
+      "Test load, experiments, canaries, and rollback conditions before release.",
+      "Use incidents and chaos tests to improve reliability controls."
+    ],
+    "goodFitIf": [
+      "You prefer measurable evidence to confident completion claims.",
+      "You enjoy finding edge cases, regressions, and system failure paths.",
+      "You want evaluation and operations to share the same release evidence."
+    ],
+    "baseline": [
+      "Complete the shared software engineering and AI foundations, or demonstrate equivalent working knowledge.",
+      "Understand model metrics, tests, APIs, and basic production telemetry.",
+      "Be able to reproduce failures and compare behavior across controlled runs."
+    ],
+    "boundary": "This is a specialist overlay after shared foundations and combines adjacent evaluation and reliability work. It does not claim one universal job title or replace live incident and on-call experience.",
+    "portfolioProof": {
+      "title": "Regression and Reliability Gate",
+      "description": "Build an evidence gate that connects behavior evaluation, runtime telemetry, load, rollout, and recovery decisions.",
+      "evidence": [
+        "An evaluation set, rubric, and regression thresholds",
+        "A trace schema and observability view",
+        "An SLO and load test report",
+        "A canary and rollback decision record",
+        "A chaos test or incident analysis with corrective actions"
+      ]
+    },
+    "readinessCriteria": [
+      "Can select metrics that match the behavior and failure risk being tested.",
+      "Can build reproducible model, LLM, and agent regression checks.",
+      "Can connect traces, inference metrics, and user-visible outcomes.",
+      "Can define load, SLO, canary, and rollback thresholds.",
+      "Can turn a failure exercise into a tested reliability improvement."
+    ],
+    "coverage": {
+      "strong": [
+        "Model, LLM, and agent evaluation",
+        "Failure taxonomy and observability",
+        "Inference metrics and load testing",
+        "Experiments, rollout, chaos, and SRE controls"
+      ],
+      "partial": [
+        "Human annotation operations",
+        "Incident leadership",
+        "Large distributed infrastructure"
+      ],
+      "outsideCourse": [
+        "Production on-call ownership",
+        "Compliance signoff",
+        "Large-scale benchmark laboratory operations"
+      ]
+    },
+    "estimatedMinutes": 750,
+    "stages": [
+      {
+        "id": "common-core",
+        "title": "Common Core",
+        "outcome": "Define behavior, evaluation layers, failure modes, and trace semantics.",
+        "artifact": "A layered evaluation plan with a failure taxonomy, trace schema, and regression thresholds.",
+        "lessons": [
+          {
+            "id": "phase-02-lesson-09",
+            "title": "Model Evaluation",
+            "estTime": "~90 minutes",
+            "slug": "model-evaluation",
+            "phaseId": "phase-02"
+          },
+          {
+            "id": "phase-11-lesson-10",
+            "title": "Evaluation & Testing LLM Applications",
+            "estTime": "~45 minutes",
+            "slug": "evaluation",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-14-lesson-30",
+            "title": "Eval-Driven Agent Development",
+            "estTime": "~60 minutes",
+            "slug": "eval-driven-agent-development",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-26",
+            "title": "Failure Modes: Why Agents Break",
+            "estTime": "~60 minutes",
+            "slug": "failure-modes-agentic",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-23",
+            "title": "OpenTelemetry GenAI Semantic Conventions",
+            "estTime": "~60 minutes",
+            "slug": "otel-genai-conventions",
+            "phaseId": "phase-14"
+          }
+        ]
+      },
+      {
+        "id": "role-practice",
+        "title": "Role Practice",
+        "outcome": "Measure inference health, production behavior, experiments, and capacity limits.",
+        "artifact": "An observability and load report that connects service metrics with behavior and user outcomes.",
+        "lessons": [
+          {
+            "id": "phase-17-lesson-08",
+            "title": "Inference Metrics — TTFT, TPOT, ITL, Goodput, P99",
+            "estTime": "~60 minutes",
+            "slug": "inference-metrics-goodput",
+            "phaseId": "phase-17"
+          },
+          {
+            "id": "phase-17-lesson-13",
+            "title": "LLM Observability Stack Selection",
+            "estTime": "~60 minutes",
+            "slug": "llm-observability",
+            "phaseId": "phase-17"
+          },
+          {
+            "id": "phase-17-lesson-21",
+            "title": "A/B Testing LLM Features — GrowthBook, Statsig, and the Vibes Problem",
+            "estTime": "~60 minutes",
+            "slug": "ab-testing-llm-features",
+            "phaseId": "phase-17"
+          },
+          {
+            "id": "phase-17-lesson-22",
+            "title": "Load Testing LLM APIs — Why k6 and Locust Lie",
+            "estTime": "~75 minutes",
+            "slug": "load-testing-llm-apis",
+            "phaseId": "phase-17"
+          }
+        ]
+      },
+      {
+        "id": "proof-project",
+        "title": "Proof Project",
+        "outcome": "Prove release and recovery behavior under controlled failure.",
+        "artifact": "A regression and reliability gate with canary thresholds, rollback evidence, and a chaos result.",
+        "lessons": [
+          {
+            "id": "phase-17-lesson-20",
+            "title": "Shadow Traffic, Canary Rollout, and Progressive Deployment for LLMs",
+            "estTime": "~60 minutes",
+            "slug": "shadow-canary-progressive",
+            "phaseId": "phase-17"
+          },
+          {
+            "id": "phase-17-lesson-24",
+            "title": "Chaos Engineering for LLM Production",
+            "estTime": "~60 minutes",
+            "slug": "chaos-engineering-llm",
+            "phaseId": "phase-17"
+          }
+        ]
+      },
+      {
+        "id": "interview-readiness-evidence",
+        "title": "Interview and Readiness Evidence",
+        "outcome": "Show how objectives, incidents, and corrective actions form an operating system for reliability.",
+        "artifact": "A reliability case study with SLOs, failure evidence, response decisions, and verified corrective actions.",
+        "lessons": [
+          {
+            "id": "phase-17-lesson-23",
+            "title": "SRE for AI — Multi-Agent Incident Response, Runbooks, Predictive Detection",
+            "estTime": "~60 minutes",
+            "slug": "sre-for-ai",
+            "phaseId": "phase-17"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "applied-ai-engineer",
+    "kind": "career-route",
+    "title": "LLM Product Engineering",
+    "workFamily": "LLM Product Engineering",
+    "commonTitles": [
+      "Applied AI Engineer",
+      "LLM Engineer",
+      "AI Product Engineer"
+    ],
+    "summary": "Turn language-model capability into evaluated, safe, cost-aware product behavior that can survive production traffic.",
+    "decisionPrompt": "Do you want to turn language-model capability into a reliable product feature with measurable user behavior?",
+    "mission": "Build on shared foundations to ship grounded LLM features with explicit contracts, evaluation, safety, cost, and release controls.",
+    "responsibilities": [
+      "Shape model behavior with prompts, schemas, context, retrieval, and tools.",
+      "Define evaluation sets and guardrails around product requirements.",
+      "Balance quality, latency, cost, and operational risk.",
+      "Ship through production interfaces and controlled rollout stages."
+    ],
+    "goodFitIf": [
+      "You want to connect model behavior directly to a user-facing product.",
+      "You enjoy balancing quality, safety, latency, and cost.",
+      "You prefer measured product behavior over isolated model demos."
+    ],
+    "baseline": [
+      "Complete the shared software engineering and AI foundations, or demonstrate equivalent working knowledge.",
+      "Be able to call a model API and build a small web or service interface.",
+      "Understand basic evaluation, testing, and production error handling."
+    ],
+    "boundary": "This is a specialist overlay after shared foundations and focuses on LLM product engineering. It does not cover every applied AI modality or replace product discovery and live production ownership.",
+    "portfolioProof": {
+      "title": "Production LLM Feature",
+      "description": "Build a grounded LLM feature with a clear user contract, measurable quality, safety controls, and a staged release plan.",
+      "evidence": [
+        "A user contract and structured output schema",
+        "A grounded application using retrieval or tools",
+        "An evaluation set and guardrail report",
+        "A quality, latency, and cost scorecard",
+        "A deployment and staged rollout record"
+      ]
+    },
+    "readinessCriteria": [
+      "Can choose prompts, schemas, retrieval, and tools based on a product requirement.",
+      "Can build an evaluation set before tuning behavior.",
+      "Can identify and test safety and failure boundaries.",
+      "Can measure quality, latency, and cost together.",
+      "Can explain deployment, gateway, canary, and rollback choices."
+    ],
+    "coverage": {
+      "strong": [
+        "Prompt and structured output design",
+        "Context, retrieval, and tools",
+        "LLM evaluation and guardrails",
+        "Cost-aware production rollout"
+      ],
+      "partial": [
+        "Product discovery",
+        "User experience research",
+        "Full cloud operations"
+      ],
+      "outsideCourse": [
+        "Vision and audio product specialization",
+        "Foundation-model training ownership",
+        "Commercial product management"
+      ]
+    },
+    "estimatedMinutes": 885,
+    "stages": [
+      {
+        "id": "common-core",
+        "title": "Common Core",
+        "outcome": "Shape language-model behavior through prompts, schemas, context, retrieval, and tools.",
+        "artifact": "A grounded feature prototype with a typed user contract and observable tool or retrieval behavior.",
+        "lessons": [
+          {
+            "id": "phase-11-lesson-01",
+            "title": "Prompt Engineering: Techniques & Patterns",
+            "estTime": "~90 minutes",
+            "slug": "prompt-engineering",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-03",
+            "title": "Structured Outputs: JSON, Schema Validation, Constrained Decoding",
+            "estTime": "~90 minutes",
+            "slug": "structured-outputs",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-04",
+            "title": "Embeddings & Vector Representations",
+            "estTime": "~75 minutes",
+            "slug": "embeddings",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-05",
+            "title": "Context Engineering: Windows, Budgets, Memory, and Retrieval",
+            "estTime": "~90 minutes",
+            "slug": "context-engineering",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-06",
+            "title": "RAG (Retrieval-Augmented Generation)",
+            "estTime": "~90 minutes",
+            "slug": "rag",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-09",
+            "title": "Function Calling & Tool Use",
+            "estTime": "~75 minutes",
+            "slug": "function-calling",
+            "phaseId": "phase-11"
+          }
+        ]
+      },
+      {
+        "id": "role-practice",
+        "title": "Role Practice",
+        "outcome": "Measure quality and control cost and safety before production exposure.",
+        "artifact": "An evaluation suite with guardrail tests and a quality, latency, and cost scorecard.",
+        "lessons": [
+          {
+            "id": "phase-11-lesson-10",
+            "title": "Evaluation & Testing LLM Applications",
+            "estTime": "~45 minutes",
+            "slug": "evaluation",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-11",
+            "title": "Caching, Rate Limiting & Cost Optimization",
+            "estTime": "~45 minutes",
+            "slug": "caching-cost",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-12",
+            "title": "Guardrails, Safety & Content Filtering",
+            "estTime": "~45 minutes",
+            "slug": "guardrails",
+            "phaseId": "phase-11"
+          }
+        ]
+      },
+      {
+        "id": "proof-project",
+        "title": "Proof Project",
+        "outcome": "Package the feature as a production-style application behind operational controls.",
+        "artifact": "A deployed LLM feature with routing, limits, observability hooks, and documented failure behavior.",
+        "lessons": [
+          {
+            "id": "phase-11-lesson-13",
+            "title": "Building a Production LLM Application",
+            "estTime": "~120 minutes",
+            "slug": "production-app",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-17-lesson-19",
+            "title": "AI Gateways — LiteLLM, Portkey, Kong AI Gateway, Bifrost",
+            "estTime": "~60 minutes",
+            "slug": "ai-gateways",
+            "phaseId": "phase-17"
+          }
+        ]
+      },
+      {
+        "id": "interview-readiness-evidence",
+        "title": "Interview and Readiness Evidence",
+        "outcome": "Show how the feature advances through controlled exposure with rollback evidence.",
+        "artifact": "A product case study with eval results, cost tradeoffs, release gates, and a rollback decision.",
+        "lessons": [
+          {
+            "id": "phase-17-lesson-20",
+            "title": "Shadow Traffic, Canary Rollout, and Progressive Deployment for LLMs",
+            "estTime": "~60 minutes",
+            "slug": "shadow-canary-progressive",
+            "phaseId": "phase-17"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building-and-deploying-ai-applications",
+    "kind": "domain",
+    "title": "Building and Deploying AI Applications",
+    "workFamily": "",
+    "commonTitles": [],
+    "summary": "Build an AI feature from prompt and structured output through retrieval, evaluation, production serving, observability, and release.",
+    "decisionPrompt": "",
+    "mission": "",
+    "responsibilities": [],
+    "goodFitIf": [],
+    "baseline": [],
+    "boundary": "",
+    "portfolioProof": null,
+    "readinessCriteria": [],
+    "coverage": {},
+    "estimatedMinutes": 780,
+    "stages": []
+  },
+  {
+    "id": "forward-deployed-ai-engineer",
+    "kind": "career-route",
+    "title": "Customer AI Deployment",
+    "workFamily": "Customer AI Deployment",
+    "commonTitles": [
+      "Forward-Deployed AI Engineer",
+      "Field AI Engineer",
+      "AI Solutions Engineer"
+    ],
+    "summary": "Discover a customer workflow, reduce its riskiest assumptions, and carry a useful AI system through measurement and rollout.",
+    "decisionPrompt": "Do you want to discover a customer workflow, prove a narrow solution, and carry it into a measured rollout?",
+    "mission": "Build on shared foundations to turn an observed customer workflow into a scoped, evaluated, and operable AI deployment.",
+    "responsibilities": [
+      "Observe the real workflow and define the outcome with users.",
+      "Map assumptions, constraints, dependencies, and failure risks.",
+      "Build the smallest vertical slice that can test the core claim.",
+      "Define success metrics, rollout controls, and feedback loops."
+    ],
+    "goodFitIf": [
+      "You want to work close to users and ambiguous operating environments.",
+      "You enjoy moving between discovery, implementation, evaluation, and rollout.",
+      "You can explain tradeoffs to both technical and operational stakeholders."
+    ],
+    "baseline": [
+      "Complete the shared software engineering and AI foundations, or demonstrate equivalent working knowledge.",
+      "Be able to build and evaluate an API-backed AI application.",
+      "Be comfortable gathering workflow evidence before proposing a solution."
+    ],
+    "boundary": "This is a specialist overlay after shared foundations, not customer support or generic consulting. It prepares you to demonstrate a deployment workflow, but it does not replace live customer or production experience.",
+    "portfolioProof": {
+      "title": "Measured Customer Pilot",
+      "description": "Turn a documented workflow into a narrow pilot with explicit evidence, release controls, and a feedback plan.",
+      "evidence": [
+        "Workflow evidence and an assumption map",
+        "An executable specification for the smallest testable slice",
+        "A working vertical slice with evaluation results",
+        "Success metrics and a staged rollout plan",
+        "A feedback record that drives the next decision"
+      ]
+    },
+    "readinessCriteria": [
+      "Can separate the requested output from the underlying operational outcome.",
+      "Can rank assumptions by uncertainty and consequence.",
+      "Can build a vertical slice that tests one valuable workflow end to end.",
+      "Can define evaluation, success, rollback, and feedback criteria before release.",
+      "Can explain what evidence supports moving from prototype to pilot or production."
+    ],
+    "coverage": {
+      "strong": [
+        "Workflow discovery and scoping",
+        "Evidence-driven prototyping",
+        "Evaluation and success metrics",
+        "Staged rollout and feedback"
+      ],
+      "partial": [
+        "Stakeholder facilitation",
+        "Enterprise integration and security",
+        "Production operations under live traffic"
+      ],
+      "outsideCourse": [
+        "Commercial account ownership",
+        "Procurement and legal negotiation",
+        "Years of customer deployment experience"
+      ]
+    },
+    "estimatedMinutes": 865,
+    "stages": [
+      {
+        "id": "common-core",
+        "title": "Common Core",
+        "outcome": "Frame the customer outcome, workflow, assumptions, and smallest useful test.",
+        "artifact": "A workflow brief with outcome, evidence, assumptions, risks, and an executable slice specification.",
+        "lessons": [
+          {
+            "id": "phase-14-lesson-47",
+            "title": "Define the Outcome Before You Choose the Output",
+            "estTime": "~60 minutes",
+            "slug": "outcomes-before-output",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-48",
+            "title": "Discover the Workflow People Actually Perform",
+            "estTime": "~70 minutes",
+            "slug": "discover-the-real-workflow",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-49",
+            "title": "Map Assumptions and Resolve the Riskiest One First",
+            "estTime": "~65 minutes",
+            "slug": "map-assumptions-and-risk",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-50",
+            "title": "Choose the Smallest Slice That Can Change the Decision",
+            "estTime": "~65 minutes",
+            "slug": "choose-the-smallest-testable-slice",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-14-lesson-51",
+            "title": "Write Specifications That Preserve Judgment",
+            "estTime": "~75 minutes",
+            "slug": "write-specifications-that-preserve-judgment",
+            "phaseId": "phase-14"
+          }
+        ]
+      },
+      {
+        "id": "role-practice",
+        "title": "Role Practice",
+        "outcome": "Build and evaluate the narrow AI system against explicit success criteria.",
+        "artifact": "A working vertical slice with an evaluation set, baseline, and success scorecard.",
+        "lessons": [
+          {
+            "id": "phase-11-lesson-06",
+            "title": "RAG (Retrieval-Augmented Generation)",
+            "estTime": "~90 minutes",
+            "slug": "rag",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-10",
+            "title": "Evaluation & Testing LLM Applications",
+            "estTime": "~45 minutes",
+            "slug": "evaluation",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-11-lesson-13",
+            "title": "Building a Production LLM Application",
+            "estTime": "~120 minutes",
+            "slug": "production-app",
+            "phaseId": "phase-11"
+          },
+          {
+            "id": "phase-14-lesson-52",
+            "title": "Design Success Metrics Before the Result Exists",
+            "estTime": "~70 minutes",
+            "slug": "design-success-metrics",
+            "phaseId": "phase-14"
+          }
+        ]
+      },
+      {
+        "id": "proof-project",
+        "title": "Proof Project",
+        "outcome": "Choose the right release stage and move the pilot through controlled exposure.",
+        "artifact": "A measured pilot with release gates, rollback conditions, and recorded results.",
+        "lessons": [
+          {
+            "id": "phase-14-lesson-53",
+            "title": "Choose Prototype, Pilot, or Production Deliberately",
+            "estTime": "~70 minutes",
+            "slug": "prototype-pilot-or-production",
+            "phaseId": "phase-14"
+          },
+          {
+            "id": "phase-17-lesson-20",
+            "title": "Shadow Traffic, Canary Rollout, and Progressive Deployment for LLMs",
+            "estTime": "~60 minutes",
+            "slug": "shadow-canary-progressive",
+            "phaseId": "phase-17"
+          }
+        ]
+      },
+      {
+        "id": "interview-readiness-evidence",
+        "title": "Interview and Readiness Evidence",
+        "outcome": "Show how evidence and user feedback determine the next iteration.",
+        "artifact": "A concise case study that connects user evidence, system results, tradeoffs, and the next decision.",
+        "lessons": [
+          {
+            "id": "phase-14-lesson-54",
+            "title": "Build a Feedback Ratchet with Ownership and Retirement",
+            "estTime": "~75 minutes",
+            "slug": "build-the-feedback-ratchet",
+            "phaseId": "phase-14"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-context-protocol",
+    "kind": "domain",
+    "title": "Model Context Protocol (MCP)",
+    "workFamily": "",
+    "commonTitles": [],
+    "summary": "Build, secure, verify, and operate stateless MCP systems from JSON-RPC envelopes through conformance release gates.",
+    "decisionPrompt": "",
+    "mission": "",
+    "responsibilities": [],
+    "goodFitIf": [],
+    "baseline": [],
+    "boundary": "",
+    "portfolioProof": null,
+    "readinessCriteria": [],
+    "coverage": {},
+    "estimatedMinutes": 1395,
+    "stages": []
+  },
+  {
+    "id": "shaping-the-build",
+    "kind": "domain",
+    "title": "Product Judgment and Delivery",
+    "workFamily": "",
+    "commonTitles": [],
+    "summary": "Turn evidence into outcomes, assumptions, testable slices, executable specifications, measurement plans, and owned feedback loops.",
+    "decisionPrompt": "",
+    "mission": "",
+    "responsibilities": [],
+    "goodFitIf": [],
+    "baseline": [],
+    "boundary": "",
+    "portfolioProof": null,
+    "readinessCriteria": [],
+    "coverage": {},
+    "estimatedMinutes": 550,
+    "stages": []
+  },
+  {
+    "id": "software-engineering-fundamentals",
+    "kind": "domain",
+    "title": "Software Engineering Fundamentals",
+    "workFamily": "",
+    "commonTitles": [],
+    "summary": "Build the repository, debugging, testing, interface, security, release, and operational foundations AI systems depend on.",
+    "decisionPrompt": "",
+    "mission": "",
+    "responsibilities": [],
+    "goodFitIf": [],
+    "baseline": [],
+    "boundary": "",
+    "portfolioProof": null,
+    "readinessCriteria": [],
+    "coverage": {},
+    "estimatedMinutes": 730,
+    "stages": []
+  },
+  {
+    "id": "using-coding-agents",
+    "kind": "domain",
+    "title": "Agent-Assisted Engineering",
+    "workFamily": "",
+    "commonTitles": [],
+    "summary": "Frame, plan, execute, delegate, verify, review, and improve coding-agent work inside real repositories.",
+    "decisionPrompt": "",
+    "mission": "",
+    "responsibilities": [],
+    "goodFitIf": [],
+    "baseline": [],
+    "boundary": "",
+    "portfolioProof": null,
+    "readinessCriteria": [],
+    "coverage": {},
+    "estimatedMinutes": 900,
+    "stages": []
+  }
+]

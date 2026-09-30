@@ -1,0 +1,2915 @@
+{
+  "generatedAt": "2026-09-30T02:28:38.066Z",
+  "programs": [
+    {
+      "id": "mcpa-certification",
+      "name": "MCPA Certification Curriculum",
+      "shortName": "MCPA",
+      "accessNoticeTitle": "Official exam access is open",
+      "provider": "Agentic AI Foundation",
+      "publisher": "AI Engineering from Scratch",
+      "version": "1.0.0-local-preview",
+      "lastVerified": "2026-09-24",
+      "guideVersion": "1.0",
+      "guideEffective": "September 2026",
+      "summary": "A free, open-source path to the Model Context Protocol Associate exam, built by implementing MCP hosts, clients, servers, and tools against the 2026-07-28 specification.",
+      "promise": "Learn the judgment the exam measures by building the protocol the exam describes.",
+      "accessNotice": "As verified on September 24, 2026, the MCPA exam is open enrollment through Linux Foundation Training and Certification. This open curriculum is available to everyone. Verify current pricing, format, and eligibility on the official page before scheduling, because program details can change.",
+      "disclaimer": "This is an independent community curriculum. It is not affiliated with, endorsed by, sponsored by, or authorized by the Agentic AI Foundation or the Linux Foundation. It does not contain live exam questions. The official exam page and current program policies always take precedence.",
+      "scoringNotice": "Practice percentages in this curriculum are raw scores over original questions. The official passing score and scoring scale for the MCPA are not published, so practice results cannot predict an official outcome.",
+      "sourcePolicy": "Every exam fact is mapped to the official MCPA certification page and the launch announcement, with the retrieval date recorded in research/source-verification-ledger.md. Protocol facts are mapped to the MCP 2026-07-28 specification. Lessons and questions are original.",
+      "prerequisitesPath": "certifications/mcpa/prerequisites.json",
+      "specVersion": "2026-07-28",
+      "officialLinks": [
+        {
+          "label": "MCPA certification page",
+          "url": "https://training.linuxfoundation.org/certification/model-context-protocol-associate-mcpa/"
+        },
+        {
+          "label": "MCPA launch announcement",
+          "url": "https://www.linuxfoundation.org/press/agentic-ai-foundation-launches-mcpa-certification-to-validate-mcp-expertise"
+        },
+        {
+          "label": "Model Context Protocol specification 2026-07-28",
+          "url": "https://modelcontextprotocol.io/specification/2026-07-28"
+        },
+        {
+          "label": "Model Context Protocol documentation",
+          "url": "https://modelcontextprotocol.io/docs/getting-started/intro"
+        },
+        {
+          "label": "Agentic AI Foundation",
+          "url": "https://aaif.io/"
+        }
+      ],
+      "tracks": [
+        {
+          "id": "mcpa-f",
+          "slug": "mcpa-f",
+          "examCode": "MCPA",
+          "credential": "Model Context Protocol Associate",
+          "shortName": "MCP Associate",
+          "level": "Foundational",
+          "accent": "blue",
+          "badge": {
+            "imageUrl": "https://training.linuxfoundation.org/wp-content/uploads/2026/06/MCPA_Badge-1.png",
+            "width": 300,
+            "height": 300,
+            "shape": "square"
+          },
+          "summary": "Prove you understand how the Model Context Protocol works: its hosts, clients, servers, and tools, the message flow and primitives that connect them, and the trust boundaries that keep the connection safe.",
+          "audience": "AI engineers, platform engineers, and AI governance professionals who connect agents to external systems and need to reason about how the protocol works and how its components communicate.",
+          "recommendedExperience": [
+            "Foundational knowledge of JSON-RPC or a similar message-based protocol",
+            "Experience calling LLM APIs such as OpenAI, Anthropic, or a local model",
+            "Understanding of agentic patterns such as tool use and the think-act-observe loop",
+            "Basic security literacy: API keys, OAuth 2.1, token handling, and authentication headers",
+            "Ability to read an MCP server manifest and its capability definitions"
+          ],
+          "exam": {
+            "items": 60,
+            "timeLimitMinutes": 90,
+            "feeUsd": 250,
+            "validityMonths": 24,
+            "eligibilityMonths": 12,
+            "retakes": 1,
+            "level": "Beginner",
+            "specVersion": "2026-07-28",
+            "itemCountPublished": false,
+            "passingScorePublished": false,
+            "format": "Multiple choice",
+            "delivery": "Online proctored",
+            "effective": "September 2026",
+            "officialGuideUrl": "https://training.linuxfoundation.org/certification/model-context-protocol-associate-mcpa/"
+          },
+          "domains": [
+            {
+              "id": "mcp-fundamentals",
+              "name": "MCP Fundamentals",
+              "weight": 16,
+              "objectives": [
+                "Explain the purpose and scope of MCP and the integration problem it standardizes between AI applications and external systems",
+                "Describe the core MCP concepts of hosts, clients, servers, primitives, and the stateless JSON-RPC request model",
+                "Reason about interoperability, protocol versioning, and the value of one open protocol over per-system custom integrations",
+                "Read the MCP specification, its revision history, and its feature lifecycle to tell current, deprecated, and removed behavior apart"
+              ]
+            },
+            {
+              "id": "architecture-and-components",
+              "name": "Architecture and Components",
+              "weight": 14,
+              "objectives": [
+                "Read the schemas and structured data that define MCP messages, tool definitions, capabilities, and server manifests",
+                "Distinguish the responsibilities of MCP hosts, clients, and servers and how discovery and capability negotiation connect them",
+                "Trace the model interaction flow from a user request through the host, model, client, and server and back into model context"
+              ]
+            },
+            {
+              "id": "interactions-and-execution",
+              "name": "Interactions and Execution",
+              "weight": 26,
+              "objectives": [
+                "Apply the request, notification, subscription, and multi round-trip interaction patterns and handle each result type",
+                "Handle protocol errors and tool execution errors, including version, capability, header, and validation failures",
+                "Walk the tool invocation lifecycle from discovery and selection through call, user input, progress, cancellation, and result",
+                "Identify the protocol primitives and utilities, including tools, resources, prompts, completion, caching, pagination, transports, and deprecated client features"
+              ]
+            },
+            {
+              "id": "security-and-governance",
+              "name": "Security and Governance",
+              "weight": 24,
+              "objectives": [
+                "Locate the trust boundaries between host, client, server, model, and the tools and content a server exposes",
+                "Apply OAuth-based authorization, client registration, scopes, and user consent so a user approves what a server may see and do",
+                "Choose risk and safety controls against tool poisoning, injection, token misuse, and over-broad access",
+                "Design auditability and observability so protocol activity can be traced, attributed, and reviewed"
+              ]
+            },
+            {
+              "id": "use-cases-and-ecosystem",
+              "name": "Use Cases and Ecosystem",
+              "weight": 20,
+              "objectives": [
+                "Map the roles, responsibilities, governance, and adoption patterns of teams building and deploying MCP",
+                "Select operational use cases and the primitives or extensions that fit each one",
+                "Reason about ecosystem portability across clients, servers, SDKs, extensions, gateways, and registries"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "path": "certifications/mcpa/lessons/00-mcp-exam-strategy",
+              "domains": [
+                "mcp-fundamentals"
+              ],
+              "role": "orientation",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/01-reading-the-specification",
+              "domains": [
+                "mcp-fundamentals"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/02-the-integration-problem",
+              "domains": [
+                "mcp-fundamentals"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/03-json-rpc-and-meta",
+              "domains": [
+                "mcp-fundamentals",
+                "architecture-and-components"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/04-the-stateless-core",
+              "domains": [
+                "mcp-fundamentals"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/05-protocol-eras-and-compatibility",
+              "domains": [
+                "mcp-fundamentals"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/06-hosts-clients-and-servers",
+              "domains": [
+                "architecture-and-components"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/07-discovery-and-capability-negotiation",
+              "domains": [
+                "architecture-and-components"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/08-tool-schemas-and-structured-content",
+              "domains": [
+                "architecture-and-components"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/09-reading-server-manifests",
+              "domains": [
+                "architecture-and-components"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/10-model-interaction-flow",
+              "domains": [
+                "architecture-and-components"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/11-the-tools-primitive",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/12-the-resources-primitive",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/13-prompts-and-completion",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/14-multi-round-trip-requests-and-elicitation",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/15-deprecated-client-features",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/16-notifications-and-subscriptions",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/17-tool-invocation-lifecycle",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/18-error-handling",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/19-transports-and-http-headers",
+              "domains": [
+                "interactions-and-execution",
+                "architecture-and-components"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/20-caching-and-pagination",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/21-long-running-work-and-tasks",
+              "domains": [
+                "interactions-and-execution"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/22-trust-boundaries",
+              "domains": [
+                "security-and-governance"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/23-oauth-authorization",
+              "domains": [
+                "security-and-governance"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/24-client-registration-and-identity",
+              "domains": [
+                "security-and-governance"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/25-consent-and-least-privilege",
+              "domains": [
+                "security-and-governance"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/26-risk-and-safety-controls",
+              "domains": [
+                "security-and-governance"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/27-auditability-and-observability",
+              "domains": [
+                "security-and-governance"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/28-roles-and-adoption",
+              "domains": [
+                "use-cases-and-ecosystem"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/29-operational-use-cases",
+              "domains": [
+                "use-cases-and-ecosystem"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/30-the-extensions-framework",
+              "domains": [
+                "use-cases-and-ecosystem"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/31-mcp-apps",
+              "domains": [
+                "use-cases-and-ecosystem"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/32-registry-gateways-and-sdk-tiers",
+              "domains": [
+                "use-cases-and-ecosystem"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/mcpa/lessons/33-mcpa-capstone-readiness",
+              "domains": [
+                "mcp-fundamentals",
+                "architecture-and-components",
+                "interactions-and-execution",
+                "security-and-governance",
+                "use-cases-and-ecosystem"
+              ],
+              "role": "capstone",
+              "required": true
+            }
+          ],
+          "deepDives": [
+            {
+              "path": "phases/13-tools-and-protocols/06-mcp-fundamentals",
+              "label": "Stateless Requests and Discovery",
+              "reason": "Build the per-request metadata model and server/discover from first principles"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/07-building-an-mcp-server",
+              "label": "Building a Server",
+              "reason": "Implement tools, resources, and prompts on the stateless core"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/08-building-an-mcp-client",
+              "label": "Building a Client",
+              "reason": "Drive servers you did not write through discovery and capability negotiation"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/09-mcp-transports",
+              "label": "Transports",
+              "reason": "Frame stdio and Streamable HTTP correctly, including the required headers"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/10-mcp-resources-and-prompts",
+              "label": "Resources and Prompts",
+              "reason": "Application-driven context and user-controlled templates in depth"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/11-mcp-sampling",
+              "label": "Model Completions Through the Client",
+              "reason": "The deprecated sampling feature, how it works under MRTR, and its migration"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/12-mcp-roots-and-elicitation",
+              "label": "Scope and User Input",
+              "reason": "Roots, elicitation, and multi round-trip requests in depth"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/13-mcp-async-tasks",
+              "label": "Durable Long-Running Work",
+              "reason": "Task handles, polling, and mid-flight input"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/14-mcp-apps",
+              "label": "Interactive Interfaces",
+              "reason": "Sandboxed UI resources rendered by the host"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/15-mcp-security-tool-poisoning",
+              "label": "Tool Poisoning Defenses",
+              "reason": "Untrusted descriptions, results, and definition drift"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/16-mcp-security-oauth-2-1",
+              "label": "Authorization",
+              "reason": "OAuth 2.1, protected resource metadata, and audience binding"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/18-mcp-auth-production",
+              "label": "Production Tokens",
+              "reason": "Token handling, rotation, and step-up authorization in deployed systems"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/17-mcp-gateways-and-registries",
+              "label": "Gateways and Registries",
+              "reason": "Routing, policy enforcement, and registry admission"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/28-mcp-tool-contracts-and-content",
+              "label": "Tool Contracts and Content",
+              "reason": "Schemas, structured content, and content blocks under load"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/29-mcp-reliability-cancellation-and-flow-control",
+              "label": "Reliability and Flow Control",
+              "reason": "Cancellation races, progress, and timeouts"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/30-mcp-registry-supply-chain-and-drift",
+              "label": "Supply Chain and Drift",
+              "reason": "Registry trust and definition drift detection"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/31-mcp-conformance-versioning-and-operations",
+              "label": "Conformance and Operations",
+              "reason": "Versioning, conformance tests, and release evidence"
+            }
+          ],
+          "assessments": [
+            {
+              "id": "mcpa-f-diagnostic",
+              "path": "certifications/mcpa/assessments/mcpa-f/diagnostic.json",
+              "kind": "diagnostic",
+              "title": "MCPA Foundations Diagnostic",
+              "timeLimitMinutes": 30
+            },
+            {
+              "id": "mcpa-f-mock-01",
+              "path": "certifications/mcpa/assessments/mcpa-f/mock-01.json",
+              "kind": "mock",
+              "title": "MCPA Full-Length Mock 1: Operational Scenarios",
+              "timeLimitMinutes": 90
+            },
+            {
+              "id": "mcpa-f-mock-02",
+              "path": "certifications/mcpa/assessments/mcpa-f/mock-02.json",
+              "kind": "mock",
+              "title": "MCPA Full-Length Mock 2: Wire-Level Messages",
+              "timeLimitMinutes": 90
+            },
+            {
+              "id": "mcpa-f-mock-03",
+              "path": "certifications/mcpa/assessments/mcpa-f/mock-03.json",
+              "kind": "mock",
+              "title": "MCPA Full-Length Mock 3: Design and Security Trade-offs",
+              "timeLimitMinutes": 90
+            }
+          ]
+        }
+      ],
+      "slug": "mcpa",
+      "phaseId": "phase-cert-mcpa",
+      "lessonsCount": 34,
+      "lessons": [
+        {
+          "id": "phase-cert-mcpa-lesson-00",
+          "lessonNum": 0,
+          "title": "The MCPA Blueprint Is a Study Budget, Not a Checklist",
+          "slug": "mcp-exam-strategy",
+          "estTime": "~45 minutes",
+          "domains": [
+            "mcp-fundamentals"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-01",
+          "lessonNum": 1,
+          "title": "Reading the MCP Specification",
+          "slug": "reading-the-specification",
+          "estTime": "~45 minutes",
+          "domains": [
+            "mcp-fundamentals"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-02",
+          "lessonNum": 2,
+          "title": "The Integration Problem MCP Solves",
+          "slug": "the-integration-problem",
+          "estTime": "~45 minutes",
+          "domains": [
+            "mcp-fundamentals"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-03",
+          "lessonNum": 3,
+          "title": "The JSON-RPC Envelope",
+          "slug": "json-rpc-and-meta",
+          "estTime": "~45 minutes",
+          "domains": [
+            "mcp-fundamentals",
+            "architecture-and-components"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-04",
+          "lessonNum": 4,
+          "title": "The Stateless Core of MCP",
+          "slug": "the-stateless-core",
+          "estTime": "~45 minutes",
+          "domains": [
+            "mcp-fundamentals"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-05",
+          "lessonNum": 5,
+          "title": "Telling a Modern MCP Server From a Legacy One",
+          "slug": "protocol-eras-and-compatibility",
+          "estTime": "~45 minutes",
+          "domains": [
+            "mcp-fundamentals"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-06",
+          "lessonNum": 6,
+          "title": "Hosts, Clients, and Servers: MCP's Process Topology",
+          "slug": "hosts-clients-and-servers",
+          "estTime": "~45 minutes",
+          "domains": [
+            "architecture-and-components"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-07",
+          "lessonNum": 7,
+          "title": "Discovering a Server and Negotiating What It Can Do",
+          "slug": "discovery-and-capability-negotiation",
+          "estTime": "~45 minutes",
+          "domains": [
+            "architecture-and-components"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-08",
+          "lessonNum": 8,
+          "title": "The Contract Inside a Tool Definition",
+          "slug": "tool-schemas-and-structured-content",
+          "estTime": "~45 minutes",
+          "domains": [
+            "architecture-and-components"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-09",
+          "lessonNum": 9,
+          "title": "Reading a Server Manifest Like a Reviewer",
+          "slug": "reading-server-manifests",
+          "estTime": "~45 minutes",
+          "domains": [
+            "architecture-and-components"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-10",
+          "lessonNum": 10,
+          "title": "The Model Interaction Flow",
+          "slug": "model-interaction-flow",
+          "estTime": "~45 minutes",
+          "domains": [
+            "architecture-and-components"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-11",
+          "lessonNum": 11,
+          "title": "The Tools Primitive: Calling Actions and Reading Their Results",
+          "slug": "the-tools-primitive",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-12",
+          "lessonNum": 12,
+          "title": "Resources: Addressable Content for a Stateless Server",
+          "slug": "the-resources-primitive",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-13",
+          "lessonNum": 13,
+          "title": "Prompt Templates and Argument Completion",
+          "slug": "prompts-and-completion",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-14",
+          "lessonNum": 14,
+          "title": "Multi Round-Trip Requests and Elicitation",
+          "slug": "multi-round-trip-requests-and-elicitation",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-15",
+          "lessonNum": 15,
+          "title": "Deprecated, Not Removed: Roots, Sampling, and Logging",
+          "slug": "deprecated-client-features",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-16",
+          "lessonNum": 16,
+          "title": "The Subscription Stream: Notifications, Progress, and Cancellation",
+          "slug": "notifications-and-subscriptions",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-17",
+          "lessonNum": 17,
+          "title": "The Tool Invocation Lifecycle",
+          "slug": "tool-invocation-lifecycle",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-18",
+          "lessonNum": 18,
+          "title": "Two Ways for a Request to Fail",
+          "slug": "error-handling",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-19",
+          "lessonNum": 19,
+          "title": "Transports and the HTTP Header Contract",
+          "slug": "transports-and-http-headers",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution",
+            "architecture-and-components"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-20",
+          "lessonNum": 20,
+          "title": "Cache Freshness and Cursor-Based Pagination",
+          "slug": "caching-and-pagination",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-21",
+          "lessonNum": 21,
+          "title": "Long-Running Work and the Tasks Extension",
+          "slug": "long-running-work-and-tasks",
+          "estTime": "~45 minutes",
+          "domains": [
+            "interactions-and-execution"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-22",
+          "lessonNum": 22,
+          "title": "Trust Zones in an MCP Exchange",
+          "slug": "trust-boundaries",
+          "estTime": "~45 minutes",
+          "domains": [
+            "security-and-governance"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-23",
+          "lessonNum": 23,
+          "title": "Authorizing Access to an MCP Server",
+          "slug": "oauth-authorization",
+          "estTime": "~45 minutes",
+          "domains": [
+            "security-and-governance"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-24",
+          "lessonNum": 24,
+          "title": "Proving a Client's Identity to an Authorization Server",
+          "slug": "client-registration-and-identity",
+          "estTime": "~45 minutes",
+          "domains": [
+            "security-and-governance"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-25",
+          "lessonNum": 25,
+          "title": "Consent and Least Privilege",
+          "slug": "consent-and-least-privilege",
+          "estTime": "~45 minutes",
+          "domains": [
+            "security-and-governance"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-26",
+          "lessonNum": 26,
+          "title": "Risk and Safety Controls for MCP Tool Calls",
+          "slug": "risk-and-safety-controls",
+          "estTime": "~45 minutes",
+          "domains": [
+            "security-and-governance"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-27",
+          "lessonNum": 27,
+          "title": "One Trace ID Ties Auditability to Observability",
+          "slug": "auditability-and-observability",
+          "estTime": "~45 minutes",
+          "domains": [
+            "security-and-governance"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-28",
+          "lessonNum": 28,
+          "title": "Every MUST Needs an Owner",
+          "slug": "roles-and-adoption",
+          "estTime": "~45 minutes",
+          "domains": [
+            "use-cases-and-ecosystem"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-29",
+          "lessonNum": 29,
+          "title": "Choosing MCP's Shape for the Job",
+          "slug": "operational-use-cases",
+          "estTime": "~45 minutes",
+          "domains": [
+            "use-cases-and-ecosystem"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-30",
+          "lessonNum": 30,
+          "title": "The Extensions Framework",
+          "slug": "the-extensions-framework",
+          "estTime": "~45 minutes",
+          "domains": [
+            "use-cases-and-ecosystem"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-31",
+          "lessonNum": 31,
+          "title": "Interactive Interfaces Inside the Conversation",
+          "slug": "mcp-apps",
+          "estTime": "~45 minutes",
+          "domains": [
+            "use-cases-and-ecosystem"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-32",
+          "lessonNum": 32,
+          "title": "Finding, Routing To, and Trusting a Server",
+          "slug": "registry-gateways-and-sdk-tiers",
+          "estTime": "~45 minutes",
+          "domains": [
+            "use-cases-and-ecosystem"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-mcpa-lesson-33",
+          "lessonNum": 33,
+          "title": "Reading One MCP Exchange End to End",
+          "slug": "mcpa-capstone-readiness",
+          "estTime": "~60 minutes",
+          "domains": [
+            "mcp-fundamentals",
+            "architecture-and-components",
+            "interactions-and-execution",
+            "security-and-governance",
+            "use-cases-and-ecosystem"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        }
+      ]
+    },
+    {
+      "id": "claude-certifications",
+      "name": "Claude Certification Curriculum",
+      "shortName": "Claude",
+      "accessNoticeTitle": "Official exam access is currently restricted",
+      "provider": "Anthropic",
+      "publisher": "AI Engineering from Scratch",
+      "version": "1.0.0-local-preview",
+      "lastVerified": "2026-08-09",
+      "guideVersion": "1.0",
+      "guideEffective": "July 2026",
+      "summary": "A free, open-source path from first Claude workflows to production architecture, mapped to all four public Claude certification blueprints.",
+      "promise": "Learn the judgment behind the answers by building the systems the exams describe.",
+      "accessNotice": "As verified on August 9, 2026, official exam registration is limited to people at Claude Partner Network organizations and requires a recognized partner-company email. This open curriculum is available to everyone. Verify current eligibility before paying or scheduling because access rules can change.",
+      "disclaimer": "This is an independent community curriculum. It is not affiliated with, endorsed by, sponsored by, or authorized by Anthropic. It does not contain live exam questions. The official exam guide and current program policies always take precedence.",
+      "scoringNotice": "Practice percentages in this curriculum are raw scores. They are not equivalent to Anthropic's scaled score of 100 to 1,000 and cannot predict an official result.",
+      "sourcePolicy": "Every exam fact is mapped to the public exam guides. Lessons and questions are original. Product details are checked against official Anthropic documentation and dated because the platform changes quickly.",
+      "prerequisitesPath": "certifications/claude/prerequisites.json",
+      "officialLinks": [
+        {
+          "label": "Claude certification exam prep courses",
+          "url": "https://anthropic-partners.skilljar.com/page/claude-certification-exam-prep-courses"
+        },
+        {
+          "label": "Claude certification program FAQ",
+          "url": "https://anthropic-partners.skilljar.com/page/faq-certifications"
+        },
+        {
+          "label": "Anthropic Academy course catalog",
+          "url": "https://anthropic.skilljar.com/"
+        },
+        {
+          "label": "Claude Platform documentation",
+          "url": "https://platform.claude.com/docs/en/home"
+        },
+        {
+          "label": "Claude Code documentation",
+          "url": "https://code.claude.com/docs/en/overview"
+        },
+        {
+          "label": "Model Context Protocol documentation",
+          "url": "https://modelcontextprotocol.io/docs/getting-started/intro"
+        }
+      ],
+      "tracks": [
+        {
+          "id": "claude-ccao-f",
+          "slug": "ccao-f",
+          "examCode": "CCAO-F",
+          "credential": "Claude Certified Associate - Foundations",
+          "shortName": "Associate Foundations",
+          "level": "Foundational",
+          "accent": "orange",
+          "badge": {
+            "imageUrl": "https://images.credly.com/images/a6387cbd-5ac1-4894-833a-da2cbc28587e/blob",
+            "width": 600,
+            "height": 600
+          },
+          "summary": "Use Claude safely and effectively for business, research, analysis, and productivity workflows.",
+          "audience": "Operations, project, sales, marketing, finance, support, research, and other knowledge-work professionals. No software-development experience is required.",
+          "recommendedExperience": [
+            "Three to six months using Claude or a comparable AI assistant in real work",
+            "Experience reviewing AI output before sharing it",
+            "A practical understanding of hallucinations, context limits, and data sensitivity"
+          ],
+          "exam": {
+            "items": 60,
+            "timeLimitMinutes": 120,
+            "feeUsd": 99,
+            "passingScaledScore": 720,
+            "scoreScale": "100-1000",
+            "validityMonths": 12,
+            "format": "Multiple-choice and multiple-response",
+            "delivery": "Proctored online or at a test center",
+            "guideVersion": "1.0",
+            "effective": "July 2026",
+            "officialGuideUrl": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542847%2FClaude+Certified+Associate+%E2%80%93+Foundations+Exam+Guide.pdf"
+          },
+          "domains": [
+            {
+              "id": "prompting-task-execution",
+              "name": "Prompting and Task Execution",
+              "weight": 14,
+              "objectives": [
+                "Create effective prompts for business and technical tasks",
+                "Decompose complex requests into manageable work",
+                "Iterate prompts using observed output quality",
+                "Adapt prompting to analysis, research, drafting, and brainstorming"
+              ]
+            },
+            {
+              "id": "output-evaluation-validation",
+              "name": "Output Evaluation and Validation",
+              "weight": 21,
+              "objectives": [
+                "Evaluate accuracy, completeness, and audience fit",
+                "Identify hallucinations, inconsistencies, and bias",
+                "Fact-check against authoritative evidence",
+                "Choose when human review or additional verification is required",
+                "Refine and compare outputs",
+                "Select appropriate inline, artifact, and structured formats"
+              ]
+            },
+            {
+              "id": "product-model-selection",
+              "name": "Product and Model Selection",
+              "weight": 12,
+              "objectives": [
+                "Choose among Projects, research, chat, and artifacts",
+                "Differentiate Haiku, Sonnet, and Opus roles",
+                "Balance quality, speed, and cost",
+                "Manage context and memory by restarting, summarizing, or persisting"
+              ]
+            },
+            {
+              "id": "workflow-integration-solution-design",
+              "name": "Workflow Integration and Solution Design",
+              "weight": 16,
+              "objectives": [
+                "Analyze requirements and candidate use cases",
+                "Apply Claude to research, planning, and process improvement",
+                "Support solution design and iteration",
+                "Augment or redesign existing workflows",
+                "Communicate value and limitations to stakeholders"
+              ]
+            },
+            {
+              "id": "configuration-knowledge-management",
+              "name": "Configuration and Knowledge Management",
+              "weight": 12,
+              "objectives": [
+                "Configure Projects with instructions and knowledge",
+                "Manage uploads and connectors",
+                "Write effective persistent instructions",
+                "Maintain configurations and sources over time"
+              ]
+            },
+            {
+              "id": "governance-risk-responsible-use",
+              "name": "Governance, Risk, and Responsible Use",
+              "weight": 15,
+              "objectives": [
+                "Separate appropriate from inappropriate use cases",
+                "Apply privacy, data-sensitivity, and regulatory constraints",
+                "Follow organizational AI policy",
+                "Recognize ethical implications and escalate risk"
+              ]
+            },
+            {
+              "id": "troubleshooting-optimization",
+              "name": "Troubleshooting and Optimization",
+              "weight": 10,
+              "objectives": [
+                "Diagnose underperforming prompts and poor outputs",
+                "Adjust the approach using feedback and results",
+                "Optimize workflows for efficiency and effectiveness"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "path": "certifications/claude/lessons/00-certification-strategy",
+              "domains": [
+                "prompting-task-execution"
+              ],
+              "role": "orientation",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/01-claude-product-and-model-landscape",
+              "domains": [
+                "product-model-selection"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/02-model-selection-and-token-economics",
+              "domains": [
+                "product-model-selection",
+                "troubleshooting-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/03-prompting-and-task-decomposition",
+              "domains": [
+                "prompting-task-execution",
+                "troubleshooting-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/04-context-knowledge-memory-and-caching",
+              "domains": [
+                "configuration-knowledge-management",
+                "product-model-selection"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/05-output-evaluation-and-validation",
+              "domains": [
+                "output-evaluation-validation",
+                "troubleshooting-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/06-governance-safety-and-responsible-use",
+              "domains": [
+                "governance-risk-responsible-use"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/07-workflow-design-and-human-handoffs",
+              "domains": [
+                "workflow-integration-solution-design",
+                "output-evaluation-validation"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/29-associate-workflow-capstone",
+              "domains": [
+                "prompting-task-execution",
+                "output-evaluation-validation",
+                "product-model-selection",
+                "workflow-integration-solution-design",
+                "configuration-knowledge-management",
+                "governance-risk-responsible-use",
+                "troubleshooting-optimization"
+              ],
+              "role": "capstone",
+              "required": true
+            }
+          ],
+          "deepDives": [
+            {
+              "path": "phases/11-llm-engineering/01-prompt-engineering",
+              "label": "Prompt Engineering",
+              "reason": "Build prompt structure and iteration from first principles"
+            },
+            {
+              "path": "phases/11-llm-engineering/05-context-engineering",
+              "label": "Context Engineering",
+              "reason": "Understand context limits and deliberate context assembly"
+            },
+            {
+              "path": "phases/11-llm-engineering/10-evaluation",
+              "label": "LLM Evaluation",
+              "reason": "Turn quality judgment into repeatable tests"
+            },
+            {
+              "path": "phases/11-llm-engineering/12-guardrails",
+              "label": "Guardrails",
+              "reason": "Layer responsible-use controls around model behavior"
+            },
+            {
+              "path": "phases/18-ethics-safety-alignment/20-bias-representational-harm",
+              "label": "Bias and Representational Harm",
+              "reason": "Recognize and evaluate harmful output patterns"
+            }
+          ],
+          "assessments": [
+            {
+              "id": "claude-ccao-f-diagnostic",
+              "path": "certifications/claude/assessments/ccao-f/diagnostic.json",
+              "kind": "diagnostic",
+              "title": "Associate Foundations Diagnostic",
+              "timeLimitMinutes": 25
+            },
+            {
+              "id": "claude-ccao-f-mock-01",
+              "path": "certifications/claude/assessments/ccao-f/mock-01.json",
+              "kind": "mock",
+              "title": "Associate Foundations Full Mock",
+              "timeLimitMinutes": 120
+            }
+          ],
+          "studyPlans": [
+            {
+              "id": "ccao-f-14-day",
+              "label": "14-day focused plan",
+              "durationDays": 14,
+              "hoursPerWeek": 7,
+              "milestones": [
+                "Days 1-2: diagnose and learn the product map",
+                "Days 3-6: prompting, context, and validation",
+                "Days 7-10: workflows, governance, and troubleshooting",
+                "Days 11-12: complete the capstone",
+                "Days 13-14: full mock and targeted review"
+              ]
+            },
+            {
+              "id": "ccao-f-28-day",
+              "label": "28-day steady plan",
+              "durationDays": 28,
+              "hoursPerWeek": 4,
+              "milestones": [
+                "Week 1: product selection and prompting",
+                "Week 2: context, knowledge, and validation",
+                "Week 3: workflow design and responsible use",
+                "Week 4: capstone, mock, and weak-domain review"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "claude-ccar-f",
+          "slug": "ccar-f",
+          "examCode": "CCAR-F",
+          "credential": "Claude Certified Architect - Foundations",
+          "shortName": "Architect Foundations",
+          "level": "Foundational architecture",
+          "accent": "violet",
+          "badge": {
+            "imageUrl": "https://images.credly.com/images/f2040db3-3904-4240-8966-e87b1510bea0/blob",
+            "width": 604,
+            "height": 604
+          },
+          "summary": "Make sound production tradeoffs across Claude Code, the Claude Agent SDK, the Claude API, and MCP.",
+          "audience": "Developers and architects who design production Claude systems and can reason through ambiguous, scenario-based architecture decisions.",
+          "recommendedExperience": [
+            "Six or more months building with Claude",
+            "Hands-on work with the Claude API and tool use",
+            "Working knowledge of Claude Code, the Claude Agent SDK, and MCP",
+            "Experience choosing between architectural alternatives under constraints"
+          ],
+          "exam": {
+            "items": 60,
+            "timeLimitMinutes": 120,
+            "feeUsd": 125,
+            "passingScaledScore": 720,
+            "scoreScale": "100-1000",
+            "validityMonths": 12,
+            "format": "Scenario-based multiple-choice and multiple-response; four scenarios drawn from six",
+            "delivery": "Proctored online or at a test center",
+            "guideVersion": "1.0",
+            "effective": "July 2026",
+            "officialGuideUrl": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542750%2FClaude+Certified+Architect+%E2%80%93+Foundations+Exam+Guide.pdf"
+          },
+          "domains": [
+            {
+              "id": "agentic-architecture-orchestration",
+              "name": "Agentic Architecture and Orchestration",
+              "weight": 27,
+              "objectives": [
+                "Implement the tool-use lifecycle from stop reason to tool result",
+                "Choose coordinator and subagent topologies",
+                "Use Task, allowedTools, isolated context, parallelism, and forked sessions",
+                "Enforce prerequisites, decompose concerns, and structure handoffs",
+                "Use hooks for deterministic controls and normalization",
+                "Choose sequential or adaptive decomposition",
+                "Resume or fork without carrying stale context"
+              ]
+            },
+            {
+              "id": "tool-design-mcp-integration",
+              "name": "Tool Design and MCP Integration",
+              "weight": 18,
+              "objectives": [
+                "Write precise tool descriptions and boundaries",
+                "Return structured and retry-aware MCP errors",
+                "Manage tool distribution and tool choice",
+                "Scope MCP configuration and resources",
+                "Choose Claude Code file, shell, and search tools safely"
+              ]
+            },
+            {
+              "id": "claude-code-configuration-workflows",
+              "name": "Claude Code Configuration and Workflows",
+              "weight": 20,
+              "objectives": [
+                "Design CLAUDE.md hierarchy, imports, rules, and memory",
+                "Create project and user commands and Skills",
+                "Apply path-specific rules",
+                "Choose plan mode, direct execution, or Explore",
+                "Use examples, test-driven iteration, and interviews",
+                "Run headless CI with structured output and independent review"
+              ]
+            },
+            {
+              "id": "prompt-engineering-structured-output",
+              "name": "Prompt Engineering and Structured Output",
+              "weight": 20,
+              "objectives": [
+                "State explicit evaluation criteria",
+                "Use few-shot examples for consistent judgment",
+                "Enforce schemas with tool use and tool choice",
+                "Validate, retry, and feed back semantic errors",
+                "Use batch processing for appropriate workloads",
+                "Separate generator and independent reviewer passes"
+              ]
+            },
+            {
+              "id": "context-management-reliability",
+              "name": "Context Management and Reliability",
+              "weight": 15,
+              "objectives": [
+                "Place facts to reduce lost-in-the-middle failures",
+                "Escalate ambiguity and policy gaps",
+                "Propagate structured errors and partial results",
+                "Use scratchpads, subagents, manifests, and compaction for large codebases",
+                "Calibrate confidence and human review",
+                "Track provenance, conflicts, dates, and content types"
+              ]
+            }
+          ],
+          "scenarioPool": [
+            "Customer support resolution agent",
+            "Code generation with Claude Code",
+            "Multi-agent research",
+            "Developer productivity with Claude",
+            "Claude Code for CI/CD",
+            "Structured data extraction"
+          ],
+          "lessons": [
+            {
+              "path": "certifications/claude/lessons/00-certification-strategy",
+              "domains": [
+                "agentic-architecture-orchestration"
+              ],
+              "role": "orientation",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/01-claude-product-and-model-landscape",
+              "domains": [
+                "agentic-architecture-orchestration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/02-model-selection-and-token-economics",
+              "domains": [
+                "context-management-reliability"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/03-prompting-and-task-decomposition",
+              "domains": [
+                "prompt-engineering-structured-output"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/04-context-knowledge-memory-and-caching",
+              "domains": [
+                "context-management-reliability"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/05-output-evaluation-and-validation",
+              "domains": [
+                "prompt-engineering-structured-output",
+                "context-management-reliability"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/08-messages-api-and-application-lifecycle",
+              "domains": [
+                "agentic-architecture-orchestration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/09-structured-output-and-defensive-parsing",
+              "domains": [
+                "prompt-engineering-structured-output"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/10-tool-use-and-agentic-loops",
+              "domains": [
+                "agentic-architecture-orchestration",
+                "tool-design-mcp-integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/11-mcp-server-design-and-integration",
+              "domains": [
+                "tool-design-mcp-integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/12-claude-agent-sdk-and-hooks",
+              "domains": [
+                "agentic-architecture-orchestration",
+                "claude-code-configuration-workflows"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/13-application-security-and-secrets",
+              "domains": [
+                "tool-design-mcp-integration",
+                "context-management-reliability"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/14-evals-testing-debugging-and-observability",
+              "domains": [
+                "prompt-engineering-structured-output",
+                "context-management-reliability"
+              ],
+              "role": "review",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/15-claude-code-for-development-teams",
+              "domains": [
+                "claude-code-configuration-workflows"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/16-multi-agent-orchestration-and-delegation",
+              "domains": [
+                "agentic-architecture-orchestration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/17-agent-sdk-sessions-subagents-and-context",
+              "domains": [
+                "agentic-architecture-orchestration",
+                "context-management-reliability"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/18-tool-contracts-errors-and-progressive-discovery",
+              "domains": [
+                "tool-design-mcp-integration",
+                "context-management-reliability"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/19-claude-code-memory-rules-skills-and-ci",
+              "domains": [
+                "claude-code-configuration-workflows"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/20-reliable-extraction-batch-and-reviewers",
+              "domains": [
+                "prompt-engineering-structured-output",
+                "context-management-reliability"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/21-long-context-reliability-provenance-and-escalation",
+              "domains": [
+                "context-management-reliability"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/31-architect-foundations-scenario-capstone",
+              "domains": [
+                "agentic-architecture-orchestration",
+                "tool-design-mcp-integration",
+                "claude-code-configuration-workflows",
+                "prompt-engineering-structured-output",
+                "context-management-reliability"
+              ],
+              "role": "capstone",
+              "required": true
+            }
+          ],
+          "deepDives": [
+            {
+              "path": "phases/14-agent-engineering/28-orchestration-patterns",
+              "label": "Orchestration Patterns",
+              "reason": "Compare coordinator, delegation, and parallel patterns"
+            },
+            {
+              "path": "phases/15-autonomous-systems/12-durable-execution",
+              "label": "Durable Execution",
+              "reason": "Handle resume, failure, and long-running state"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/15-mcp-security-tool-poisoning",
+              "label": "MCP Tool Poisoning",
+              "reason": "Treat tool descriptions and results as an attack surface"
+            },
+            {
+              "path": "phases/14-agent-engineering/39-reviewer-agent",
+              "label": "Reviewer Agent",
+              "reason": "Build independent evidence-based review"
+            },
+            {
+              "path": "phases/14-agent-engineering/40-multi-session-handoff",
+              "label": "Multi-Session Handoff",
+              "reason": "Preserve structured state without stale context"
+            }
+          ],
+          "assessments": [
+            {
+              "id": "claude-ccar-f-diagnostic",
+              "path": "certifications/claude/assessments/ccar-f/diagnostic.json",
+              "kind": "diagnostic",
+              "title": "Architect Foundations Diagnostic",
+              "timeLimitMinutes": 30
+            },
+            {
+              "id": "claude-ccar-f-mock-01",
+              "path": "certifications/claude/assessments/ccar-f/mock-01.json",
+              "kind": "mock",
+              "title": "Architect Foundations Scenario Mock",
+              "timeLimitMinutes": 120
+            }
+          ],
+          "studyPlans": [
+            {
+              "id": "ccar-f-28-day",
+              "label": "28-day scenario plan",
+              "durationDays": 28,
+              "hoursPerWeek": 12,
+              "milestones": [
+                "Days 1-5: product, model, prompt, context, and validation foundations",
+                "Days 6-10: Messages API, structured output, tool loops, and MCP",
+                "Days 11-15: Agent SDK, security, evaluation, and Claude Code",
+                "Days 16-20: orchestration, sessions, tool contracts, and memory",
+                "Days 21-24: extraction, long-context reliability, and scenario capstone",
+                "Days 25-28: full scenario mock and targeted review"
+              ]
+            },
+            {
+              "id": "ccar-f-49-day",
+              "label": "49-day architecture plan",
+              "durationDays": 49,
+              "hoursPerWeek": 7,
+              "milestones": [
+                "Week 1: product, model, and prompt foundations",
+                "Week 2: context, validation, API, and structured output",
+                "Week 3: tool loops, MCP, Agent SDK, and security",
+                "Week 4: evaluation and Claude Code workflows",
+                "Week 5: orchestration, sessions, and tool contracts",
+                "Week 6: memory, extraction, and context reliability",
+                "Week 7: scenario capstone, full mock, and remediation"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "claude-ccar-p",
+          "slug": "ccar-p",
+          "examCode": "CCAR-P",
+          "credential": "Claude Certified Architect - Professional",
+          "shortName": "Architect Professional",
+          "level": "Professional architecture",
+          "accent": "green",
+          "badge": {
+            "imageUrl": "https://images.credly.com/images/7583afbc-4aab-4c7d-8af4-d9af72786ab3/blob",
+            "width": 600,
+            "height": 600
+          },
+          "summary": "Own the full lifecycle of secure, observable, production-grade Claude systems from discovery to iteration.",
+          "audience": "Mid- to senior-level solution architects, AI engineers, technical leads, and senior software engineers responsible for end-to-end production systems and cross-functional decisions.",
+          "recommendedExperience": [
+            "Three or more years in systems architecture or platform engineering",
+            "Six or more months operating Claude or comparable LLM systems in production",
+            "Experience delivering systems from discovery through deployment and operations",
+            "Ability to defend cost, latency, quality, safety, and maintainability tradeoffs"
+          ],
+          "exam": {
+            "items": 63,
+            "timeLimitMinutes": 120,
+            "feeUsd": 175,
+            "passingScaledScore": 720,
+            "scoreScale": "100-1000",
+            "validityMonths": 12,
+            "format": "Multiple-choice and multiple-response",
+            "delivery": "Proctored online or at a test center",
+            "guideVersion": "1.0",
+            "effective": "July 2026",
+            "officialGuideUrl": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf"
+          },
+          "domains": [
+            {
+              "id": "solution-design-architecture",
+              "name": "Solution Design and Architecture",
+              "weight": 17,
+              "objectives": [
+                "Translate business problems into Claude solutions",
+                "Design input, processing, output, and feedback loops",
+                "Choose workflow, agentic, or augmented-LLM patterns",
+                "Design multi-agent orchestration",
+                "Decompose complex problems",
+                "Align designs to value, cost, performance, and SLAs"
+              ]
+            },
+            {
+              "id": "models-prompting-context",
+              "name": "Claude Models, Prompting and Context Engineering",
+              "weight": 13,
+              "objectives": [
+                "Select models from explicit tradeoffs",
+                "Design prompts, templates, and guardrails",
+                "Apply zero-shot, few-shot, and reasoning techniques",
+                "Manage context windows and token use",
+                "Reuse stable prompts with caching, modular prompts, and Skills"
+              ]
+            },
+            {
+              "id": "integration",
+              "name": "Integration",
+              "weight": 19,
+              "objectives": [
+                "Reduce capability bloat",
+                "Find authentication and authorization gaps",
+                "Balance accuracy and latency",
+                "Select observability at scale",
+                "Design RAG chunking and indexing",
+                "Match retrieval to data shape and query pattern",
+                "Choose MCP, API, CLI, or agent-to-agent integration",
+                "Use progressive discovery instead of monolithic context where appropriate"
+              ]
+            },
+            {
+              "id": "evaluation-testing-optimization",
+              "name": "Evaluation, Testing and Optimization",
+              "weight": 16,
+              "objectives": [
+                "Define accuracy, latency, cost, safety, and security metrics",
+                "Build representative datasets and mixed-method test frameworks",
+                "Run A/B tests and iterative improvements",
+                "Diagnose prompt, hallucination, retrieval, and model failures",
+                "Optimize tokens, latency, and cost-performance",
+                "Monitor with logs, traces, and observability"
+              ]
+            },
+            {
+              "id": "governance-safety-risk",
+              "name": "Governance, Safety and Risk Management",
+              "weight": 14,
+              "objectives": [
+                "Layer guardrails and safety controls",
+                "Identify LLM failure modes",
+                "Design human-in-the-loop validation",
+                "Account for GDPR, HIPAA, FedRAMP, and applicable regulation",
+                "Address bias, fairness, and transparency"
+              ]
+            },
+            {
+              "id": "stakeholder-lifecycle",
+              "name": "Stakeholder Communication and Lifecycle Management",
+              "weight": 14,
+              "objectives": [
+                "Run structured discovery",
+                "Communicate decisions and tradeoffs",
+                "Manage feedback, expectations, and SLAs",
+                "Document architectures and implementation guidance",
+                "Support discovery, design, handoff, monitoring, and iteration"
+              ]
+            },
+            {
+              "id": "developer-productivity-operations",
+              "name": "Developer Productivity and Operational Enablement",
+              "weight": 7,
+              "objectives": [
+                "Configure Claude tools and team environments",
+                "Improve engineering workflows with AI-assisted tooling",
+                "Support debugging and operational incident resolution"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "path": "certifications/claude/lessons/00-certification-strategy",
+              "domains": [
+                "stakeholder-lifecycle"
+              ],
+              "role": "orientation",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/22-business-discovery-requirements-and-slas",
+              "domains": [
+                "solution-design-architecture",
+                "stakeholder-lifecycle"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/23-end-to-end-architecture-and-value-tradeoffs",
+              "domains": [
+                "solution-design-architecture"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/01-claude-product-and-model-landscape",
+              "domains": [
+                "models-prompting-context",
+                "solution-design-architecture"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/02-model-selection-and-token-economics",
+              "domains": [
+                "models-prompting-context",
+                "evaluation-testing-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/03-prompting-and-task-decomposition",
+              "domains": [
+                "models-prompting-context"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/04-context-knowledge-memory-and-caching",
+              "domains": [
+                "models-prompting-context",
+                "integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/05-output-evaluation-and-validation",
+              "domains": [
+                "evaluation-testing-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/06-governance-safety-and-responsible-use",
+              "domains": [
+                "governance-safety-risk"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/08-messages-api-and-application-lifecycle",
+              "domains": [
+                "integration",
+                "models-prompting-context"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/09-structured-output-and-defensive-parsing",
+              "domains": [
+                "models-prompting-context",
+                "evaluation-testing-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/10-tool-use-and-agentic-loops",
+              "domains": [
+                "solution-design-architecture",
+                "integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/11-mcp-server-design-and-integration",
+              "domains": [
+                "integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/12-claude-agent-sdk-and-hooks",
+              "domains": [
+                "solution-design-architecture",
+                "developer-productivity-operations"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/13-application-security-and-secrets",
+              "domains": [
+                "governance-safety-risk",
+                "integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/14-evals-testing-debugging-and-observability",
+              "domains": [
+                "evaluation-testing-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/15-claude-code-for-development-teams",
+              "domains": [
+                "developer-productivity-operations"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/16-multi-agent-orchestration-and-delegation",
+              "domains": [
+                "solution-design-architecture"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/18-tool-contracts-errors-and-progressive-discovery",
+              "domains": [
+                "integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/24-rag-retrieval-and-data-pipelines",
+              "domains": [
+                "integration",
+                "evaluation-testing-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/25-integration-protocols-identity-and-least-privilege",
+              "domains": [
+                "integration",
+                "governance-safety-risk"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/26-production-observability-latency-and-cost",
+              "domains": [
+                "integration",
+                "evaluation-testing-optimization",
+                "developer-productivity-operations"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/27-enterprise-governance-compliance-and-hitl",
+              "domains": [
+                "governance-safety-risk",
+                "stakeholder-lifecycle"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/28-stakeholder-communication-adrs-and-lifecycle",
+              "domains": [
+                "stakeholder-lifecycle"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/32-architect-professional-system-capstone",
+              "domains": [
+                "solution-design-architecture",
+                "models-prompting-context",
+                "integration",
+                "evaluation-testing-optimization",
+                "governance-safety-risk",
+                "stakeholder-lifecycle",
+                "developer-productivity-operations"
+              ],
+              "role": "capstone",
+              "required": true
+            }
+          ],
+          "deepDives": [
+            {
+              "path": "phases/11-llm-engineering/13-production-app",
+              "label": "Production LLM Application",
+              "reason": "Connect model calls to a service boundary"
+            },
+            {
+              "path": "phases/11-llm-engineering/07-advanced-rag",
+              "label": "Advanced RAG",
+              "reason": "Go deeper on retrieval and reranking"
+            },
+            {
+              "path": "phases/17-infrastructure-and-production/13-llm-observability",
+              "label": "LLM Observability",
+              "reason": "Instrument production trajectories"
+            },
+            {
+              "path": "phases/17-infrastructure-and-production/21-ab-testing-llm-features",
+              "label": "A/B Testing LLM Features",
+              "reason": "Compare variants with live evidence"
+            },
+            {
+              "path": "phases/17-infrastructure-and-production/23-sre-for-ai",
+              "label": "SRE for AI",
+              "reason": "Own incidents, SLOs, and recovery"
+            },
+            {
+              "path": "phases/17-infrastructure-and-production/26-compliance-frameworks",
+              "label": "Compliance Frameworks",
+              "reason": "Map obligations to system controls"
+            },
+            {
+              "path": "phases/17-infrastructure-and-production/27-finops-llms",
+              "label": "FinOps for LLMs",
+              "reason": "Manage cost per useful outcome"
+            }
+          ],
+          "assessments": [
+            {
+              "id": "claude-ccar-p-diagnostic",
+              "path": "certifications/claude/assessments/ccar-p/diagnostic.json",
+              "kind": "diagnostic",
+              "title": "Architect Professional Diagnostic",
+              "timeLimitMinutes": 30
+            },
+            {
+              "id": "claude-ccar-p-mock-01",
+              "path": "certifications/claude/assessments/ccar-p/mock-01.json",
+              "kind": "mock",
+              "title": "Architect Professional Full Mock",
+              "timeLimitMinutes": 120
+            }
+          ],
+          "studyPlans": [
+            {
+              "id": "ccar-p-35-day",
+              "label": "35-day professional sprint",
+              "durationDays": 35,
+              "hoursPerWeek": 14,
+              "milestones": [
+                "Days 1-5: discovery, requirements, product selection, and value tradeoffs",
+                "Days 6-10: models, prompts, context, validation, and governance foundations",
+                "Days 11-15: Messages API, structured output, tool loops, and MCP",
+                "Days 16-20: Agent SDK, security, evaluation, Claude Code, and orchestration",
+                "Days 21-25: tool contracts, RAG, identity, observability, and cost",
+                "Days 26-30: enterprise governance, stakeholder lifecycle, and operations",
+                "Days 31-35: capstone defense, full mock, and remediation"
+              ]
+            },
+            {
+              "id": "ccar-p-63-day",
+              "label": "63-day production plan",
+              "durationDays": 63,
+              "hoursPerWeek": 8,
+              "milestones": [
+                "Week 1: discovery, value, and product landscape",
+                "Week 2: model, prompt, context, and validation foundations",
+                "Week 3: API lifecycle and structured output",
+                "Week 4: tool loops, MCP, Agent SDK, and security",
+                "Week 5: evaluation, Claude Code, orchestration, and tool contracts",
+                "Week 6: RAG, identity, and integration",
+                "Week 7: observability, latency, cost, and governance",
+                "Week 8: stakeholder lifecycle and operational ownership",
+                "Week 9: capstone, full mock, and remediation"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "claude-ccdv-f",
+          "slug": "ccdv-f",
+          "examCode": "CCDV-F",
+          "credential": "Claude Certified Developer - Foundations",
+          "shortName": "Developer Foundations",
+          "level": "Foundational technical",
+          "accent": "blue",
+          "badge": {
+            "imageUrl": "https://images.credly.com/images/f101c6ac-8a2d-4220-b381-70e3e6c364e3/blob",
+            "width": 601,
+            "height": 601
+          },
+          "summary": "Build, integrate, secure, test, and ship Claude applications, agents, workflows, tools, and MCP servers.",
+          "audience": "Software engineers, AI engineers, and technical builders with Python or TypeScript experience and working knowledge of REST APIs and command-line tools.",
+          "recommendedExperience": [
+            "One to five years of software-engineering experience",
+            "At least six months with Claude or comparable LLM systems",
+            "Fluency with REST APIs, JSON, asynchronous code, and CLI tools",
+            "Working knowledge of agents, context management, and MCP"
+          ],
+          "exam": {
+            "items": 53,
+            "timeLimitMinutes": 120,
+            "feeUsd": 125,
+            "passingScaledScore": 720,
+            "scoreScale": "100-1000",
+            "validityMonths": 12,
+            "format": "Multiple-choice and multiple-response",
+            "delivery": "Proctored online or at a test center",
+            "guideVersion": "1.0",
+            "effective": "July 2026",
+            "officialGuideUrl": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542875%2FClaude+Certified+Developer+%E2%80%93+Foundations+Exam+Guide.pdf"
+          },
+          "domains": [
+            {
+              "id": "agents-workflows",
+              "name": "Agents and Workflows",
+              "weight": 14.7,
+              "objectives": [
+                "Choose workflows or agents from task constraints",
+                "Design manager and subagent hierarchies",
+                "Build with the Claude Agent SDK, custom loops, managed agents, and hooks",
+                "Apply tool-loop, memory, context, and framework patterns"
+              ]
+            },
+            {
+              "id": "applications-integration",
+              "name": "Applications and Integration",
+              "weight": 33.1,
+              "objectives": [
+                "Translate business needs into functional and infrastructure requirements",
+                "Apply system lifecycle practices",
+                "Use messages, tools, streaming, vision, thinking, caching, batch, and third-party providers",
+                "Apply REST, JSON, async, version-control, review, and refactoring practices",
+                "Design instruction, schema, session, content-boundary, and plugin behavior",
+                "Manage CLAUDE.md, settings, model, prompt, and plugin versions"
+              ]
+            },
+            {
+              "id": "claude-code",
+              "name": "Claude Code",
+              "weight": 3.1,
+              "objectives": [
+                "Operate Rules, Skills, Commands, Agents, memory, sessions, headless mode, streaming mode, auto-mode, CLAUDE.md, initialization, and settings"
+              ]
+            },
+            {
+              "id": "eval-testing-debugging",
+              "name": "Eval, Testing, and Debugging",
+              "weight": 2.6,
+              "objectives": [
+                "Classify errors, select recovery, analyze traces, and isolate integration failures from model failures"
+              ]
+            },
+            {
+              "id": "model-selection-optimization",
+              "name": "Model Selection and Optimization",
+              "weight": 16.8,
+              "objectives": [
+                "Explain tokens, sampling, context, non-determinism, thinking, effort, and prompting modes",
+                "Integrate SDK and transport fundamentals",
+                "Balance model quality, latency, cost, capability, and version changes",
+                "Budget tokens and use prompt caching"
+              ]
+            },
+            {
+              "id": "prompt-context-engineering",
+              "name": "Prompt and Context Engineering",
+              "weight": 11,
+              "objectives": [
+                "Prevent context drift and bloat with pruning, compaction, and isolation",
+                "Place clear instructions, examples, and constraints",
+                "Sanitize input and iterate prompts",
+                "Validate and defensively consume structured output"
+              ]
+            },
+            {
+              "id": "security-safety",
+              "name": "Security and Safety",
+              "weight": 8.1,
+              "objectives": [
+                "Mitigate prompt injection, jailbreaks, data leakage, and unsafe input",
+                "Layer guardrails with least privilege",
+                "Use hooks for deterministic safety controls",
+                "Protect identity, secrets, keys, and access approvals"
+              ]
+            },
+            {
+              "id": "tools-mcps",
+              "name": "Tools and MCPs",
+              "weight": 10.6,
+              "objectives": [
+                "Design descriptions, schemas, errors, approvals, and tool sets",
+                "Author and deploy MCP tools, resources, and prompts across transports",
+                "Choose among built-in tools, custom tools, Skills, and MCP"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "path": "certifications/claude/lessons/00-certification-strategy",
+              "domains": [
+                "applications-integration"
+              ],
+              "role": "orientation",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/01-claude-product-and-model-landscape",
+              "domains": [
+                "model-selection-optimization",
+                "applications-integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/02-model-selection-and-token-economics",
+              "domains": [
+                "model-selection-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/03-prompting-and-task-decomposition",
+              "domains": [
+                "prompt-context-engineering"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/04-context-knowledge-memory-and-caching",
+              "domains": [
+                "prompt-context-engineering",
+                "model-selection-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/05-output-evaluation-and-validation",
+              "domains": [
+                "prompt-context-engineering",
+                "eval-testing-debugging"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/08-messages-api-and-application-lifecycle",
+              "domains": [
+                "applications-integration",
+                "model-selection-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/09-structured-output-and-defensive-parsing",
+              "domains": [
+                "prompt-context-engineering",
+                "applications-integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/10-tool-use-and-agentic-loops",
+              "domains": [
+                "tools-mcps",
+                "agents-workflows"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/11-mcp-server-design-and-integration",
+              "domains": [
+                "tools-mcps",
+                "applications-integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/12-claude-agent-sdk-and-hooks",
+              "domains": [
+                "agents-workflows",
+                "security-safety"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/13-application-security-and-secrets",
+              "domains": [
+                "security-safety",
+                "applications-integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/14-evals-testing-debugging-and-observability",
+              "domains": [
+                "eval-testing-debugging",
+                "applications-integration",
+                "model-selection-optimization"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/15-claude-code-for-development-teams",
+              "domains": [
+                "claude-code",
+                "applications-integration"
+              ],
+              "role": "core",
+              "required": true
+            },
+            {
+              "path": "certifications/claude/lessons/30-developer-application-capstone",
+              "domains": [
+                "agents-workflows",
+                "applications-integration",
+                "claude-code",
+                "eval-testing-debugging",
+                "model-selection-optimization",
+                "prompt-context-engineering",
+                "security-safety",
+                "tools-mcps"
+              ],
+              "role": "capstone",
+              "required": true
+            }
+          ],
+          "deepDives": [
+            {
+              "path": "phases/14-agent-engineering/01-the-agent-loop",
+              "label": "The Agent Loop",
+              "reason": "Build the loop before using an SDK"
+            },
+            {
+              "path": "phases/14-agent-engineering/17-claude-agent-sdk",
+              "label": "Claude Agent SDK",
+              "reason": "Go deeper on the production SDK surface"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/05-tool-schema-design",
+              "label": "Tool Schema Design",
+              "reason": "Design clear, testable tool contracts"
+            },
+            {
+              "path": "phases/13-tools-and-protocols/07-building-an-mcp-server",
+              "label": "Building an MCP Server",
+              "reason": "Implement the server boundary end to end"
+            },
+            {
+              "path": "phases/14-agent-engineering/27-prompt-injection-defense",
+              "label": "Prompt Injection Defense",
+              "reason": "Threat-model untrusted instructions"
+            },
+            {
+              "path": "phases/14-agent-engineering/30-eval-driven-agent-development",
+              "label": "Eval-Driven Agent Development",
+              "reason": "Use trajectories and final state as release evidence"
+            }
+          ],
+          "assessments": [
+            {
+              "id": "claude-ccdv-f-diagnostic",
+              "path": "certifications/claude/assessments/ccdv-f/diagnostic.json",
+              "kind": "diagnostic",
+              "title": "Developer Foundations Diagnostic",
+              "timeLimitMinutes": 30
+            },
+            {
+              "id": "claude-ccdv-f-mock-01",
+              "path": "certifications/claude/assessments/ccdv-f/mock-01.json",
+              "kind": "mock",
+              "title": "Developer Foundations Full Mock",
+              "timeLimitMinutes": 120
+            }
+          ],
+          "studyPlans": [
+            {
+              "id": "ccdv-f-21-day",
+              "label": "21-day intensive plan",
+              "durationDays": 21,
+              "hoursPerWeek": 12,
+              "milestones": [
+                "Days 1-4: models, prompts, context, and API mechanics",
+                "Days 5-9: outputs, tools, MCP, and agent loops",
+                "Days 10-14: SDK, security, evaluation, and Claude Code",
+                "Days 15-18: build and defend the capstone",
+                "Days 19-21: full mock and domain remediation"
+              ]
+            },
+            {
+              "id": "ccdv-f-42-day",
+              "label": "42-day build plan",
+              "durationDays": 42,
+              "hoursPerWeek": 7,
+              "milestones": [
+                "Week 1: model and API foundations",
+                "Week 2: prompt, context, and output contracts",
+                "Week 3: tools and MCP",
+                "Week 4: agents and security",
+                "Week 5: evaluation, debugging, and Claude Code",
+                "Week 6: capstone and mock"
+              ]
+            }
+          ]
+        }
+      ],
+      "slug": "claude",
+      "phaseId": "phase-cert-claude",
+      "lessonsCount": 33,
+      "lessons": [
+        {
+          "id": "phase-cert-claude-lesson-00",
+          "lessonNum": 0,
+          "title": "Study the Decisions, Not the Vocabulary",
+          "slug": "certification-strategy",
+          "estTime": "~75 minutes",
+          "domains": [
+            "prompting-task-execution",
+            "agentic-architecture-orchestration",
+            "stakeholder-lifecycle",
+            "applications-integration"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-01",
+          "lessonNum": 1,
+          "title": "Choose the Smallest Surface That Can Carry the Work",
+          "slug": "claude-product-and-model-landscape",
+          "estTime": "~90 minutes",
+          "domains": [
+            "product-model-selection",
+            "agentic-architecture-orchestration",
+            "models-prompting-context",
+            "solution-design-architecture",
+            "model-selection-optimization",
+            "applications-integration"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-02",
+          "lessonNum": 2,
+          "title": "Spend Capability Where Failure Is Expensive",
+          "slug": "model-selection-and-token-economics",
+          "estTime": "~90 minutes",
+          "domains": [
+            "product-model-selection",
+            "troubleshooting-optimization",
+            "context-management-reliability",
+            "models-prompting-context",
+            "evaluation-testing-optimization",
+            "model-selection-optimization"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-03",
+          "lessonNum": 3,
+          "title": "Turn a Request Into a Testable Contract",
+          "slug": "prompting-and-task-decomposition",
+          "estTime": "~100 minutes",
+          "domains": [
+            "prompting-task-execution",
+            "troubleshooting-optimization",
+            "prompt-engineering-structured-output",
+            "models-prompting-context",
+            "prompt-context-engineering"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-04",
+          "lessonNum": 4,
+          "title": "Put Each Fact in the Right Kind of Context",
+          "slug": "context-knowledge-memory-and-caching",
+          "estTime": "~105 minutes",
+          "domains": [
+            "configuration-knowledge-management",
+            "product-model-selection",
+            "context-management-reliability",
+            "models-prompting-context",
+            "integration",
+            "prompt-context-engineering",
+            "model-selection-optimization"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-05",
+          "lessonNum": 5,
+          "title": "Validate the Claim, Not the Confidence",
+          "slug": "output-evaluation-and-validation",
+          "estTime": "~115 minutes",
+          "domains": [
+            "output-evaluation-validation",
+            "troubleshooting-optimization",
+            "prompt-engineering-structured-output",
+            "context-management-reliability",
+            "evaluation-testing-optimization",
+            "prompt-context-engineering",
+            "eval-testing-debugging"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-06",
+          "lessonNum": 6,
+          "title": "Put Authority Around Capability",
+          "slug": "governance-safety-and-responsible-use",
+          "estTime": "~110 minutes",
+          "domains": [
+            "governance-risk-responsible-use",
+            "governance-safety-risk"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-07",
+          "lessonNum": 7,
+          "title": "Design the Handoff Before the Automation",
+          "slug": "workflow-design-and-human-handoffs",
+          "estTime": "~105 minutes",
+          "domains": [
+            "workflow-integration-solution-design",
+            "output-evaluation-validation"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-08",
+          "lessonNum": 8,
+          "title": "The Messages API Is a State Machine",
+          "slug": "messages-api-and-application-lifecycle",
+          "estTime": "~120 minutes",
+          "domains": [
+            "agentic-architecture-orchestration",
+            "integration",
+            "models-prompting-context",
+            "applications-integration",
+            "model-selection-optimization"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-09",
+          "lessonNum": 9,
+          "title": "Structured Output Is an Untrusted Contract",
+          "slug": "structured-output-and-defensive-parsing",
+          "estTime": "~95 minutes",
+          "domains": [
+            "prompt-engineering-structured-output",
+            "models-prompting-context",
+            "evaluation-testing-optimization",
+            "prompt-context-engineering",
+            "applications-integration"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-10",
+          "lessonNum": 10,
+          "title": "A Tool Loop Is Controlled Delegation",
+          "slug": "tool-use-and-agentic-loops",
+          "estTime": "~130 minutes",
+          "domains": [
+            "agentic-architecture-orchestration",
+            "tool-design-mcp-integration",
+            "solution-design-architecture",
+            "integration",
+            "tools-mcps",
+            "agents-workflows"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-11",
+          "lessonNum": 11,
+          "title": "MCP Separates Capability From Host",
+          "slug": "mcp-server-design-and-integration",
+          "estTime": "~120 minutes",
+          "domains": [
+            "tool-design-mcp-integration",
+            "integration",
+            "tools-mcps",
+            "applications-integration"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-12",
+          "lessonNum": 12,
+          "title": "The Agent SDK Is a Harness, Not Permission",
+          "slug": "claude-agent-sdk-and-hooks",
+          "estTime": "~140 minutes",
+          "domains": [
+            "agentic-architecture-orchestration",
+            "claude-code-configuration-workflows",
+            "solution-design-architecture",
+            "developer-productivity-operations",
+            "agents-workflows",
+            "security-safety"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-13",
+          "lessonNum": 13,
+          "title": "Security Lives Outside the Prompt",
+          "slug": "application-security-and-secrets",
+          "estTime": "~120 minutes",
+          "domains": [
+            "tool-design-mcp-integration",
+            "context-management-reliability",
+            "governance-safety-risk",
+            "integration",
+            "security-safety",
+            "applications-integration"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-14",
+          "lessonNum": 14,
+          "title": "Evals Turn Agent Behavior Into Engineering Evidence",
+          "slug": "evals-testing-debugging-and-observability",
+          "estTime": "~120 minutes",
+          "domains": [
+            "prompt-engineering-structured-output",
+            "context-management-reliability",
+            "evaluation-testing-optimization",
+            "eval-testing-debugging",
+            "applications-integration",
+            "model-selection-optimization"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-15",
+          "lessonNum": 15,
+          "title": "Claude Code Scales Through Shared Constraints",
+          "slug": "claude-code-for-development-teams",
+          "estTime": "~170 minutes",
+          "domains": [
+            "claude-code-configuration-workflows",
+            "developer-productivity-operations",
+            "claude-code",
+            "applications-integration"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-16",
+          "lessonNum": 16,
+          "title": "Multi-Agent Orchestration and Delegation",
+          "slug": "multi-agent-orchestration-and-delegation",
+          "estTime": "~135 minutes",
+          "domains": [
+            "agentic-architecture-orchestration",
+            "solution-design-architecture"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-17",
+          "lessonNum": 17,
+          "title": "Agent SDK Sessions, Subagents, and Context",
+          "slug": "agent-sdk-sessions-subagents-and-context",
+          "estTime": "~120 minutes",
+          "domains": [
+            "agentic-architecture-orchestration",
+            "context-management-reliability"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-18",
+          "lessonNum": 18,
+          "title": "Tool Contracts, Errors, and Progressive Discovery",
+          "slug": "tool-contracts-errors-and-progressive-discovery",
+          "estTime": "~120 minutes",
+          "domains": [
+            "tool-design-mcp-integration",
+            "context-management-reliability",
+            "integration"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-19",
+          "lessonNum": 19,
+          "title": "Claude Code Memory, Rules, Skills, and CI",
+          "slug": "claude-code-memory-rules-skills-and-ci",
+          "estTime": "~210 minutes",
+          "domains": [
+            "claude-code-configuration-workflows"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-20",
+          "lessonNum": 20,
+          "title": "Reliable Extraction, Batch, and Independent Reviewers",
+          "slug": "reliable-extraction-batch-and-reviewers",
+          "estTime": "~135 minutes",
+          "domains": [
+            "prompt-engineering-structured-output",
+            "context-management-reliability"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-21",
+          "lessonNum": 21,
+          "title": "Make Large Context Observable",
+          "slug": "long-context-reliability-provenance-and-escalation",
+          "estTime": "~150 minutes",
+          "domains": [
+            "context-management-reliability"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-22",
+          "lessonNum": 22,
+          "title": "Business Discovery, Requirements, and SLAs",
+          "slug": "business-discovery-requirements-and-slas",
+          "estTime": "~120 minutes",
+          "domains": [
+            "solution-design-architecture",
+            "stakeholder-lifecycle"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-23",
+          "lessonNum": 23,
+          "title": "End-to-End Architecture and Value Tradeoffs",
+          "slug": "end-to-end-architecture-and-value-tradeoffs",
+          "estTime": "~135 minutes",
+          "domains": [
+            "solution-design-architecture"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-24",
+          "lessonNum": 24,
+          "title": "RAG, Retrieval, and Data Pipelines",
+          "slug": "rag-retrieval-and-data-pipelines",
+          "estTime": "~150 minutes",
+          "domains": [
+            "integration",
+            "evaluation-testing-optimization"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-25",
+          "lessonNum": 25,
+          "title": "Integration Protocols, Identity, and Least Privilege",
+          "slug": "integration-protocols-identity-and-least-privilege",
+          "estTime": "~150 minutes",
+          "domains": [
+            "integration",
+            "governance-safety-risk"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-26",
+          "lessonNum": 26,
+          "title": "Production Observability, Latency, and Cost",
+          "slug": "production-observability-latency-and-cost",
+          "estTime": "~150 minutes",
+          "domains": [
+            "integration",
+            "evaluation-testing-optimization",
+            "developer-productivity-operations"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-27",
+          "lessonNum": 27,
+          "title": "Enterprise Governance, Compliance, and Human Review",
+          "slug": "enterprise-governance-compliance-and-hitl",
+          "estTime": "~150 minutes",
+          "domains": [
+            "governance-safety-risk",
+            "stakeholder-lifecycle"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-28",
+          "lessonNum": 28,
+          "title": "Stakeholder Communication, ADRs, and Lifecycle Ownership",
+          "slug": "stakeholder-communication-adrs-and-lifecycle",
+          "estTime": "~135 minutes",
+          "domains": [
+            "stakeholder-lifecycle"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-29",
+          "lessonNum": 29,
+          "title": "Ship a Week of Work, Not a Perfect Prompt",
+          "slug": "associate-workflow-capstone",
+          "estTime": "~4 hours across one simulated workweek",
+          "domains": [
+            "prompting-task-execution",
+            "output-evaluation-validation",
+            "product-model-selection",
+            "workflow-integration-solution-design",
+            "configuration-knowledge-management",
+            "governance-risk-responsible-use",
+            "troubleshooting-optimization"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-30",
+          "lessonNum": 30,
+          "title": "Ship a Claude Application You Can Defend",
+          "slug": "developer-application-capstone",
+          "estTime": "~240 minutes",
+          "domains": [
+            "agents-workflows",
+            "applications-integration",
+            "claude-code",
+            "eval-testing-debugging",
+            "model-selection-optimization",
+            "prompt-context-engineering",
+            "security-safety",
+            "tools-mcps"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-31",
+          "lessonNum": 31,
+          "title": "Defend One Architecture Across Six Contexts",
+          "slug": "architect-foundations-scenario-capstone",
+          "estTime": "~6 hours across two focused sessions",
+          "domains": [
+            "agentic-architecture-orchestration",
+            "tool-design-mcp-integration",
+            "claude-code-configuration-workflows",
+            "prompt-engineering-structured-output",
+            "context-management-reliability"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        },
+        {
+          "id": "phase-cert-claude-lesson-32",
+          "lessonNum": 32,
+          "title": "Architect Professional System Capstone",
+          "slug": "architect-professional-system-capstone",
+          "estTime": "~8 to 12 hours",
+          "domains": [
+            "solution-design-architecture",
+            "models-prompting-context",
+            "integration",
+            "evaluation-testing-optimization",
+            "governance-safety-risk",
+            "stakeholder-lifecycle",
+            "developer-productivity-operations"
+          ],
+          "hasQuiz": true,
+          "questionCount": 6
+        }
+      ]
+    }
+  ],
+  "totalCertificationLessons": 67
+}

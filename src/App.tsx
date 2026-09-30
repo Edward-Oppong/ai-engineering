@@ -8,6 +8,10 @@ import { DashboardView } from './views/DashboardView';
 import { PhasesView } from './views/PhasesView';
 import { LessonView } from './views/LessonView';
 import { ReviewQueueView } from './views/ReviewQueueView';
+import { ProjectsView } from './views/ProjectsView';
+import { CertificationsView } from './views/CertificationsView';
+import { ResearchPaperView } from './views/ResearchPaperView';
+import { LearningPathsModal } from './components/LearningPathsModal';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { StorageWarningBanner } from './components/StorageWarningBanner';
 import { roadmap, lessonsSummary } from './lib/curriculum-loader';
@@ -16,13 +20,15 @@ import { auth } from './lib/auth';
 import { UserLessonRecord, SM2ReviewItem, UserProfile } from './types';
 
 export function App() {
-  const [currentTab, setCurrentTab] = useState<'dashboard' | 'phases' | 'lesson' | 'review'>('dashboard');
+  const [currentTab, setCurrentTab] = useState<'dashboard' | 'phases' | 'lesson' | 'review' | 'projects' | 'certifications' | 'research'>('dashboard');
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [selectedPhaseId, setSelectedPhaseId] = useState<string>('phase-00');
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
   const [isDesktopInstallOpen, setIsDesktopInstallOpen] = useState<boolean>(false);
+  const [isLearningPathsOpen, setIsLearningPathsOpen] = useState<boolean>(false);
 
   // Detect if running inside Electron desktop app — hide install guide banner when true
   const isElectron = navigator.userAgent.toLowerCase().includes('electron');
@@ -96,6 +102,18 @@ export function App() {
         const lessonId = hash.replace('lesson-', '');
         setSelectedLessonId(lessonId);
         setCurrentTab('lesson');
+      } else if (hash.startsWith('project-')) {
+        const projectId = hash.replace('project-', '');
+        setSelectedProjectId(projectId);
+        setCurrentTab('projects');
+      } else if (hash === 'projects') {
+        setCurrentTab('projects');
+      } else if (hash === 'certifications') {
+        setCurrentTab('certifications');
+      } else if (hash === 'research') {
+        setCurrentTab('research');
+      } else if (hash === 'learning-paths') {
+        setIsLearningPathsOpen(true);
       } else if (hash.startsWith('phase-')) {
         setSelectedPhaseId(hash);
         setCurrentTab('phases');
@@ -124,6 +142,7 @@ export function App() {
         setIsSearchOpen(false);
         setIsSettingsOpen(false);
         setIsAuthOpen(false);
+        setIsLearningPathsOpen(false);
       }
     };
 
@@ -143,7 +162,7 @@ export function App() {
     window.location.hash = `${phaseId}`;
   };
 
-  const handleSelectTab = (tab: 'dashboard' | 'phases' | 'review') => {
+  const handleSelectTab = (tab: 'dashboard' | 'phases' | 'review' | 'projects' | 'certifications' | 'research') => {
     setCurrentTab(tab);
     window.location.hash = tab;
   };
@@ -165,6 +184,7 @@ export function App() {
         onSelectTab={handleSelectTab}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
+        onOpenLearningPaths={() => setIsLearningPathsOpen(true)}
         currentUser={currentUser}
         onOpenAuth={() => setIsAuthOpen(true)}
         streakCount={streakCount}
@@ -186,6 +206,9 @@ export function App() {
               onSelectPhase={handleSelectPhase}
               onOpenReview={() => handleSelectTab('review')}
               onOpenDesktopInstall={isElectron ? undefined : () => setIsDesktopInstallOpen(true)}
+              onOpenProjects={() => handleSelectTab('projects')}
+              onOpenCertifications={() => handleSelectTab('certifications')}
+              onOpenLearningPaths={() => setIsLearningPathsOpen(true)}
             />
           )}
         </ErrorBoundary>
@@ -199,6 +222,30 @@ export function App() {
               initialSelectedPhaseId={selectedPhaseId}
               onSelectLesson={handleSelectLesson}
             />
+          )}
+        </ErrorBoundary>
+
+        <ErrorBoundary context="Hands-On Projects" key={`projects-${currentUser.id}`}>
+          {currentTab === 'projects' && (
+            <ProjectsView
+              onSelectLesson={handleSelectLesson}
+              initialProjectId={selectedProjectId}
+            />
+          )}
+        </ErrorBoundary>
+
+        <ErrorBoundary context="Certifications" key={`certifications-${currentUser.id}`}>
+          {currentTab === 'certifications' && (
+            <CertificationsView
+              onSelectLesson={handleSelectLesson}
+              userLessons={userLessons}
+            />
+          )}
+        </ErrorBoundary>
+
+        <ErrorBoundary context="Research Papers" key="research">
+          {currentTab === 'research' && (
+            <ResearchPaperView />
           )}
         </ErrorBoundary>
 
@@ -248,6 +295,12 @@ export function App() {
       <DesktopInstallModal
         isOpen={isDesktopInstallOpen}
         onClose={() => setIsDesktopInstallOpen(false)}
+      />
+
+      <LearningPathsModal
+        isOpen={isLearningPathsOpen}
+        onClose={() => setIsLearningPathsOpen(false)}
+        onSelectLesson={handleSelectLesson}
       />
     </div>
   );

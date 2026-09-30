@@ -11,12 +11,13 @@
 [![Vite](https://img.shields.io/badge/Vite-6.1-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![IndexedDB](https://img.shields.io/badge/Storage-IndexedDB%20Isolated-amber?style=flat-square&logo=database)](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
+[![Groq AI](https://img.shields.io/badge/AI-Groq%20LLaMA%203.3%2070B-F97316?style=flat-square&logo=openai&logoColor=white)](https://groq.com/)
+[![IndexedDB](https://img.shields.io/badge/Storage-IndexedDB%20Isolated-amber?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
 [![Pyodide](https://img.shields.io/badge/Python-WebAssembly%20(Pyodide)-3776AB?style=flat-square&logo=python&logoColor=white)](https://pyodide.org/)
-[![Electron](https://img.shields.io/badge/Electron-34.2-47848F?style=flat-square&logo=electron&logoColor=white)](https://www.electronjs.org/)
+[![Electron](https://img.shields.io/badge/Electron-43.x-47848F?style=flat-square&logo=electron&logoColor=white)](https://www.electronjs.org/)
 [![License](https://img.shields.io/badge/License-MIT-emerald?style=flat-square)](./LICENSE)
 
-[Features](#-key-features) • [Multi-User & Online Learning](#-multi-learner-profiles--isolated-progress) • [Curriculum Structure](#-curriculum-architecture) • [Getting Started](#-getting-started) • [Desktop App (.exe)](#-standalone-desktop-app-electron) • [Security & Privacy](#-security--privacy-architecture) • [Documentation](#-system-documentation)
+[Features](#-key-features) • [Research Papers & Daily Gate](#-research-papers--daily-reading-gate) • [Multi-User Learning](#-multi-learner-profiles--isolated-progress) • [Curriculum Structure](#-curriculum-architecture) • [Getting Started](#-getting-started) • [Desktop App (.exe)](#-standalone-desktop-app-electron) • [Documentation](./SYSTEM_DOCS.md)
 
 </div>
 
@@ -24,172 +25,183 @@
 
 ## 📖 Overview
 
-The **AI Engineering Study Companion** is a local-first, privacy-respecting educational application built for deep self-paced study of the comprehensive 20-track **[AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch)** curriculum (**503 structured chapters**).
+The **AI Engineering Study Companion** is a local-first, privacy-respecting educational application built for deep self-paced study of the comprehensive 20-track **[AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch)** curriculum (**523 structured chapters, 48 hands-on projects**).
 
-Designed with the aesthetic rigor of an academic monograph (inspired by Stripe Press and MIT Press), it eliminates generic SaaS bloat and online distractions to provide a serene, focused reading, coding, and review environment.
-
-Whether you run it **locally**, package it as a **standalone Windows desktop app (.exe)**, or host it **online** on web platforms (such as Vercel, GitHub Pages, or Netlify), each learner enjoys full data isolation and independent progress tracking.
+Designed with the aesthetic rigor of an academic monograph (inspired by Stripe Press and MIT Press), it eliminates generic SaaS bloat and online distractions to provide a serene, focused reading, coding, and review environment — anchored by a **daily research paper reading habit** powered by Groq AI.
 
 ---
 
 ## ✨ Key Features
 
-### 1. 👥 Multi-Learner Profiles & Isolated Progress (Online & Local)
-* **Individual Progress Isolation**: One person's study progress, chapter notes, quiz attempts, and review decks never mix with another's.
+### 1. 📚 Research Papers & Daily Reading Habit *(v1.2.0 — NEW)*
+
+> **Explore 4–5 seminal AI papers daily to connect foundational research with production code.**
+
+- **12 curated seminal papers** bundled offline — from *Attention Is All You Need* to *vLLM PagedAttention* to the *Model Context Protocol*.
+- **100% Offline-Ready & Non-Blocking** — lessons remain freely accessible anytime with or without reading, giving complete flexibility for offline study.
+- **Groq AI Deep-Dive** — when online, click any paper to get an instant Groq LLaMA-3.3-70B analysis covering: *why it matters*, *core contribution*, *engineering implications*, *limitations*, and *discussion questions*.
+- **AI Trends Feed** — a 6-item AI engineering trend briefing generated fresh by Groq each session.
+- **Daily habit tracking** — visual daily progress ring and streak tracker for completing 4 papers a day.
+- **Full paper library** — all 12 papers always accessible by category (Foundations, Transformers & LLMs, Agents & MCP, Inference & Systems, Frontier Evals).
+
+| Paper | Category | Phase |
+|:---|:---|:---|
+| Attention Is All You Need | Transformers & LLMs | Phase 07 |
+| GPT-3: Language Models are Few-Shot Learners | Transformers & LLMs | Phase 09 |
+| InstructGPT (RLHF) | Transformers & LLMs | Phase 11 |
+| Retrieval-Augmented Generation (RAG) | Agents & MCP | Phase 14 |
+| ReAct: Reasoning & Acting | Agents & MCP | Phase 13 |
+| Chain-of-Thought Prompting | Transformers & LLMs | Phase 10 |
+| LoRA: Low-Rank Adaptation | Inference & Systems | Phase 11/17 |
+| Model Context Protocol (MCP) | Agents & MCP | Phase 13 |
+| FlashAttention | Inference & Systems | Phase 07/18 |
+| PagedAttention / vLLM | Inference & Systems | Phase 18 |
+| Scaling Laws (Kaplan et al.) | Foundations | Phase 09 |
+| GPT-4 Technical Report | Frontier Evals | Phase 19 |
+
+### 2. 👥 Multi-Learner Profiles & Isolated Progress (Online & Local)
+* **Individual Progress Isolation**: One person's study progress, notes, quiz attempts, and review decks never mix with another's.
 * **Instant Profile Switcher**: Switch between learners in one click right from the top navigation bar.
-* **Optional PIN Security**: Protect your private notes and study session data with an encrypted 4+ digit PIN on shared machines or public browsers.
-* **Zero Backend Requirement**: Accounts and profile credentials operate 100% locally with client-side SHA-256 hashing and dedicated IndexedDB storage spaces per user (`ai_engineering_study_db_<userId>`).
+* **Optional PIN Security**: Protect your private notes and study session data with an encrypted 4+ digit PIN.
+* **Zero Backend Requirement**: Accounts operate 100% locally with client-side SHA-256 hashing and dedicated IndexedDB storage spaces per user.
 
-### 2. 📴 100% Offline & Local-First
-* **Zero Runtime API Calls**: All 503 lessons, code files, and quiz assets are pre-compiled at build time into static JSON chunks.
-* **Durable IndexedDB Persistence**: All notes, chapter completions, quiz attempts, study streaks, and spaced repetition intervals persist locally in your browser's IndexedDB.
+### 3. 📴 100% Offline & Local-First (except Groq AI calls)
+* **Zero Runtime API Calls for Lessons**: All 523 lessons, code files, and quiz assets are pre-compiled at build time into static JSON chunks.
+* **Durable IndexedDB Persistence**: All notes, chapter completions, quiz attempts, study streaks, and spaced repetition intervals persist locally.
+* **Groq AI** is the only network dependency — and only when you click "AI Deep-Dive" or "Refresh Trends".
 
-### 3. 🗺️ 5 Connected Learning Milestones
-The 20 curriculum tracks are organized into 5 progressive milestones with rich domain color-coding and architectural lithographs:
+### 4. 🗺️ 5 Connected Learning Milestones
+The 20 curriculum tracks are organized into 5 progressive milestones:
 
 <div align="center">
 
 | Milestone | Focus & Capabilities | Curriculum Coverage |
 |:---|:---|:---:|
-| **01. Foundations & Core ML** | Setup, Calculus, Linear Algebra, Optimization, Classic ML, Deep Learning Tensor Core | `Tracks 00–03` |
-| **02. Perceptual Modalities** | Computer Vision Convolutions, NLP Tokenization & Embeddings, Speech Spectrograms | `Tracks 04–06` |
-| **03. Generative Models & Transformers** | Multi-Head Attention, Diffusion Mathematics, RLHF, and LLMs from Scratch | `Tracks 07–11` |
-| **04. Agentic Systems & Autonomy** | Tool Protocols (MCP), Multimodal RAG, Autonomous ReAct Loops, Multi-Agent Swarms | `Tracks 12–16` |
-| **05. Production & Capstones** | Distributed vLLM Inference, Quantization, Alignment Ethics, and Production Capstones | `Tracks 17–19` |
+| **01. Foundations & Core ML** | Setup, Calculus, Linear Algebra, Optimization, Classic ML, Deep Learning | `Tracks 00–03` |
+| **02. Perceptual Modalities** | Computer Vision, NLP Tokenization & Embeddings, Speech Spectrograms | `Tracks 04–06` |
+| **03. Generative Models & Transformers** | Multi-Head Attention, Diffusion, RLHF, LLMs from Scratch | `Tracks 07–11` |
+| **04. Agentic Systems & Autonomy** | MCP, Multimodal RAG, ReAct Loops, Multi-Agent Swarms | `Tracks 12–16` |
+| **05. Production & Capstones** | vLLM Inference, Quantization, Alignment Ethics, Capstones | `Tracks 17–19` |
 
 </div>
 
-### 4. 🧠 SuperMemo-2 (SM-2) Spaced Repetition
-* **Automated Retention Deck**: Questions missed during chapter quizzes are automatically scheduled in your personal **Review Deck**.
-* **Scientifically Optimized**: Implements the SuperMemo-2 algorithm to calculate optimal review intervals based on your self-reported recall difficulty (*Forgot / Hard / Good / Easy*).
+### 5. 🔨 48 Hands-On Projects
+* Projects track with **48 real-world builds** — tiny coding agents, RAG pipelines, transformer implementations, vLLM serving clusters.
+* Each project has multi-stage milestones, starter code, test files, and a demo command.
+* Track your project status (Not Started / In Progress / Completed) with personal notes and repo URL.
 
-### 5. 🐍 In-Browser Python Execution (Pyodide WebAssembly)
-* **Zero Local Python Setup**: Execute Python code examples directly in your browser using Pyodide (Python compiled to WebAssembly).
-* **Live Terminal Output Console**: Captures real-time `stdout`, `stderr`, execution time in milliseconds, and structured error diagnostics in a sandboxed runtime.
+### 6. 🏆 Certifications Prep
+* **MCPA (Model Context Protocol Associate)** exam preparation track.
+* Exam blueprints, domain weightings, lesson mappings, and exam facts.
+* **Claude AI Certification** track.
 
-### 6. 👓 Reading Comfort, Focus Mode & Bookmarks
-* **Single-Key Focus Mode**: Press **`F`** to collapse all navigation bars and immerse yourself in distraction-free reading. Press **`Esc`** or **`F`** to exit.
-* **Typography Preferences**: Choose between **Book Serif** (`Charter` / `Newsreader`) and **Clean Sans** (`Inter`), customize font size (`S` to `XL`), and adjust reading column width.
+### 7. 🧠 SuperMemo-2 (SM-2) Spaced Repetition
+* Missed quiz questions are automatically scheduled in your personal **Review Deck**.
+* SM-2 algorithm calculates optimal review intervals based on *Forgot / Hard / Good / Easy* ratings.
+
+### 8. 🐍 In-Browser Python Execution (Pyodide WebAssembly)
+* **Zero Local Python Setup**: Execute Python examples directly in your browser.
+* **Live Terminal Output Console**: Captures stdout, stderr, execution time, and structured error diagnostics.
+
+### 9. 👓 Reading Comfort, Focus Mode & Bookmarks
+* **Single-Key Focus Mode**: Press **`F`** to collapse navigation and immerse in distraction-free reading.
+* **Typography Preferences**: Book Serif or Clean Sans, `S` to `XL` font size, column width adjustment.
 * **Chapter Bookmarking**: Save chapters for one-click reference.
 
-### 7. 💾 Full Data Backup & Portability
-* **One-Click JSON Export**: Download your complete study history, personal notes, quiz scores, and SM-2 flashcard intervals as a single `.json` file.
-* **Seamless Restore**: Move your study progress between devices without requiring accounts or cloud servers.
+### 10. 💾 Full Data Backup & Portability
+* **One-Click JSON Export**: Download your complete study history, notes, quiz scores, and SM-2 flashcard intervals.
+* **Seamless Restore**: Move study progress between devices without accounts or cloud servers.
 
 ---
 
-## 👥 Multi-Learner Profiles & Isolated Progress
+## 🏗️ Curriculum Architecture
 
-When multiple people learn using the same computer, or when accessing an online deployment:
-
-1. **Creating a Profile**: Click the user profile chip in the top-right navbar (or via Settings) → Click **`+ Add New Learner`**. Enter a name, unique handle, avatar color, and optional PIN.
-2. **Switching Profiles**: Click your user avatar in the navbar → Select any learner profile. The application immediately swaps the active IndexedDB connection and loads only that learner's progress, notes, streak, and review deck.
-3. **PIN Security**: If enabled, switching into a protected profile requires entering the secret PIN.
-4. **Data Isolation**: Each user profile is assigned a unique IndexedDB database name (`ai_engineering_study_db_<userId>`) and isolated localStorage preferences keys.
+```
+523 lessons × 20 phases × 5 milestones
+       +
+48 hands-on projects (5 difficulty levels)
+       +
+Certifications (MCPA + Claude AI)
+       +
+Career Learning Paths (role-based routes)
+       +
+12 seminal research papers (bundled)
+```
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-* **Node.js** 18+ installed on your computer
-* **npm** (comes with Node.js)
+- Node.js ≥ 18
+- npm ≥ 9
 
-### Installation & Local Run
-
-#### Using Bash (macOS / Linux / Git Bash)
+### 1. Clone (with curriculum submodule)
 ```bash
-# 1. Clone the repository
-git clone https://github.com/Edward-Oppong/ai-engineering.git
+git clone --recurse-submodules https://github.com/Edward-Oppong/ai-engineering.git
 cd ai-engineering
-
-# 2. Install dependencies
 npm install
+```
 
-# 3. Compile curriculum data index
+### 2. Index the curriculum (generates JSON from `.md` files)
+```bash
 npm run build:data
+```
 
-# 4. Start local development server
+### 3. Start the dev server
+```bash
 npm run dev
 ```
 
-#### Using PowerShell (Windows)
-```powershell
-# 1. Clone the repository
-git clone https://github.com/Edward-Oppong/ai-engineering.git
-cd ai-engineering
-
-# 2. Install dependencies
-npm install
-
-# 3. Compile curriculum data index
-npm run build:data
-
-# 4. Start local development server
-npm run dev
-```
-
-The app will start at `http://localhost:5173`.
+Open `http://localhost:5173` — navigate to **Research** tab and read 4 papers to unlock your first lesson.
 
 ---
 
-## 🏗️ Production Build & Desktop App (.exe)
+## 🖥️ Standalone Desktop App (Electron)
 
-### 1. Web Production Build
-```bash
-# Compile curriculum index, TypeScript, and Vite static assets
-npm run build
-
-# Preview static build locally
-npm run preview
-```
-
-### 2. Standalone Desktop App (Electron)
-You can run or package the entire application into a standalone desktop `.exe` installer or portable binary:
+Build a standalone Windows installer:
 
 ```bash
-# Run the desktop app locally in development mode
-npm run electron:start
-
-# Package into a native Windows .exe (installer + portable executable)
 npm run electron:build
 ```
-The packaged installers will be generated inside the `release/` directory:
-* **Installer**: `release/AI Engineering Study Companion Setup 1.1.0.exe`
-* **Portable**: `release/AI Engineering Study Companion 1.1.0.exe`
+
+Output (in `release/` directory):
+- `AI Engineering Study Companion Setup.exe` — full installer (NSIS)
+- `AI Engineering Study Companion Portable.exe` — no-install portable binary
+
+Both include the full curriculum, research paper library, and Groq AI integration.
 
 ---
 
-## 🧪 Testing
+## 🔐 Security & Privacy Architecture
 
-Run the automated test suite covering the SM-2 spaced repetition algorithm and data calculation edge cases:
+| Data | Where Stored | Who Sees It |
+|---|---|---|
+| Lesson progress & notes | Browser IndexedDB (device-local) | Only on your device |
+| Profile credentials (PIN) | localStorage (SHA-256 hashed) | Never transmitted |
+| Daily reading progress | localStorage (date-keyed) | Only on your device |
+| Quiz & review data | Browser IndexedDB (device-local) | Only on your device |
+| Paper analysis requests | Groq Cloud API (when clicked) | Paper abstract + Groq |
+| AI trend requests | Groq Cloud API (when clicked) | Prompt only, no user data |
 
-```bash
-npm run test
-```
-
----
-
-## 🛡️ Security & Privacy Architecture
-
-| Security Area | Implementation & Guarantee |
-|---|---|
-| **Attack Surface** | **Zero Backend** — No open ports, no remote database, zero exposed API credentials. |
-| **User Progress Isolation** | **Scoped Databases** — Each learner profile writes strictly to its dedicated IndexedDB namespace (`ai_engineering_study_db_<userId>`). |
-| **Profile Security** | **Client-Side SHA-256 Hashing** — Optional PINs are hashed with local salts before storage and never stored in plaintext. |
-| **Python Sandbox** | **WebAssembly Isolated** — Pyodide executes strictly within the browser tab sandbox with zero host filesystem access. |
-| **Content Security** | **Strict SVG & Markdown** — Mermaid diagrams run under `securityLevel: 'strict'`; Markdown is parsed into an AST without raw HTML evaluation. |
-| **Data Privacy** | **100% Client-Side** — Zero telemetry, zero tracking cookies, zero analytics scripts. Your study data never leaves your computer. |
+> The Groq API key is embedded in the frontend bundle for local/Electron use.  
+> For a public deployment, proxy it through a lightweight BFF (e.g., Vercel Edge Function).
 
 ---
 
-## 📚 System Documentation
+## 📄 System Documentation
 
-For detailed architectural schematics, multi-user database schemas, IndexedDB table structures, failure modes, and recovery procedures, refer to **[SYSTEM_DOCS.md](./SYSTEM_DOCS.md)**.
+See **[SYSTEM_DOCS.md](./SYSTEM_DOCS.md)** for the complete technical reference:
+- Full architecture diagram
+- IndexedDB schema (v3)
+- Daily reading gate implementation details
+- Groq API integration notes
+- Build pipeline walkthrough
+- Component & view reference tables
+- Troubleshooting guide
 
 ---
 
-## 📄 License & Attribution
+## 📜 License
 
-* **Curriculum Content**: Based on the [AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch) curriculum by Rohit G.
-* **Study Platform Source Code**: MIT License.
+MIT — see [LICENSE](./LICENSE)

@@ -100,7 +100,7 @@ console.log(`[Indexer] Found ${phaseFolders.length} phase directories.`);
 
 if (phaseFolders.length === 0) {
   if (hasExistingData) {
-    console.warn(`[Indexer] Warning: 0 phase directories found in ${curriculumDir} (e.g. uninitialized git submodule in CI/Vercel). Preserving pre-compiled src/data/ bundle.`);
+    console.warn(`[Indexer] Warning: 0 phase directories found in ${curriculumDir}. Preserving pre-compiled src/data/ bundle.`);
     process.exit(0);
   }
   console.error(`[Indexer Error] No phase directories found in ${phasesDir}`);
@@ -111,7 +111,6 @@ const allLessonsSummary = [];
 const phasesMetadata = [];
 
 for (const phaseFolder of phaseFolders) {
-  // Folder format e.g. "00-setup-and-tooling" -> num: 0, slug: "setup-and-tooling"
   const phaseMatch = phaseFolder.match(/^(\d+)-(.*)$/);
   const phaseNum = phaseMatch ? parseInt(phaseMatch[1], 10) : -1;
   const phaseSlug = phaseMatch ? phaseMatch[2] : phaseFolder;
@@ -130,7 +129,6 @@ for (const phaseFolder of phaseFolders) {
   const phaseLessonsData = [];
 
   for (const lessonFolder of lessonFolders) {
-    // E.g. "01-dev-environment" -> num: 1, slug: "dev-environment"
     const lessonMatch = lessonFolder.match(/^(\d+)-(.*)$/);
     const lessonNum = lessonMatch ? parseInt(lessonMatch[1], 10) : -1;
     const lessonSlug = lessonMatch ? lessonMatch[2] : lessonFolder;
@@ -148,34 +146,11 @@ for (const phaseFolder of phaseFolders) {
 
     // Code files
     const codeDir = path.join(lessonPath, 'code');
-    const codeFiles = [];
-    if (fs.existsSync(codeDir) && fs.statSync(codeDir).isDirectory()) {
-      const codeFilenames = fs.readdirSync(codeDir);
-      for (const cName of codeFilenames) {
-        const cPath = path.join(codeDir, cName);
-        if (fs.statSync(cPath).isFile()) {
-          const content = fs.readFileSync(cPath, 'utf-8');
-          codeFiles.push({
-            filename: cName,
-            language: getLanguageFromFilename(cName),
-            content,
-            sizeBytes: fs.statSync(cPath).size
-          });
-        }
-      }
-    }
+    const codeFiles = readCodeFiles(codeDir);
 
     // Quiz
     const quizPath = path.join(lessonPath, 'quiz.json');
-    let quizData = null;
-    if (fs.existsSync(quizPath)) {
-      try {
-        const quizRaw = fs.readFileSync(quizPath, 'utf-8');
-        quizData = JSON.parse(quizRaw);
-      } catch (err) {
-        console.warn(`[Indexer] Failed to parse quiz at ${quizPath}:`, err.message);
-      }
-    }
+    const quizData = readQuizFile(quizPath);
 
     const title = docMeta.title || (roadmapInfo?.lessons.find(l => parseInt(l.num, 10) === lessonNum)?.title) || formatTitle(lessonSlug);
     const estTime = docMeta.time || (roadmapInfo?.lessons.find(l => parseInt(l.num, 10) === lessonNum)?.est) || '~45 min';
@@ -196,7 +171,8 @@ for (const phaseFolder of phaseFolders) {
       hasQuiz: !!(quizData && quizData.questions && quizData.questions.length > 0),
       questionCount: quizData?.questions?.length || 0,
       codeFilesCount: codeFiles.length,
-      tags: [phaseSlug, lessonSlug, ...(docMeta.languages || [])]
+      tags: [phaseSlug, lessonSlug, ...(docMeta.languages || [])],
+      relativePath: `phases/${phaseFolder}/${lessonFolder}`
     };
 
     allLessonsSummary.push(lessonSummaryItem);
@@ -229,7 +205,16 @@ for (const phaseFolder of phaseFolders) {
   }, null, 2));
 }
 
-// 3. Write summary files
+// 3. Index Certifications (MCPA and Claude)
+const certsData = indexCertifications(curriculumDir, outDataDir, outPhasesDir, allLessonsSummary, phasesMetadata);
+
+// 4. Index Projects
+const projectsData = indexProjects(curriculumDir, outDataDir);
+
+// 5. Index Learning Paths
+const learningPathsData = indexLearningPaths(curriculumDir, outDataDir, allLessonsSummary);
+
+// 6. Write summary files
 fs.writeFileSync(
   path.join(outDataDir, 'roadmap.json'),
   JSON.stringify(phasesMetadata, null, 2)
@@ -240,9 +225,49 @@ fs.writeFileSync(
   JSON.stringify(allLessonsSummary, null, 2)
 );
 
-console.log(`[Indexer] Successfully compiled ${phasesMetadata.length} phases and ${allLessonsSummary.length} lessons into src/data/!`);
+console.log(`[Indexer] Successfully compiled ${phasesMetadata.length} phases and ${allLessonsSummary.length} total lessons (including certifications)!`);
+console.log(`[Indexer] Compiled ${projectsData.projects.length} ready projects and ${projectsData.planned.length} planned projects.`);
+console.log(`[Indexer] Compiled ${certsData.programs.length} certification programs with ${certsData.totalCertificationLessons} exam prep lessons.`);
+console.log(`[Indexer] Compiled ${learningPathsData.length} learning paths and career routes.`);
 
+// ==========================================
 // Helper Functions
+// ==========================================
+
+function readCodeFiles(codeDir) {
+  const codeFiles = [];
+  if (fs.existsSync(codeDir) && fs.statSync(codeDir).isDirectory()) {
+    const codeFilenames = fs.readdirSync(codeDir);
+    for (const cName of codeFilenames) {
+      const cPath = path.join(codeDir, cName);
+      if (fs.statSync(cPath).isFile()) {
+        try {
+          const content = fs.readFileSync(cPath, 'utf-8');
+          codeFiles.push({
+            filename: cName,
+            language: getLanguageFromFilename(cName),
+            content,
+            sizeBytes: fs.statSync(cPath).size
+          });
+        } catch (e) {}
+      }
+    }
+  }
+  return codeFiles;
+}
+
+function readQuizFile(quizPath) {
+  if (fs.existsSync(quizPath)) {
+    try {
+      const quizRaw = fs.readFileSync(quizPath, 'utf-8');
+      return JSON.parse(quizRaw);
+    } catch (err) {
+      console.warn(`[Indexer] Failed to parse quiz at ${quizPath}:`, err.message);
+    }
+  }
+  return null;
+}
+
 function formatTitle(slug) {
   return slug
     .split('-')
@@ -314,4 +339,342 @@ function extractDocMeta(markdown) {
   }
 
   return { title, motto, type, languages, prerequisites, time, beats };
+}
+
+/**
+ * Index hands-on real-world projects from curriculum/projects
+ */
+function indexProjects(curriculumDir, outDataDir) {
+  const projectsDir = path.join(curriculumDir, 'projects');
+  if (!fs.existsSync(projectsDir)) {
+    return { projects: [], planned: [] };
+  }
+
+  const entries = fs.readdirSync(projectsDir, { withFileTypes: true });
+  const projectDirs = entries.filter(e => e.isDirectory() && !e.name.startsWith('_') && !e.name.startsWith('.'));
+
+  const projects = [];
+
+  for (const dir of projectDirs) {
+    const pPath = path.join(projectsDir, dir.name);
+    const pJsonPath = path.join(pPath, 'project.json');
+    if (!fs.existsSync(pJsonPath)) continue;
+
+    try {
+      const pData = JSON.parse(fs.readFileSync(pJsonPath, 'utf-8'));
+      const readmePath = path.join(pPath, 'README.md');
+      const readme = fs.existsSync(readmePath) ? fs.readFileSync(readmePath, 'utf-8') : '';
+
+      // Parse stages
+      const stages = (pData.stages || []).map(st => {
+        const stageDir = path.join(pPath, 'stages', st.id);
+        const stageDocPath = path.join(stageDir, 'docs', 'en.md');
+        const stageDoc = fs.existsSync(stageDocPath) ? fs.readFileSync(stageDocPath, 'utf-8') : '';
+
+        // Starter files
+        const starterDir = path.join(stageDir, 'starter');
+        const starterFiles = readCodeFiles(starterDir);
+
+        // Tests files
+        const testsDir = path.join(stageDir, 'tests');
+        const testFiles = readCodeFiles(testsDir);
+
+        return {
+          id: st.id,
+          title: st.title,
+          summary: st.summary,
+          hours: st.hours || 2,
+          difficulty: st.difficulty || 'starter',
+          language: st.language || (pData.languages && pData.languages[0]) || 'python',
+          concepts: st.concepts || [],
+          markdown: stageDoc,
+          starterFiles,
+          testFiles
+        };
+      });
+
+      // Solution files sample
+      const solutionDir = path.join(pPath, 'solution');
+      const solutionFiles = readCodeFiles(solutionDir);
+
+      projects.push({
+        id: pData.id || dir.name,
+        title: pData.title,
+        level: pData.level || 1,
+        levelName: pData.levelName || 'Starter',
+        tagline: pData.tagline || '',
+        summary: pData.summary || '',
+        youWillBuild: pData.youWillBuild || '',
+        usefulFor: pData.usefulFor || [],
+        hours: pData.hours || 8,
+        languages: pData.languages || ['Python'],
+        languageWhy: pData.languageWhy || {},
+        status: pData.status || 'ready',
+        skills: pData.skills || [],
+        prerequisites: pData.prerequisites || [],
+        demo: pData.demo || null,
+        stages,
+        stagesCount: stages.length,
+        readme,
+        solutionFilesSummary: solutionFiles.map(s => ({ filename: s.filename, language: s.language, sizeBytes: s.sizeBytes }))
+      });
+    } catch (err) {
+      console.warn(`[Indexer] Failed to parse project in ${dir.name}:`, err.message);
+    }
+  }
+
+  // Roadmap planned projects
+  const roadmapPath = path.join(projectsDir, 'roadmap.json');
+  let planned = [];
+  if (fs.existsSync(roadmapPath)) {
+    try {
+      const rData = JSON.parse(fs.readFileSync(roadmapPath, 'utf-8'));
+      const readyIds = new Set(projects.map(p => p.id));
+      planned = (rData.planned || []).filter(p => !readyIds.has(p.id));
+    } catch (e) {}
+  }
+
+  // Sort by level then title
+  projects.sort((a, b) => a.level - b.level || a.title.localeCompare(b.title));
+
+  const result = {
+    generatedAt: new Date().toISOString(),
+    totalProjects: projects.length,
+    levels: [
+      { level: 1, name: 'Starter', summary: 'One program, one clear input and output. No model needed to pass the tests.' },
+      { level: 2, name: 'Builder', summary: 'A pipeline of three or more parts with a typed contract between them.' },
+      { level: 3, name: 'Engineer', summary: 'State, budgets, retries, traces, and one measured eval number.' },
+      { level: 4, name: 'Systems', summary: 'Isolation, concurrency, protocols, many tools, long-running work.' },
+      { level: 5, name: 'Frontier', summary: 'Compare agent systems, trace failures, and measure reproducible experiments.' }
+    ],
+    projects,
+    planned
+  };
+
+  fs.writeFileSync(path.join(outDataDir, 'projects.json'), JSON.stringify(result, null, 2));
+  return result;
+}
+
+/**
+ * Index Certification programs (MCPA & Claude)
+ */
+function indexCertifications(curriculumDir, outDataDir, outPhasesDir, allLessonsSummary, phasesMetadata) {
+  const certsDir = path.join(curriculumDir, 'certifications');
+  if (!fs.existsSync(certsDir)) {
+    return { programs: [], totalCertificationLessons: 0 };
+  }
+
+  const certPrograms = ['mcpa', 'claude'];
+  const programsData = [];
+  let totalCertLessons = 0;
+
+  for (const progSlug of certPrograms) {
+    const progPath = path.join(certsDir, progSlug);
+    const progJsonPath = path.join(progPath, 'program.json');
+    if (!fs.existsSync(progJsonPath)) continue;
+
+    const progManifest = JSON.parse(fs.readFileSync(progJsonPath, 'utf-8'));
+    
+    // Read tracks
+    const tracksDir = path.join(progPath, 'tracks');
+    const tracks = [];
+    if (fs.existsSync(tracksDir)) {
+      const trackFiles = fs.readdirSync(tracksDir).filter(f => f.endsWith('.json'));
+      for (const tFile of trackFiles) {
+        try {
+          const tData = JSON.parse(fs.readFileSync(path.join(tracksDir, tFile), 'utf-8'));
+          tracks.push(tData);
+        } catch (e) {}
+      }
+    }
+
+    // Process certification lessons
+    const lessonsDir = path.join(progPath, 'lessons');
+    const lessonDirs = fs.existsSync(lessonsDir) 
+      ? fs.readdirSync(lessonsDir).filter(f => fs.statSync(path.join(lessonsDir, f)).isDirectory()).sort()
+      : [];
+
+    const phaseId = `phase-cert-${progSlug}`;
+    const phaseNum = progSlug === 'mcpa' ? 101 : 102;
+    const phaseTitle = progSlug === 'mcpa' ? 'MCPA Exam Prep (2026-07-28 Spec)' : 'Anthropic Claude Certifications';
+
+    const certPhaseLessons = [];
+
+    for (const lDir of lessonDirs) {
+      const lessonPath = path.join(lessonsDir, lDir);
+      const docPath = path.join(lessonPath, 'docs', 'en.md');
+      const lessonMatch = lDir.match(/^(\d+)-(.*)$/);
+      const lessonNum = lessonMatch ? parseInt(lessonMatch[1], 10) : 0;
+      const lessonSlug = lessonMatch ? lessonMatch[2] : lDir;
+      const lessonId = `${phaseId}-lesson-${String(lessonNum).padStart(2, '0')}`;
+
+      let rawMarkdown = '';
+      let docMeta = {};
+      if (fs.existsSync(docPath)) {
+        rawMarkdown = fs.readFileSync(docPath, 'utf-8');
+        docMeta = extractDocMeta(rawMarkdown);
+      }
+
+      const codeFiles = readCodeFiles(path.join(lessonPath, 'code'));
+      const quizData = readQuizFile(path.join(lessonPath, 'quiz.json'));
+
+      const title = docMeta.title || formatTitle(lessonSlug);
+      const estTime = docMeta.time || '~45 min';
+
+      // Find domains from tracks
+      const associatedDomains = [];
+      for (const trk of tracks) {
+        if (trk.lessons) {
+          const relMatch = trk.lessons.find(l => l.path && l.path.includes(lDir));
+          if (relMatch && relMatch.domains) {
+            associatedDomains.push(...relMatch.domains);
+          }
+        }
+      }
+
+      const lessonSummaryItem = {
+        id: lessonId,
+        phaseId,
+        phaseNum,
+        phaseTitle,
+        lessonNum,
+        title,
+        slug: lessonSlug,
+        estTime,
+        motto: docMeta.motto || '',
+        type: 'Certification',
+        languages: docMeta.languages || [],
+        prerequisites: docMeta.prerequisites || 'None',
+        hasQuiz: !!(quizData && quizData.questions && quizData.questions.length > 0),
+        questionCount: quizData?.questions?.length || 0,
+        codeFilesCount: codeFiles.length,
+        tags: ['certification', progSlug, lessonSlug, ...associatedDomains],
+        domains: [...new Set(associatedDomains)],
+        relativePath: `certifications/${progSlug}/lessons/${lDir}`
+      };
+
+      allLessonsSummary.push(lessonSummaryItem);
+
+      certPhaseLessons.push({
+        ...lessonSummaryItem,
+        markdown: rawMarkdown,
+        beats: docMeta.beats || [],
+        codeFiles,
+        quiz: quizData
+      });
+    }
+
+    totalCertLessons += certPhaseLessons.length;
+
+    // Add to phasesMetadata
+    phasesMetadata.push({
+      id: phaseId,
+      number: phaseNum,
+      slug: `cert-${progSlug}`,
+      title: phaseTitle,
+      estTime: progSlug === 'mcpa' ? '~30 hours' : '~28 hours',
+      statusGlyph: '✅',
+      lessonsCount: certPhaseLessons.length,
+      folderName: `certifications/${progSlug}`,
+      isCertification: true
+    });
+
+    // Write phase chunk JSON so reader can load it!
+    fs.writeFileSync(
+      path.join(outPhasesDir, `${phaseId}.json`),
+      JSON.stringify({
+        phase: phasesMetadata[phasesMetadata.length - 1],
+        lessons: certPhaseLessons
+      }, null, 2)
+    );
+
+    programsData.push({
+      ...progManifest,
+      slug: progSlug,
+      phaseId,
+      lessonsCount: certPhaseLessons.length,
+      tracks,
+      lessons: certPhaseLessons.map(l => ({
+        id: l.id,
+        lessonNum: l.lessonNum,
+        title: l.title,
+        slug: l.slug,
+        estTime: l.estTime,
+        domains: l.domains,
+        hasQuiz: l.hasQuiz,
+        questionCount: l.questionCount
+      }))
+    });
+  }
+
+  const certsResult = {
+    generatedAt: new Date().toISOString(),
+    programs: programsData,
+    totalCertificationLessons: totalCertLessons
+  };
+
+  fs.writeFileSync(path.join(outDataDir, 'certifications.json'), JSON.stringify(certsResult, null, 2));
+  return certsResult;
+}
+
+/**
+ * Index 12 Learning Paths and Career Routes
+ */
+function indexLearningPaths(curriculumDir, outDataDir, allLessonsSummary) {
+  const lpDir = path.join(curriculumDir, 'learning-paths');
+  if (!fs.existsSync(lpDir)) {
+    return [];
+  }
+
+  const files = fs.readdirSync(lpDir).filter(f => f.endsWith('.json'));
+  const paths = [];
+
+  for (const file of files) {
+    try {
+      const data = JSON.parse(fs.readFileSync(path.join(lpDir, file), 'utf-8'));
+      const id = path.basename(file, '.json');
+
+      // Resolve lesson paths to lesson IDs
+      const stages = (data.stages || []).map(st => {
+        const resolvedLessons = (st.lessonPaths || []).map(lp => {
+          // lp e.g. "phases/13-tools-and-protocols/01-the-tool-interface"
+          const match = allLessonsSummary.find(l => l.relativePath && l.relativePath.startsWith(lp) || l.relativePath === lp);
+          return match ? { id: match.id, title: match.title, estTime: match.estTime, slug: match.slug, phaseId: match.phaseId } : { path: lp, title: formatTitle(path.basename(lp)) };
+        });
+
+        return {
+          id: st.id,
+          title: st.title,
+          outcome: st.outcome || '',
+          artifact: st.artifact || '',
+          lessons: resolvedLessons
+        };
+      });
+
+      paths.push({
+        id: data.id || id,
+        kind: data.kind || 'domain',
+        title: data.title,
+        workFamily: data.workFamily || '',
+        commonTitles: data.commonTitles || [],
+        summary: data.summary || '',
+        decisionPrompt: data.decisionPrompt || '',
+        mission: data.mission || '',
+        responsibilities: data.responsibilities || [],
+        goodFitIf: data.goodFitIf || [],
+        baseline: data.baseline || [],
+        boundary: data.boundary || '',
+        portfolioProof: data.portfolioProof || null,
+        readinessCriteria: data.readinessCriteria || [],
+        coverage: data.coverage || {},
+        estimatedMinutes: data.estimatedMinutes || 600,
+        stages
+      });
+    } catch (err) {
+      console.warn(`[Indexer] Failed to parse learning path ${file}:`, err.message);
+    }
+  }
+
+  fs.writeFileSync(path.join(outDataDir, 'learning-paths.json'), JSON.stringify(paths, null, 2));
+  return paths;
 }

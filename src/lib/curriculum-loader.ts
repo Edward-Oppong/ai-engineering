@@ -1,6 +1,19 @@
-import { PhaseChunk, LessonDetail, PhaseMetadata, LessonSummary } from '../types';
+import { 
+  PhaseChunk, 
+  LessonDetail, 
+  PhaseMetadata, 
+  LessonSummary,
+  ProjectsBundle,
+  CertificationsBundle,
+  LearningPath,
+  ProjectItem,
+  CertificationProgram
+} from '../types';
 import roadmapData from '../data/roadmap.json';
 import lessonsSummaryData from '../data/lessons-summary.json';
+import projectsBundleData from '../data/projects.json';
+import certsBundleData from '../data/certifications.json';
+import learningPathsBundleData from '../data/learning-paths.json';
 
 // In-memory cache for loaded phase chunks
 const phaseCache = new Map<string, PhaseChunk>();
@@ -10,6 +23,17 @@ const phaseModules = import.meta.glob('../data/phases/*.json');
 
 export const roadmap: PhaseMetadata[] = roadmapData as PhaseMetadata[];
 export const lessonsSummary: LessonSummary[] = lessonsSummaryData as LessonSummary[];
+export const projectsData: ProjectsBundle = projectsBundleData as unknown as ProjectsBundle;
+export const certificationsData: CertificationsBundle = certsBundleData as unknown as CertificationsBundle;
+export const learningPathsData: LearningPath[] = learningPathsBundleData as unknown as LearningPath[];
+
+export function getProjectById(projectId: string): ProjectItem | undefined {
+  return projectsData.projects.find(p => p.id === projectId);
+}
+
+export function getCertificationProgram(slug: string): CertificationProgram | undefined {
+  return certificationsData.programs.find(p => p.slug === slug);
+}
 
 /**
  * Load a full phase chunk with lazy evaluation and memory caching

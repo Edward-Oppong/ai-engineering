@@ -4,10 +4,11 @@ import { UserProfile } from '../types';
 import { AVATAR_COLORS } from '../lib/auth';
 
 interface NavbarProps {
-  currentTab: 'dashboard' | 'phases' | 'lesson' | 'review';
-  onSelectTab: (tab: 'dashboard' | 'phases' | 'review') => void;
+  currentTab: 'dashboard' | 'phases' | 'lesson' | 'review' | 'projects' | 'certifications' | 'research';
+  onSelectTab: (tab: 'dashboard' | 'phases' | 'review' | 'projects' | 'certifications' | 'research') => void;
   onOpenSearch: () => void;
   onOpenSettings: () => void;
+  onOpenLearningPaths?: () => void;
   currentUser: UserProfile;
   onOpenAuth: () => void;
   streakCount: number;
@@ -21,6 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectTab,
   onOpenSearch,
   onOpenSettings,
+  onOpenLearningPaths,
   currentUser,
   onOpenAuth,
   streakCount,
@@ -48,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Center Nav Links — Understated Text Navigation */}
-        <nav className="hidden md:flex items-center gap-6 text-xs font-sans">
+        <nav className="hidden md:flex items-center gap-5 text-xs font-sans">
           <button
             onClick={() => onSelectTab('dashboard')}
             className={`transition-colors py-1 ${
@@ -72,6 +74,34 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
+            onClick={() => onSelectTab('projects')}
+            className={`transition-colors py-1 flex items-center gap-1.5 ${
+              currentTab === 'projects'
+                ? 'text-amber-950 dark:text-stone-100 font-semibold border-b-2 border-amber-800 dark:border-stone-200'
+                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+            }`}
+          >
+            <span>Projects</span>
+            <span className="px-1.5 py-0.2 rounded text-[10px] font-mono font-semibold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300/60 dark:border-emerald-800">
+              48
+            </span>
+          </button>
+
+          <button
+            onClick={() => onSelectTab('certifications')}
+            className={`transition-colors py-1 flex items-center gap-1.5 ${
+              currentTab === 'certifications'
+                ? 'text-amber-950 dark:text-stone-100 font-semibold border-b-2 border-amber-800 dark:border-stone-200'
+                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+            }`}
+          >
+            <span>Certifications</span>
+            <span className="px-1.5 py-0.2 rounded text-[10px] font-mono font-semibold bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300 border border-blue-300/60 dark:border-blue-800">
+              MCPA
+            </span>
+          </button>
+
+          <button
             onClick={() => onSelectTab('review')}
             className={`transition-colors py-1 flex items-center gap-1.5 ${
               currentTab === 'review'
@@ -85,6 +115,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {dueReviewCount}
               </span>
             )}
+          </button>
+
+          <button
+            onClick={() => onSelectTab('research')}
+            className={`transition-colors py-1 flex items-center gap-1.5 ${
+              currentTab === 'research'
+                ? 'text-amber-950 dark:text-stone-100 font-semibold border-b-2 border-amber-800 dark:border-stone-200'
+                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+            }`}
+          >
+            <span>Research</span>
+            <span className="px-1.5 py-0.2 rounded text-[10px] font-mono font-semibold bg-violet-100 dark:bg-violet-950 text-violet-800 dark:text-violet-300 border border-violet-300/60 dark:border-violet-800">
+              Groq AI
+            </span>
           </button>
         </nav>
 
@@ -147,10 +191,10 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Mobile Sub-Navigation */}
-      <div className="flex md:hidden items-center justify-around py-2 border-t border-stone-300/70 dark:border-stone-800 text-xs font-sans bg-[#f5f2eb] dark:bg-[#1c1b1a]">
+      <div className="flex md:hidden items-center justify-around py-2 border-t border-stone-300/70 dark:border-stone-800 text-xs font-sans bg-[#f5f2eb] dark:bg-[#1c1b1a] overflow-x-auto scrollbar-none">
         <button
           onClick={() => onSelectTab('dashboard')}
-          className={`py-1 px-3 ${
+          className={`py-1 px-2.5 whitespace-nowrap ${
             currentTab === 'dashboard' ? 'text-stone-900 dark:text-stone-100 font-semibold' : 'text-stone-500'
           }`}
         >
@@ -159,7 +203,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         <button
           onClick={() => onSelectTab('phases')}
-          className={`py-1 px-3 ${
+          className={`py-1 px-2.5 whitespace-nowrap ${
             currentTab === 'phases' || currentTab === 'lesson' ? 'text-stone-900 dark:text-stone-100 font-semibold' : 'text-stone-500'
           }`}
         >
@@ -167,8 +211,26 @@ export const Navbar: React.FC<NavbarProps> = ({
         </button>
 
         <button
+          onClick={() => onSelectTab('projects')}
+          className={`py-1 px-2.5 whitespace-nowrap ${
+            currentTab === 'projects' ? 'text-stone-900 dark:text-stone-100 font-semibold' : 'text-stone-500'
+          }`}
+        >
+          Projects
+        </button>
+
+        <button
+          onClick={() => onSelectTab('certifications')}
+          className={`py-1 px-2.5 whitespace-nowrap ${
+            currentTab === 'certifications' ? 'text-stone-900 dark:text-stone-100 font-semibold' : 'text-stone-500'
+          }`}
+        >
+          Certs
+        </button>
+
+        <button
           onClick={() => onSelectTab('review')}
-          className={`py-1 px-3 flex items-center gap-1 ${
+          className={`py-1 px-2.5 flex items-center gap-1 whitespace-nowrap ${
             currentTab === 'review' ? 'text-stone-900 dark:text-stone-100 font-semibold' : 'text-stone-500'
           }`}
         >
@@ -178,6 +240,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               {dueReviewCount}
             </span>
           )}
+        </button>
+
+        <button
+          onClick={() => onSelectTab('research')}
+          className={`py-1 px-2.5 whitespace-nowrap ${
+            currentTab === 'research' ? 'text-stone-900 dark:text-stone-100 font-semibold' : 'text-stone-500'
+          }`}
+        >
+          Research
         </button>
       </div>
     </header>
