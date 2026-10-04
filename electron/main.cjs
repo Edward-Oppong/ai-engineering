@@ -1,5 +1,7 @@
-const { app, BrowserWindow, Menu, shell } = require('electron');
+const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');
 const path = require('path');
+const fs = require('fs');
+const os = require('os');
 
 const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
 
@@ -98,6 +100,27 @@ function createWindow() {
     mainWindow = null;
   });
 }
+
+// ── IPC: open a source file in the OS default editor ───────────────────────
+// The renderer sends { filename, content } → we write to a temp file and
+// call shell.openPath() so the user's default editor (VS Code, PyCharm, etc.)
+// handles it. The temp file is cleaned up after 60 s.
+ipcMain.handle('open-file', async (_event, { filename, content }) => {
+  try {
+    const tmpDir = path.join(os.tmpdir(), 'ai-eng-scripts');
+    if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+    const filePath = path.join(tmpDir, filename);
+    fs.writeFileSync(filePath, content, 'utf8');
+    const result = await shell.openPath(filePath);
+    // shell.openPath returns '' on success, or an error string
+    if (result) return { ok: false, error: result };
+    // Cleanup after 60 s — long enough for any editor to read it
+    setTimeout(() => { try { fs.unlinkSync(filePath); } catch {} }, 60_000);
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: err.message };
+  }
+});
 
 // App lifecycle
 app.whenReady().then(() => {

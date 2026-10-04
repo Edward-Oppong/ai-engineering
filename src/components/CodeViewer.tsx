@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
 import { CodeFile, PythonExecutionResult } from '../types';
 import { Highlight, themes } from 'prism-react-renderer';
-import { FileCode, Copy, Check, Terminal, Play, RotateCcw, AlertCircle } from 'lucide-react';
+import { FileCode, Copy, Check, Terminal, Play, AlertCircle, Download, FolderDown, ExternalLink } from 'lucide-react';
 import { runPythonCode } from '../lib/pyodide-runner';
 
 interface CodeViewerProps {
   files: CodeFile[];
+}
+
+// Electron context-bridge â€” only present in the desktop app
+declare global {
+  interface Window {
+    electronAPI?: {
+      isElectron: boolean;
+      platform: string;
+      openFile?: (filename: string, content: string) => Promise<{ ok: boolean; error?: string }>;
+    };
+  }
 }
 
 export const CodeViewer: React.FC<CodeViewerProps> = ({ files }) => {
@@ -13,6 +24,10 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ files }) => {
   const [copied, setCopied] = useState(false);
   const [executing, setExecuting] = useState(false);
   const [executionResult, setExecutionResult] = useState<PythonExecutionResult | null>(null);
+  const [downloading, setDownloading] = useState(false);
+  const [openError, setOpenError] = useState<string | null>(null);
+
+  const isElectron = typeof window !== 'undefined' && !!window.electronAPI?.isElectron;
 
   if (!files || files.length === 0) {
     return null;
@@ -41,6 +56,49 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ files }) => {
     } catch (err) {
       console.warn('Copy failed:', err);
     }
+  };
+
+  /** Download a single file via Blob â†’ anchor click */
+  const downloadFile = (file: CodeFile) => {
+    const blob = new Blob([file.content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDownloadCurrent = () => {
+    downloadFile(currentFile);
+  };
+
+  /** Open the file in the OS default editor via Electron IPC */
+  const handleOpenInEditor = async () => {
+    setOpenError(null);
+    if (window.electronAPI?.openFile) {
+      const result = await window.electronAPI.openFile(currentFile.filename, currentFile.content);
+      if (!result.ok) setOpenError(result.error ?? 'Could not open file in editor.');
+    } else {
+      // Running in browser â€” fall back to download
+      downloadFile(currentFile);
+    }
+  };
+
+  /** Download all files as individual sequential downloads */
+  const handleDownloadAll = async () => {
+    if (downloading) return;
+    setDownloading(true);
+    for (let i = 0; i < files.length; i++) {
+      downloadFile(files[i]);
+      // small delay so the browser doesn't block multiple simultaneous downloads
+      if (i < files.length - 1) {
+        await new Promise(res => setTimeout(res, 300));
+      }
+    }
+    setDownloading(false);
   };
 
   const handleRunPython = async () => {
@@ -92,12 +150,45 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ files }) => {
                   ? 'bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 cursor-wait'
                   : 'bg-stone-900 hover:bg-stone-800 dark:bg-stone-100 dark:hover:bg-white text-white dark:text-stone-900 cursor-pointer'
               }`}
-              title="Run this Python file in your browser via WebAssembly (Pyodide)"
+              title="Run this file in your browser via WebAssembly (Pyodide)"
             >
               <Play className="w-3 h-3 fill-current" />
               <span>{executing ? 'Executing...' : 'Run in Browser'}</span>
             </button>
           )}
+
+          {/* â”€â”€ Open in Editor (Electron) / Download (browser) â”€â”€ */}
+          <button
+            onClick={handleOpenInEditor}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#faf8f4] dark:bg-stone-800 hover:bg-violet-50 dark:hover:bg-violet-950/40 text-stone-700 dark:text-stone-300 hover:text-violet-800 dark:hover:text-violet-300 transition-colors text-xs font-medium border border-stone-300/80 dark:border-stone-700 shadow-2xs"
+            title={isElectron ? `Open ${currentFile.filename} in your default editor` : `Download ${currentFile.filename}`}
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            <span>{isElectron ? 'Open in Editor' : 'Download'}</span>
+          </button>
+
+          {/* Download All â€” multiple files */}
+          {files.length > 1 && (
+            <button
+              onClick={handleDownloadAll}
+              disabled={downloading}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#faf8f4] dark:bg-stone-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-stone-700 dark:text-stone-300 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors text-xs font-medium border border-stone-300/80 dark:border-stone-700 shadow-2xs"
+              title={`Download all ${files.length} files`}
+            >
+              <FolderDown className="w-3.5 h-3.5" />
+              <span>{downloading ? 'Downloading...' : `All ${files.length} files`}</span>
+            </button>
+          )}
+
+          {/* Download current file â€” always available */}
+          <button
+            onClick={handleDownloadCurrent}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#faf8f4] dark:bg-stone-800 hover:bg-blue-50 dark:hover:bg-blue-950/40 text-stone-700 dark:text-stone-300 hover:text-blue-800 dark:hover:text-blue-300 transition-colors text-xs font-medium border border-stone-300/80 dark:border-stone-700 shadow-2xs"
+            title={`Download ${currentFile.filename}`}
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download</span>
+          </button>
 
           {/* Copy File Button */}
           <button
@@ -118,6 +209,14 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ files }) => {
           </button>
         </div>
       </div>
+
+      {/* Open-in-editor error banner */}
+      {openError && (
+        <div className="flex items-center justify-between px-4 py-2 bg-rose-50 dark:bg-rose-950/30 border-b border-rose-200 dark:border-rose-900 text-xs text-rose-800 dark:text-rose-300">
+          <span>Could not open in editor: {openError}</span>
+          <button onClick={() => setOpenError(null)} className="text-rose-500 hover:text-rose-700 dark:hover:text-rose-200 ml-4">✕</button>
+        </div>
+      )}
 
       {/* File Tabs */}
       <div className="flex items-center gap-1 px-3 pt-2 bg-stone-100/60 dark:bg-[#1a1918] border-b border-stone-200 dark:border-stone-800 overflow-x-auto">
@@ -176,8 +275,8 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ files }) => {
           <div className="flex items-center justify-between text-[11px] text-stone-400 border-b border-stone-800 pb-2">
             <div className="flex items-center gap-2">
               <Terminal className="w-3.5 h-3.5 text-stone-400" />
-              <span>WebAssembly Python Console</span>
-              <span>·</span>
+              <span>WebAssembly Console</span>
+              <span>Â·</span>
               <span className="text-stone-500">Executed in {executionResult.executionTimeMs}ms</span>
             </div>
 

@@ -3,9 +3,10 @@ import {
   ProjectItem, 
   ProjectStage, 
   PlannedProject, 
-  UserProjectRecord 
+  UserProjectRecord,
+  LessonDetail
 } from '../types';
-import { projectsData } from '../lib/curriculum-loader';
+import { projectsData, loadLessonDetail } from '../lib/curriculum-loader';
 import { db } from '../lib/db';
 import { MarkdownRenderer } from '../components/MarkdownRenderer';
 import { CodeViewer } from '../components/CodeViewer';
@@ -28,7 +29,9 @@ import {
   Check,
   BookOpen,
   ArrowRight,
-  GitBranch
+  ArrowLeft,
+  GitBranch,
+  Loader2
 } from 'lucide-react';
 
 interface ProjectsViewProps {
@@ -62,6 +65,25 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
   const [projectNotes, setProjectNotes] = useState<string>('');
   const [repoUrl, setRepoUrl] = useState<string>('');
   const [notesSaveStatus, setNotesSaveStatus] = useState<string>('');
+
+  // Prerequisite lesson viewer (in-drawer)
+  const [prereqLesson, setPrereqLesson] = useState<{ lesson: LessonDetail; phaseTitle: string } | null>(null);
+  const [prereqLoading, setPrereqLoading] = useState(false);
+
+  const handleOpenPrereq = async (lessonId: string) => {
+    if (!lessonId) return;
+    setPrereqLoading(true);
+    try {
+      const result = await loadLessonDetail(lessonId);
+      if (result) {
+        setPrereqLesson({ lesson: result.lesson, phaseTitle: result.phase.title });
+      }
+    } catch (e) {
+      console.error('Failed to load prerequisite lesson:', e);
+    } finally {
+      setPrereqLoading(false);
+    }
+  };
 
   // Load project tracking records from IndexedDB
   const refreshRecords = async () => {
@@ -536,6 +558,102 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
         </div>
       )}
 
+      {/* Prereq loading spinner — covers the backdrop */}
+      {prereqLoading && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-stone-900/40 backdrop-blur-sm">
+          <div className="flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#faf8f4] dark:bg-[#1e1d1c] border border-stone-300 dark:border-stone-800 shadow-xl text-sm text-stone-700 dark:text-stone-300 font-sans">
+            <Loader2 className="w-4 h-4 animate-spin text-amber-600" />
+            Loading lesson…
+          </div>
+        </div>
+      )}
+
+      {/* In-app Prerequisite Lesson Reader */}
+      {prereqLesson && (
+        <div className="fixed inset-0 z-[55] bg-stone-900/70 backdrop-blur-sm flex justify-end">
+          <div className="relative w-full max-w-4xl min-h-screen bg-[#faf8f4] dark:bg-[#1e1d1c] border-l border-stone-300 dark:border-stone-800 shadow-2xl flex flex-col font-sans transition-colors overflow-y-auto">
+            {/* Prereq Header */}
+            <div className="sticky top-0 z-20 bg-[#faf8f4]/95 dark:bg-[#1e1d1c]/95 backdrop-blur-md px-6 py-3.5 border-b border-stone-300/70 dark:border-stone-800 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3 min-w-0">
+                <button
+                  onClick={() => setPrereqLesson(null)}
+                  className="flex items-center gap-1.5 text-xs font-medium text-stone-600 dark:text-stone-400 hover:text-amber-800 dark:hover:text-amber-300 transition-colors shrink-0"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  Back to Project
+                </button>
+                <div className="w-px h-4 bg-stone-300 dark:bg-stone-700 shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-[10px] uppercase tracking-wider text-stone-400 dark:text-stone-500 font-medium truncate">
+                    {prereqLesson.phaseTitle} · Prerequisite Reading
+                  </p>
+                  <h2 className="text-sm font-semibold text-stone-900 dark:text-stone-100 truncate">
+                    {prereqLesson.lesson.title}
+                  </h2>
+                </div>
+              </div>
+              <button
+                onClick={() => setPrereqLesson(null)}
+                className="p-1.5 rounded-lg text-stone-500 hover:text-stone-800 dark:hover:text-stone-200 hover:bg-stone-200/60 dark:hover:bg-stone-800 transition-colors shrink-0"
+                aria-label="Close prerequisite reader"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Prereq Body */}
+            <div className="px-8 py-6 flex-1">
+              {/* Reading time & phase context */}
+              <div className="flex items-center gap-3 mb-6 text-xs text-stone-500 dark:text-stone-400">
+                <span className="flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5" />
+                  {prereqLesson.lesson.estTime}
+                </span>
+                {prereqLesson.lesson.type && (
+                  <>
+                    <span>·</span>
+                    <span className="capitalize">{prereqLesson.lesson.type}</span>
+                  </>
+                )}
+                {prereqLesson.lesson.motto && (
+                  <>
+                    <span>·</span>
+                    <span className="italic text-stone-400 dark:text-stone-500">{prereqLesson.lesson.motto}</span>
+                  </>
+                )}
+              </div>
+
+              {/* Main lesson markdown content */}
+              <div className="prose-prereq">
+                <MarkdownRenderer content={prereqLesson.lesson.markdown ?? ''} />
+              </div>
+
+              {/* Footer CTA */}
+              <div className="mt-10 pt-6 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between">
+                <button
+                  onClick={() => setPrereqLesson(null)}
+                  className="flex items-center gap-1.5 text-xs text-stone-600 dark:text-stone-400 hover:text-amber-800 dark:hover:text-amber-300 transition-colors font-medium"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  Back to Project
+                </button>
+                <button
+                  onClick={() => {
+                    setPrereqLesson(null);
+                    closeProject();
+                    onSelectLesson(prereqLesson.lesson.id);
+                  }}
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-amber-700 hover:bg-amber-800 text-white transition-colors"
+                >
+                  Open Full Lesson
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Project Detail Drawer / Modal */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/60 backdrop-blur-sm flex justify-end">
@@ -621,17 +739,18 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
               {/* Prerequisites if any */}
               {selectedProject.prerequisites && selectedProject.prerequisites.length > 0 && (
                 <div className="flex flex-wrap items-center gap-2 text-xs">
-                  <span className="text-stone-500 font-medium">Recommended Prerequisites:</span>
+                  <span className="text-stone-500 font-medium flex items-center gap-1">
+                    <BookOpen className="w-3.5 h-3.5" />
+                    Recommended Prerequisites:
+                  </span>
                   {selectedProject.prerequisites.map((p, idx) => {
-                    const lessonIdMatch = p.path.replace(/\//g, '-').replace(/^phases-/, 'phase-');
+                    const safePath = p.path ?? '';
+                    const lessonIdMatch = safePath.replace(/\//g, '-').replace(/^phases-/, 'phase-');
                     return (
                       <button
                         key={idx}
-                        onClick={() => {
-                          closeProject();
-                          onSelectLesson(lessonIdMatch);
-                        }}
-                        className="px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800 text-[11px] hover:underline flex items-center gap-1"
+                        onClick={() => handleOpenPrereq(lessonIdMatch)}
+                        className="px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800 text-[11px] font-medium hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1"
                       >
                         <BookOpen className="w-3 h-3" />
                         {p.title}

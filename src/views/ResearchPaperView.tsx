@@ -304,10 +304,19 @@ export function ResearchPaperView({ onGoalMet }: Props) {
   const [isGenerating, setIsGenerating]           = useState(false);
   const [discoverError, setDiscoverError]         = useState<string | null>(null);
 
-  // Groq API Key State
-  const [isKeyModalOpen, setIsKeyModalOpen]       = useState(false);
-  const [keyInputValue, setKeyInputValue]         = useState(() => getGroqApiKey());
-  const [apiKeyConfigured, setApiKeyConfigured]   = useState(() => hasGroqApiKey());
+  // Groq API Key UI state
+  const [apiKeyConfigured, setApiKeyConfigured] = useState(() => hasGroqApiKey());
+  const [isKeyModalOpen, setIsKeyModalOpen]     = useState(false);
+  const [keyInputValue, setKeyInputValue]       = useState('');
+
+  function handleSaveKey() {
+    const trimmed = keyInputValue.trim();
+    if (!trimmed) return;
+    setGroqApiKey(trimmed);
+    setApiKeyConfigured(true);
+    setIsKeyModalOpen(false);
+    setKeyInputValue('');
+  }
 
   const allLibraryPapers = getAllPapers();
   const LIB_CATEGORIES = ['All', ...Array.from(new Set(allLibraryPapers.map(p => p.category)))];
@@ -356,11 +365,6 @@ export function ResearchPaperView({ onGoalMet }: Props) {
     }
   }
 
-  function handleSaveKey() {
-    setGroqApiKey(keyInputValue);
-    setApiKeyConfigured(hasGroqApiKey());
-    setIsKeyModalOpen(false);
-  }
 
   async function loadTrends() {
     if (trendsLoaded) return;
@@ -545,18 +549,16 @@ export function ResearchPaperView({ onGoalMet }: Props) {
                   Discover with Groq AI
                 </button>
 
-                <button
-                  onClick={() => setIsKeyModalOpen(true)}
-                  title="Configure your Groq API Key"
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
-                    apiKeyConfigured
-                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800'
-                      : 'bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border-rose-300 dark:border-rose-800'
-                  }`}
-                >
-                  <Key className="w-3 h-3" />
-                  {apiKeyConfigured ? 'Groq Active' : 'Add Groq Key'}
-                </button>
+                {!apiKeyConfigured && (
+                  <button
+                    onClick={() => setIsKeyModalOpen(true)}
+                    title="Configure your Groq API Key"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-colors bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border-rose-300 dark:border-rose-800"
+                  >
+                    <Key className="w-3 h-3" />
+                    Add Groq Key
+                  </button>
+                )}
               </div>
             </div>
 
